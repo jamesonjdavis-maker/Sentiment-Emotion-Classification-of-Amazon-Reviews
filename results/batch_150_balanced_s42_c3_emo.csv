@@ -1,0 +1,601 @@
+review_id,rating,truth,title,text,text_len,verified_purchase,helpful_vote,date,pred,llm_emotion,raw_output,correct,lex_emotion,lex_top,lex_scores,lex_words,lex_tied
+136449,5,POSITIVE,Gift Card,We love Roosters!,3,True,0,2020-01-17 21:39:50.873,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise love:joy,False
+56916,5,POSITIVE,Great gift,Many choices for use,4,True,0,2022-12-27 04:53:25.276,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+79719,5,POSITIVE,Such a great gift card tin,Such a great gift card tin! Amazon gift cards are always well received-everyone loves them! Makes gift shopping so easy!!,20,True,0,2018-06-27 02:17:26.776,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 5, ""disgust"": 0, ""fear"": 0, ""joy"": 5, ""sadness"": 0, ""surprise"": 5, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise shopping:anticipation/joy/surprise/trust,True
+62477,5,POSITIVE,Great gifts!,"My daughter's birthday was the 19th, so I bought her a $50 Amazon gift card.  My birthday was the 23rd and she bought me a $50 Amazon gift card!  We both love getting these as we are frequent customers of Amazon, they have everything you need.",46,False,0,2012-01-27 14:46:16.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 5, ""sadness"": 0, ""surprise"": 4, ""trust"": 0}",birthday:anticipation/joy/surprise gift:anticipation/joy/surprise birthday:anticipation/joy/surprise gift:anticipation/joy/surprise love:joy,False
+117485,5,POSITIVE,Easy Simple and Enjoyable,It was great 👍,4,True,0,2021-06-27 15:03:31.947,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+109549,5,POSITIVE,Just what I wanted,Came fast and as expected.,5,False,0,2017-06-10 21:55:55.967,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",expected:anticipation,False
+127465,5,POSITIVE,Lo recomiendo.,Excelente.,1,True,0,2021-02-19 17:26:14.776,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+117644,5,POSITIVE,It worked!,I tried to buy off microsoft store but it wasn't accepting my card. I bought this through amazon and it worked,21,True,0,2019-12-17 02:53:01.938,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",store:anticipation,False
+50439,5,POSITIVE,arrived fast!,Always love a gift card!,5,True,0,2019-01-16 21:58:00.299,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",love:joy gift:anticipation/joy/surprise,False
+124162,5,POSITIVE,Perfect to give as gift,"It's a gift card....,what more is there to say ?",10,True,0,2017-01-15 20:30:05.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 2, ""trust"": 1}",perfect:anticipation/joy/trust gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+134558,5,POSITIVE,Easy to give as a gift.,Gas card.,2,True,0,2022-05-16 19:53:48.072,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+69459,5,POSITIVE,Five Stars,Love It!,2,True,0,2018-09-04 21:11:52.075,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",love:joy,False
+91794,5,POSITIVE,Nice little tin box,"It comes with a nice little tin box which can be used for other stuff (i.e. card storage, etc)",19,True,0,2022-08-22 03:55:07.953,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+123321,5,POSITIVE,Easy,Very easy to use,4,True,0,2022-03-28 00:41:07.871,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+129305,5,POSITIVE,Beautiful gold box,[[VIDEOID:9098c02c1b448bb11a86ec1623915b01]] Makes gift card a gift,6,False,11,2022-01-21 22:10:52.029,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",beautiful:joy gift:anticipation/joy/surprise gift:anticipation/joy/surprise,False
+83741,5,POSITIVE,cute container,The cupcake holder for the gift card really added to the appeal of the card!,15,True,0,2022-02-03 18:23:47.188,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise appeal:anticipation,False
+91691,5,POSITIVE,Elegant box,Loved the gifty card box. Very elegant.,7,True,0,2020-02-05 13:37:05.324,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",elegant:joy elegant:joy,False
+72432,5,POSITIVE,Five Stars,Very easy to do,4,True,0,2015-02-14 18:51:08.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+23979,5,POSITIVE,New mom loves it,It made a great impression and my friend remarked how adorable it looks.,13,True,0,2019-11-08 01:01:57.128,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",friend:joy/trust adorable:joy,False
+141634,5,POSITIVE,Yummm,Kids love Red Robin.,4,True,0,2021-06-03 01:20:06.408,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",love:joy,False
+75943,5,POSITIVE,Five Stars,"Quickly received, no surprises",4,True,0,2014-12-22 14:47:32.000,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+147220,5,POSITIVE,Always on time,Makes everything better when you see that item you want,10,True,0,2023-04-20 00:38:17.166,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",time:anticipation,False
+21329,5,POSITIVE,Perfect gift,This was a perfect gift for my granddaughter.,8,True,0,2019-08-10 02:45:52.508,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 2, ""trust"": 2}",perfect:anticipation/joy/trust gift:anticipation/joy/surprise perfect:anticipation/joy/trust gift:anticipation/joy/surprise,True
+50804,5,POSITIVE,Five Stars,Fast shipping and great for a gift idea.,8,True,0,2017-11-09 16:32:08.994,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+143800,5,POSITIVE,Totally worth the $25,"You want me to write a review for this? Ok. I really wanted $26 but got the $25 I was told I would get if I spent $25 on it. Oh well. I guy can hope. The real question is if it worked at the restaurant or not. It was a gift for someone else so as far as I'm concerned, A+ on my end.",65,True,1,2017-02-12 05:20:10.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise/trust,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 1, ""joy"": 2, ""sadness"": 1, ""surprise"": 2, ""trust"": 2}",hope:anticipation/joy/surprise/trust real:trust gift:anticipation/joy/surprise concerned:fear/sadness,True
+66631,5,POSITIVE,Snow Flake Gift Box,The snow flake gift box (and the gift card inside!) got a big smile from my nephew when we opened it at Christmas.,23,True,0,2021-01-15 02:13:37.082,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,joy/surprise,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 4, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise smile:joy/surprise/trust,True
+118147,5,POSITIVE,amount balance,Easy to use,3,False,0,2020-09-26 13:58:31.731,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+29679,5,POSITIVE,Reload plus bonus,What’s not to like I used a visa gift card I got as a reward to reload.,17,True,0,2022-06-25 01:55:06.565,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 1}",bonus:anticipation/joy/surprise gift:anticipation/joy/surprise reward:anticipation/joy/surprise/trust,True
+119935,5,POSITIVE,Good,Good,1,True,0,2020-07-20 21:42:48.829,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,tie,anticipation/joy/surprise/trust,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 2}",good:anticipation/joy/surprise/trust good:anticipation/joy/surprise/trust,True
+49902,5,POSITIVE,Love my knives,It is very sharp!,4,True,0,2021-05-12 01:39:22.204,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",love:joy,False
+14856,5,POSITIVE,Great idea for a gift,Lightning deal.  Delicious ice cream combos made right before your eyes.,11,True,0,2016-11-02 03:22:05.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,joy/surprise,"{""anger"": 1, ""anticipation"": 3, ""disgust"": 0, ""fear"": 1, ""joy"": 4, ""sadness"": 0, ""surprise"": 4, ""trust"": 1}",gift:anticipation/joy/surprise lightning:anger/fear/surprise deal:anticipation/joy/surprise/trust delicious:joy cream:anticipation/joy/surprise,True
+125722,5,POSITIVE,Classy Gift card in a holiday Box,Perfect for holiday gift giving in a premium gift box.,10,True,0,2022-01-29 14:12:51.292,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 6, ""disgust"": 0, ""fear"": 0, ""joy"": 6, ""sadness"": 0, ""surprise"": 3, ""trust"": 1}",gift:anticipation/joy/surprise holiday:anticipation/joy perfect:anticipation/joy/trust holiday:anticipation/joy gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+45556,5,POSITIVE,Very simple to use and it's very quick.,"I wanted to reload on my account so I did. It was very quick and easy. I was thinking it would take more than 5 minutes, but it actually reloaded for less than 5 minutes, so they were right. I would totally use this again in the future when I need to reload on my account.",56,True,0,2020-01-02 13:02:06.706,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 2}",account:trust account:trust,False
+58529,5,POSITIVE,Well.  It’s my money so it’s pretty cool.,I used my own money to add to.. my......  own account.  I mean...  I guess this is a reviewable item?,20,True,0,2020-02-06 04:30:31.402,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,trust,trust,"{""anger"": 2, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 4}",money:anger/anticipation/joy/surprise/trust pretty:anticipation/joy/trust money:anger/anticipation/joy/surprise/trust account:trust guess:surprise,False
+66018,5,POSITIVE,LOVE this unique way to give a gift card.,Not only can you get someone a gift card - but it comes with an additional gift - a felt ornament. Getting Christmas gifts for extended family is so time consuming and wasteful. Gift cards & the ability to buy literally anything on Amazon is so convenient and appreciated by people. Definitely recommend this one out of other available cards because it comes with a cute ornament that looks great on a tree!,73,True,0,2022-08-16 04:29:46.298,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,anticipation/joy/surprise,"{""anger"": 2, ""anticipation"": 6, ""disgust"": 2, ""fear"": 0, ""joy"": 6, ""sadness"": 1, ""surprise"": 6, ""trust"": 2}",love:joy unique:surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise time:anticipation wasteful:anger/disgust/sadness gift:anticipation/joy/surprise recommend:trust tree:anger/anticipation/disgust/joy/surprise/trust,True
+27014,4,POSITIVE,Issue in distinguishing,"I ordered few cards of $25 and few of $50, all looks alike and came in same package. How to distinguish?",21,True,0,2019-09-30 23:30:44.651,NEUTRAL,surprise,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""surprise""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+87776,5,POSITIVE,Love it',Like,1,True,0,2020-07-23 23:35:31.538,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",love:joy,False
+21920,5,POSITIVE,Fast shipping!,"Fast shipping! Great, easy gift for last minute. My dad loved receiving this.",13,True,0,2016-03-16 13:19:31.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise receiving:anticipation/joy/surprise,True
+44141,5,POSITIVE,Easy,Very convent in emergency’s,4,True,0,2022-09-05 22:08:16.323,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,trust,fear/sadness/surprise/trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 1, ""joy"": 0, ""sadness"": 1, ""surprise"": 1, ""trust"": 1}",convent:trust emergency:fear/sadness/surprise,True
+101177,5,POSITIVE,Easy Peasy,Very easy to add money to my account and I got a bonus for doing so.,16,True,0,2020-12-25 13:00:25.991,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise/trust,"{""anger"": 1, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 2}",money:anger/anticipation/joy/surprise/trust account:trust bonus:anticipation/joy/surprise,True
+58025,5,POSITIVE,Penguin Card Holder,"Adorable card holder, cuter than I expected",7,True,0,2019-01-25 22:15:25.595,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,anticipation/joy,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",adorable:joy expected:anticipation,True
+127783,5,POSITIVE,Five Stars,everyone loved,2,True,0,2017-08-04 19:55:51.085,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+55104,5,POSITIVE,Search for coupon to get free money!,Who doesn't love getting some free money when you reload your cards?,12,True,0,2018-10-07 16:58:04.033,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 2, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 2, ""trust"": 2}",money:anger/anticipation/joy/surprise/trust love:joy money:anger/anticipation/joy/surprise/trust,False
+134527,5,POSITIVE,Didn’t have to go anywhere got it the next day,Easy,1,True,0,2021-02-28 22:00:18.730,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+118308,5,POSITIVE,Five Stars,Pretty easy way to spend thx,6,True,0,2016-08-25 15:38:30.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",pretty:anticipation/joy/trust,True
+55305,5,POSITIVE,Great small gift,These are great for small gifts for customers. I put one in a card and everyone is thrilled to get them.,21,True,0,2015-10-15 01:09:32.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+92907,5,POSITIVE,Five Stars,Can't go wrong with a $25 dollar gift card,9,True,3,2015-09-07 17:16:48.000,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+48582,5,POSITIVE,Five Stars,Awesome gift package for the price! Definitely recommend in a pinch!!!!,11,True,0,2016-12-03 20:20:58.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/surprise/trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",gift:anticipation/joy/surprise recommend:trust,True
+77654,5,POSITIVE,Perfect gift,Love sending gift cards to people for different holidays<br />Gets there fast,12,True,0,2022-10-21 15:56:09.384,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 2, ""trust"": 1}",perfect:anticipation/joy/trust gift:anticipation/joy/surprise love:joy gift:anticipation/joy/surprise,False
+133783,5,POSITIVE,Five Stars,Perfect present for college bound grandchild.,6,True,0,2016-08-26 21:41:58.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",True,tie,anticipation/joy/trust,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 2}",perfect:anticipation/joy/trust present:anticipation/joy/surprise/trust,True
+85175,3,NEUTRAL,gift card,Because I think the description of the product was wrong I am not sure either of the people I bought these gift cards for have an Amazon account,28,True,0,2013-10-09 12:31:40.000,NEUTRAL,anticipation,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""anticipation""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise account:trust,True
+7058,3,NEUTRAL,It is a card.,"The presentation seemed kind of cheesy and Christmasy. Other than that, it is a card. Nothing too exciting or disappointing.",20,True,0,2017-05-07 03:10:38.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 1, ""surprise"": 1, ""trust"": 1}",kind:joy/trust exciting:anticipation/joy/surprise disappointing:sadness,False
+21522,3,NEUTRAL,Three Stars,ok as promised,3,True,0,2018-01-08 13:17:52.579,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+10572,3,NEUTRAL,Where Was The Personal Message?,"It is a gift card so there is not a lot to review there.  However, it has you fill out a section for the personal note which I did on two cards that I bought, nothing showed up. What was the point in having me fill out that section if they were not going to bother putting the note on there?. I had the cards shipped to me and then sent them out.  If they had gone straight to the giftee, they would not have had a clue who they were from.  So those shipping to the receiptant beward of that!  Other than that, they are cute cards and were shipped next day.  They were much appreicated after I wrote the personal message myself!",124,True,1,2012-12-26 19:14:03.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,trust,trust,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 5}",personal:trust gift:anticipation/joy/surprise fill:trust personal:trust fill:trust clue:anticipation personal:trust,False
+61483,3,NEUTRAL,Giftable but not easy to add to wallet.,It is not easy to use. I cannot add to my Google wallet. So I would avoid it.,18,True,1,2021-03-12 22:09:29.471,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,fear,fear,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 1, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",avoid:fear,False
+72176,3,NEUTRAL,Three Stars,like,1,True,0,2016-06-15 12:36:01.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+71241,3,NEUTRAL,"Iffy use,...depends on situation, check fine print",Worked fine for gas.  Did NOT work to reload my Sunpass.,11,True,0,2018-02-11 23:35:07.337,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+141252,3,NEUTRAL,How to use and redeem,"I do not understand how this works, confusing to me.",10,True,0,2019-09-23 01:45:50.402,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+23870,3,NEUTRAL,Easy to give someone you care about,Was a birthday present for my new son-in-law. He was really appreciated it.,13,True,0,2016-11-01 17:31:19.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",False,tie,anticipation/joy/surprise/trust,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 2}",birthday:anticipation/joy/surprise present:anticipation/joy/surprise/trust law:trust,True
+14812,3,NEUTRAL,Nice,Perfect as a gift for a graduate.,7,True,0,2020-04-30 17:09:25.985,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",False,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",perfect:anticipation/joy/trust gift:anticipation/joy/surprise,True
+96094,3,NEUTRAL,Baby gift card,I wish Amazon had a metal gift box for baby gift cards like they do for birthdays.,17,True,2,2017-02-16 19:37:52.000,NEUTRAL,anticipation,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""anticipation""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 5, ""sadness"": 0, ""surprise"": 3, ""trust"": 0}",baby:joy gift:anticipation/joy/surprise gift:anticipation/joy/surprise baby:joy gift:anticipation/joy/surprise,False
+97615,3,NEUTRAL,"Arrived heavily dent, feel embarrassed to gift away","Arrived heavily dent, feel embarrassed to gift away",8,False,0,2021-09-12 15:28:59.497,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+54708,3,NEUTRAL,Cannot use for all Amazon services!!,"This card was purchased for the purpose of paying my Prime subscription and Prime Video Channels monthly fee.  Although I had enough on my gift card to cover the fees, my subscriptions were suspended because the fees must be paid by credit card or check.  Really???  This doesn't make sense, but I confirmed it while chatting with an Amazon rep.  I'd like to know the reasoning behind this decision.",69,True,0,2021-07-26 22:55:08.363,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,trust,trust,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 3}",fee:anger gift:anticipation/joy/surprise cover:trust credit:trust confirmed:trust,False
+126700,3,NEUTRAL,Card did not come with the note I requested.,"Card did not come with the note I requested, and small corner of peel off section to reveal code is missing, not sure why.  And the card does not indicate how much is on it.  It is a gift for someone so all the above is very annoying, and not good customer service.  Seems to be no way to check the value of the card (making sure it actually has the value stated loaded on it), before I give to the recipient.  Amazon just seems to have option to load it on to my own account which I do not want to do.",103,False,1,2020-04-29 19:03:52.211,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,anticipation,anticipation,"{""anger"": 1, ""anticipation"": 3, ""disgust"": 0, ""fear"": 1, ""joy"": 2, ""sadness"": 1, ""surprise"": 2, ""trust"": 2}",missing:fear/sadness gift:anticipation/joy/surprise annoying:anger good:anticipation/joy/surprise/trust recipient:anticipation account:trust,False
+50504,3,NEUTRAL,I thought the $6.95 charge was excesive,The loading charge I thought was excessive,7,False,1,2020-08-10 22:38:16.573,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",thought:anticipation thought:anticipation,False
+43213,3,NEUTRAL,Quick Shipping but..,I'm just frustrated that I couldn't add it to my Apple Pay wallet. It's not compatible in that way. There were times that my husband had the card and I needed it so it would have been super convenient if I were able to add it to my phone wallet.,50,True,0,2021-12-08 15:33:14.218,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,anger,anger/anticipation/joy/trust,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",frustrated:anger pay:anticipation/joy/trust,True
+126778,3,NEUTRAL,Gift message not included.,I ordered this as a graduation gift and wrote my gift note to be included with the package and it was not included. Very disappointing,25,True,0,2022-05-02 18:46:48.420,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 1, ""joy"": 4, ""sadness"": 1, ""surprise"": 4, ""trust"": 1}",gift:anticipation/joy/surprise graduation:anticipation/fear/joy/surprise/trust gift:anticipation/joy/surprise gift:anticipation/joy/surprise disappointing:sadness,True
+96840,3,NEUTRAL,"If you're a patient person who doesn't mind, confusing, complicated, & difficult transactions, these are the giftcards for you!","Be prepared that very few people at Hyatt know how these giftcards work.  I've tried to use several giftcards at several locations on several different occasions, and each time, every Hyatt employee I've encountered (over the phone or in person) have to put me on hold and call corporate to figure out how to redeem them.  I'm literally sitting on hold right now trying to book an advanced reservation with one now and they can't seem to figure out how to apply a $100 gift card to a $500 reservation.  (15 minutes and counting).  This is the third time I've tried to use it.  The answer I just received is &#34;you can't use a gift card on an advanced booking rate&#34;----different answers with different hotels.  When I call the same hotel later tonight, I will get a different answer.  At a different hotel 2 months ago, they nearly lost their minds because first they said you couldn't use them in international hotels (wrong) and then they said you can only use one gift card per stay (also wrong---after calling corporate for 1 hour, they took them all).  Long story short:  you will experience resistance, confusion, and stress every time you try to use one---especially if you try to use more than one.  One thing to keep in mind:  The FULL balance of your giftcard has to be used---ie:  if you have a $200 balance and your booking is only $100, you will not be able to use the giftcard.  Your giftcard will pay for anything on your folio, however (ie:  spa treatments, meals, room service, etc).  Hope this helps.",269,False,1,2016-11-29 21:03:56.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,anticipation,anticipation,"{""anger"": 2, ""anticipation"": 12, ""disgust"": 0, ""fear"": 2, ""joy"": 6, ""sadness"": 1, ""surprise"": 5, ""trust"": 4}",patient:anticipation difficult:fear prepared:anticipation/trust time:anticipation gift:anticipation/joy/surprise time:anticipation gift:anticipation/joy/surprise lost:sadness gift:anticipation/joy/surprise long:anticipation resistance:anger confusion:anger/fear time:anticipation pay:anticipation/joy/trust spa:anticipation/joy/surprise/trust hope:anticipation/joy/surprise/trust,False
+95640,3,NEUTRAL,Good product at a good price. Recommend.,Good product at a good price. Recommend.,7,True,0,2022-01-13 00:31:14.357,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False,trust,trust,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 4, ""trust"": 6}",good:anticipation/joy/surprise/trust good:anticipation/joy/surprise/trust recommend:trust good:anticipation/joy/surprise/trust good:anticipation/joy/surprise/trust recommend:trust,False
+13576,3,NEUTRAL,OK,OK,1,True,0,2017-12-11 23:47:59.827,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+73365,3,NEUTRAL,Box Review,This review is for the gift box. It is beautiful but very hard to open. I ordered two of them and both had the same issue. You have to force them open and then it is very difficult to get the box to fit back together.,46,False,0,2019-12-23 20:38:39.289,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,joy,fear/joy,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 2, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise beautiful:joy force:anger/fear difficult:fear,True
+20269,3,NEUTRAL,Directions in wrong place,"Nice size and shape. Can easily be added to a holiday card. BUT … The directions for cashing in the gift card are written on the ugly, protective plastic wrapper. The wrapper is removed before giving the gift card so the recipient doesn’t get the directions!!!  The directions for cashing-in the gift card should be written in the decorative cover — not on the disposable wrapper. AND … The directions are wrong!!!  All you need to do is log onto your Amazon account and click on the “Gift Card” tab. Then select “redeem.”  This information should be included on the card-sleeve.",101,True,0,2022-12-02 14:45:01.494,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 6, ""disgust"": 1, ""fear"": 0, ""joy"": 5, ""sadness"": 0, ""surprise"": 4, ""trust"": 2}",holiday:anticipation/joy gift:anticipation/joy/surprise ugly:disgust gift:anticipation/joy/surprise recipient:anticipation gift:anticipation/joy/surprise cover:trust account:trust gift:anticipation/joy/surprise,False
+7325,3,NEUTRAL,came damaged,"The gift card came dinged and damaged, no way was suitable for gift giving. It was shipped in a box so it was damaged before I even got it so poor quality control. I ended up using it myself and bought a new one at a local store in better shape for the gift.",54,True,0,2022-08-16 11:50:12.241,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise store:anticipation gift:anticipation/joy/surprise,False
+69976,3,NEUTRAL,Quick,Reload quick,2,True,0,2019-06-23 18:47:47.699,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+32923,3,NEUTRAL,Not great,Not great,2,True,0,2020-04-13 20:51:22.270,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+81141,3,NEUTRAL,Easy to do but very slow.,Worked well but it was very slow took several days to show the balance.,14,True,2,2016-06-01 00:11:05.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",show:trust,False
+85407,3,NEUTRAL,Reload,For the most part it's pretty easy sometimes it takes a little while,13,True,0,2022-08-28 16:09:36.788,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,tie,anticipation/joy/trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",pretty:anticipation/joy/trust,True
+33885,3,NEUTRAL,Lost $100.00,It did not work. I lost the money. Lost,9,False,0,2021-06-25 12:00:58.748,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,sadness,sadness,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 3, ""surprise"": 1, ""trust"": 1}",lost:sadness lost:sadness money:anger/anticipation/joy/surprise/trust lost:sadness,False
+55743,3,NEUTRAL,Three Stars,"The amount purchased ia correct, but the card has swipe marks.",11,True,0,2017-03-04 03:49:17.000,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+4421,3,NEUTRAL,Old glue caused the card to detach,The Actual card came detached from the cardboard.  Old glue maybe?,11,True,3,2018-02-06 13:48:14.832,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+55503,3,NEUTRAL,Easy to use,Easy to use and send.,5,True,0,2022-07-31 18:44:22.863,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+74726,3,NEUTRAL,""" FROM WHO ??? """,No Message of To /From ! Left in Drive Way ! Process seems poorly set up !,17,True,1,2015-12-14 01:04:57.000,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+82554,3,NEUTRAL,"Nice Product, but delivery problems","Nice product, but delivery problems",5,True,0,2016-12-22 18:56:08.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",delivery:anticipation delivery:anticipation,False
+101283,3,NEUTRAL,It's a gift card.......,Like I said - It's a gift card.......,8,False,1,2015-01-09 23:15:34.000,NEUTRAL,trust,"{
+  ""sentiment"": ""NEUTRAL"",
+  ""emotion"": ""trust""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+1274,3,NEUTRAL,Make sure you order the gift card of your choice,"Cute Amazon box, but not the gift box I chose<br />I ordered the gold gift box with gift card as a wedding anniversary gift for someone.<br />I ended up with a plain cute smile mail box instead. there was no gift receipt in the box so they had no idea who sent it. The gift card did work though.",59,True,0,2022-06-06 13:59:54.284,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 8, ""disgust"": 0, ""fear"": 0, ""joy"": 8, ""sadness"": 0, ""surprise"": 8, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise smile:joy/surprise/trust mail:anticipation gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+75699,3,NEUTRAL,Did what any Giftcard does,"Came on time, worked, not much else to say.",9,True,0,2019-07-10 17:08:28.858,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",time:anticipation,False
+38328,3,NEUTRAL,Three Stars,Really not all that impressed,5,True,0,2014-09-14 23:10:51.000,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+144360,3,NEUTRAL,the survey was a bit misleading.,the survey was a bit misleading. I was under the impression that by doing the survey I received a gift card,21,True,1,2015-01-06 07:49:10.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,tie,anger/disgust,"{""anger"": 2, ""anticipation"": 1, ""disgust"": 2, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",misleading:anger/disgust misleading:anger/disgust gift:anticipation/joy/surprise,True
+13570,3,NEUTRAL,It's a gift card,It's a gift card...don't understand why you are charged an activation fee...other sites have them without one,17,True,0,2020-12-10 20:08:26.848,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 1, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise fee:anger,True
+89200,3,NEUTRAL,Slow Shipping,"It’s a gift card so nothing to really rate, but I’m withholding 2 stars because shipping took forever.",18,True,0,2019-01-22 03:03:29.323,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+140378,3,NEUTRAL,Tricky Checkout,I purchase this by accident.  Be careful when you order anything from Amazon.  Check out is a little tricky.,19,True,1,2017-07-19 00:25:56.742,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,tie,fear/sadness/surprise,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 1, ""joy"": 0, ""sadness"": 1, ""surprise"": 1, ""trust"": 0}",accident:fear/sadness/surprise,True
+98853,3,NEUTRAL,Paper gift card,"Beautiful box, but paper gift card inside box looked like it had been folded in half.",16,True,0,2021-01-02 19:44:16.891,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,joy,joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise beautiful:joy gift:anticipation/joy/surprise,False
+141463,3,NEUTRAL,Gift card undelivabe,"I wanted my gift card to go family in Italy, but I was not able to have it shipped there for some reason was on your undelivable site.<br />Very disappointed",30,True,2,2018-10-23 21:24:34.541,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 1, ""anticipation"": 2, ""disgust"": 1, ""fear"": 0, ""joy"": 2, ""sadness"": 1, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise disappointed:anger/disgust/sadness,True
+13401,3,NEUTRAL,Debit over credit gift card ?,Limited use,2,True,0,2019-11-12 19:08:53.368,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False,trust,anger/anticipation/joy/sadness/surprise/trust,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 1, ""surprise"": 1, ""trust"": 1}",credit:trust gift:anticipation/joy/surprise limited:anger/sadness,True
+23788,3,NEUTRAL,Three Stars,ok,1,True,0,2016-10-14 02:15:33.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+123861,3,NEUTRAL,I am not get $5 gift for my first gift card,I am not get $5 gift for my first gift card,11,True,1,2016-11-08 05:47:04.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 4, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+126494,3,NEUTRAL,amount of gift card not printed,The amount of the gift was not printed on the card so I enclosed a note.  Past orders have had the amount on the card.  The graduation box is great.,30,True,0,2019-06-16 22:06:34.826,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 1, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise graduation:anticipation/fear/joy/surprise/trust,True
+122876,3,NEUTRAL,No se a podido utilizar,Nose que paso que  el primer día apareció el saldo y luego se desapareció,14,True,0,2021-12-30 23:21:33.510,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,disgust,disgust/trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 1, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",nose:disgust primer:trust,True
+135062,3,NEUTRAL,Three Stars,Little disappointed because the movie could only be used at one location In Oklahoma city,15,True,0,2017-01-20 19:14:56.000,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False,tie,anger/disgust/sadness,"{""anger"": 1, ""anticipation"": 0, ""disgust"": 1, ""fear"": 0, ""joy"": 0, ""sadness"": 1, ""surprise"": 0, ""trust"": 0}",disappointed:anger/disgust/sadness,True
+8942,3,NEUTRAL,Had trouble with every purchase,"Not sure why, but had trouble everywhere I used this card. It worked eventually but I used it a total of 3 places and not a single transaction was straightforward.  I had to return an item that I'd initially purchased with this card and it took about 3 days for the return to post back to the card.",58,True,0,2019-01-21 12:10:22.140,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 2}",transaction:trust straightforward:trust,False
+83519,1,NEGATIVE,Money getter,It’s difficult,2,True,0,2019-11-06 22:21:35.610,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,tie,anger/anticipation/fear/joy/surprise/trust,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 1, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",money:anger/anticipation/joy/surprise/trust difficult:fear,True
+102710,1,NEGATIVE,Verify everything.,"Ordered a few of these last Christmas. One came loaded, the other did not. Niece brought the matter up at a family get together. You can imagine my embarrassment. Bezos got my money and I got a red face. Nice.......",40,True,0,2020-07-29 11:55:20.088,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",True,surprise,surprise,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 1, ""joy"": 1, ""sadness"": 1, ""surprise"": 2, ""trust"": 1}",embarrassment:fear/sadness/surprise money:anger/anticipation/joy/surprise/trust,False
+127893,2,NEGATIVE,I made a selection error but tried to change it ...,"I made a selection error but tried to change it but unable to, so I was not able to take advantage of the offer.",24,True,0,2018-05-15 04:04:11.298,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,sadness,sadness,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 2, ""joy"": 0, ""sadness"": 3, ""surprise"": 0, ""trust"": 0}",error:sadness change:fear error:sadness change:fear unable:sadness,False
+126625,1,NEGATIVE,Gift card that arrived had zero balance,When the recipient of this card attempted to use it there was zero balance on it and the gift card was not able to be used.,26,True,0,2020-10-17 02:04:57.467,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise recipient:anticipation gift:anticipation/joy/surprise,False
+123222,1,NEGATIVE,loading from a debit card randomly doesn't work,"loading from a debit card randomly doesn't work with very unhelpful message, that is hard to understand and take action on",21,True,0,2023-03-18 17:49:52.713,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,surprise,surprise,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 2, ""trust"": 0}",randomly:surprise randomly:surprise,False
+7482,1,NEGATIVE,Card doesn't work,Issue with cards not working.,5,True,6,2017-02-02 20:21:46.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+48133,1,NEGATIVE,VERY DISSAPOINTED IN AMAZON,Dont buy gift cards from Amazon.  I tried all five of the cards and  the  16 numbers if each if five  cards COULD NOT BE SCANNED OR ENTERED.  GIFT CARDS ARENT RETURNABLE TO AMAZON.<br />The reveal card is great but the gift card doesnt work.,45,True,1,2020-12-14 18:22:07.814,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 0}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+38107,2,NEGATIVE,If it is a gift maybe go into the store,"The gift card works fine and the convenience was amazing. The condition of the gift card after it arrived....not so much. To use my daughters words, they dropped it on the ground and then walked on it all day, picked it up and shoved it in the packaging without even wiping it off.",53,True,2,2019-12-21 15:20:03.778,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False,anticipation,anticipation,"{""anger"": 1, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 3, ""trust"": 1}",gift:anticipation/joy/surprise store:anticipation gift:anticipation/joy/surprise gift:anticipation/joy/surprise words:anger ground:trust,False
+89897,1,NEGATIVE,One Star,"Showed up not loaded, Amazin could care less!",8,False,1,2016-07-09 13:25:46.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",star:anticipation/joy/trust,True
+96897,2,NEGATIVE,.,Not packaged as described,4,True,0,2021-12-22 02:39:28.067,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+125508,1,NEGATIVE,Told How To Pay,"Buy e-books when an e-gift card is loaded to your account, and that is how you are going to be forced to pay for it. Doesn't matter if you have a bonus category credit card you'd prefer to use.",39,True,4,2016-08-02 00:09:55.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 1, ""joy"": 4, ""sadness"": 0, ""surprise"": 2, ""trust"": 5}",pay:anticipation/joy/trust gift:anticipation/joy/surprise account:trust forced:fear pay:anticipation/joy/trust bonus:anticipation/joy/surprise credit:trust prefer:trust,False
+68278,1,NEGATIVE,Paper gift card - boo,Holder  is perfect. Gift card that came was paper with a sticker on the back. The claim code is permanently adhered to the back of the sticker. I guessed a few letters of it and contacted Amazon hoping they would credit the amount to my account. It is for $50 I certainly hope they give it to me!,58,True,2,2016-12-03 00:42:17.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/trust,"{""anger"": 0, ""anticipation"": 4, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 3, ""trust"": 4}",gift:anticipation/joy/surprise perfect:anticipation/joy/trust gift:anticipation/joy/surprise credit:trust account:trust hope:anticipation/joy/surprise/trust,True
+142677,1,NEGATIVE,Poor security.,I did not buy this card. My account was compromised. Gave one star for poor security on Amazon’s part.,19,True,1,2019-05-03 22:23:26.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 0, ""trust"": 2}",account:trust star:anticipation/joy/trust,False
+54942,1,NEGATIVE,getting out,i got into a nightmare. once you are in - you are in. it goes against my will. i want out and it seems impossible. enter at your own risk,30,False,0,2021-05-09 14:47:24.325,NEGATIVE,fear,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""fear""
+}",True,fear,fear,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 2, ""joy"": 0, ""sadness"": 1, ""surprise"": 0, ""trust"": 0}",nightmare:fear impossible:sadness risk:anticipation/fear,False
+144596,1,NEGATIVE,Card did not work,Somehow the card number was taken and used when my son went to use it the card had a 0 balance and was used to purchase google play 7x in a row. I contacted Amazon customer service and said I would have a refund in 3-5 business days and it’s been over a week and no refund.,57,True,4,2022-01-17 23:21:54.065,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anger,anger,"{""anger"": 1, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",row:anger,False
+77767,1,NEGATIVE,Beware of scatching,Scratched off back and 2 letters or numbers were removed as well ..,13,True,0,2022-03-05 14:00:10.598,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/fear,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 1, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",beware:anticipation/fear,True
+132959,2,NEGATIVE,"Poorly done UI interface, no way to undo","First of all, I really don't like that they default the value to $100. I accidentally ordered a $100 gift card because of this.<br />Second, I tried adding a new card, and missed seeing the second 'Add card' button. (why should I have to click the words 'Add card' two times?) There is no way to cancel the order like other kinds of orders, since they are so happy to take the money it processes instantly. No confirmation page like when ordering off a shopping cart.",86,True,1,2019-02-05 18:24:36.172,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,surprise,anticipation/joy/surprise/trust,"{""anger"": 2, ""anticipation"": 4, ""disgust"": 1, ""fear"": 1, ""joy"": 4, ""sadness"": 2, ""surprise"": 4, ""trust"": 4}",default:disgust/fear/sadness accidentally:surprise gift:anticipation/joy/surprise words:anger cancel:sadness happy:anticipation/joy/trust money:anger/anticipation/joy/surprise/trust confirmation:trust shopping:anticipation/joy/surprise/trust,True
+112185,2,NEGATIVE,Need to know who the gift is for and who it's from,"A gift card is relatively easy gift to provide.  The only real issue is to know who it's going to and who it's from.  I recently sent my 6 year old grand niece a gift card.  When I sent the gift card I marked it as a gift and added a note.  There are multiple birthdays in this month, but unfortunately when the gift card arrived, no one was able to determine who the gift card was for or who it came from.  Something so simple, but messed up.  We asked her mom if they had received it and she said yes, but they too did not know who it was for or who sent it.  In the end, the mystery was solved, but a little more attention to details would  be nice.",133,False,0,2021-05-30 13:25:02.277,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",True,tie,anticipation/surprise,"{""anger"": 0, ""anticipation"": 9, ""disgust"": 0, ""fear"": 0, ""joy"": 8, ""sadness"": 0, ""surprise"": 9, ""trust"": 2}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise provide:trust real:trust gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise mystery:anticipation/surprise,True
+112729,1,NEGATIVE,It was something.,It was something.,3,True,1,2023-01-02 23:23:13.853,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+88551,1,NEGATIVE,Do not recommend,The worst part is that there is no value on the card can’t tell how much each is,18,True,1,2019-06-20 15:45:47.140,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",recommend:trust,False
+86496,1,NEGATIVE,ACTIVATE MY RECENT PURCHASE OF AMAZON GIFT CARD WORTH OF $2000,I've an Amazon gift card which was ordered through my account. But I cannot use the Gift Card and it is saying to activate the Amazon Gift Card. Please activate my Gift Card.,33,True,1,2020-04-20 13:21:01.898,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 5, ""disgust"": 0, ""fear"": 0, ""joy"": 5, ""sadness"": 0, ""surprise"": 5, ""trust"": 1}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise account:trust gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise,True
+115480,1,NEGATIVE,****BIG SCAM*** DONT BUY****,Not working at any of the stores mentioned. Cannot reach Customer Support. Gift card is not returnable at Amazon.<br /><br />BIG SCAM....stay away from buying this card.,27,True,0,2021-01-27 01:14:47.879,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+123584,1,NEGATIVE,One card was redeemed.,"It's a shame but I ordered $250 worth of Uber Eats - $50 - 5 cards.  When we went to use one of the cards, it was rejected because it said it had already been redeemed.  I don't know how this could happen.",43,True,8,2022-02-05 22:25:21.801,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/disgust/fear/sadness,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 1, ""fear"": 1, ""joy"": 0, ""sadness"": 1, ""surprise"": 0, ""trust"": 0}",shame:disgust/fear/sadness happen:anticipation,True
+149276,1,NEGATIVE,Payless is in Bankrupty - the gift card cannot be used online,"I purchased a $25.00  Payless Gift card for a relative as part of her Birthday gift. There was no attempt to use this card until approximately one month ago. My relative began searching for shoes online and found several pairs of shoes that she liked and was ready to order when she noticed that Payless did &#34;not&#34; have the option to use its gift card for a purchase.  We felt that this was a glitch or technical issue with the website that went on for several weeks.  During the middle of last week, my relative found 4 pairs of shoes that she wanted to order using the gift card and her Visa but she could not because there was &#34;still&#34; no option to enter Payless Gift Card information.  My relative called customer service to find out if they could place a phone order for the online order.  The answer was a clear &#34;No. 'She kept waiting and attempting until finally calling Customer Service yesterday.  The representative was rude and did not offer any remedy for the situation.  My relative went into Payless in our town 2X's attempting to find the same style without success except for one of the pairs of shoes which would have cost much more in the store.  Online there was an initial sale plus she had a code to use for another 20% off.  These discounts were not available in the brick and mortar store.  It should not have been this difficult for Payless to turn this situation around.  The Payless Gift Card clearly states that it can be used in store and online.",268,True,0,2017-04-30 17:06:59.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 16, ""disgust"": 1, ""fear"": 1, ""joy"": 13, ""sadness"": 0, ""surprise"": 9, ""trust"": 9}",gift:anticipation/joy/surprise gift:anticipation/joy/surprise relative:trust birthday:anticipation/joy/surprise gift:anticipation/joy/surprise attempt:anticipation relative:trust found:joy/trust ready:anticipation gift:anticipation/joy/surprise relative:trust found:joy/trust gift:anticipation/joy/surprise gift:anticipation/joy/surprise relative:trust finally:anticipation/disgust/joy/surprise/trust remedy:anticipation/joy/trust relative:trust success:anticipation/joy store:anticipation store:anticipation difficult:fear gift:anticipation/joy/surprise store:anticipation,False
+111063,1,NEGATIVE,Not ok,When it got to me after paying $105 there was no money on it,14,True,1,2021-06-11 16:59:57.626,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anger/anticipation/joy/surprise/trust,"{""anger"": 1, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",money:anger/anticipation/joy/surprise/trust,True
+94693,1,NEGATIVE,Complete scam,This was the worst gift card I bought for anyone. I got it for a friend and upon verifying it and buying a cup of coffee and the rest of the money was PayPaled to someone’s account!!!<br />Be careful!!<br /><br />NEVER BUYING AGAIN AND WONT RECOMMEND<br />TRIED CALLING THE NUMBER ON THE BACK AND EMAILING WITH NO USE,58,True,3,2021-08-24 00:27:46.458,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 1, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 3, ""sadness"": 0, ""surprise"": 2, ""trust"": 4}",gift:anticipation/joy/surprise friend:joy/trust money:anger/anticipation/joy/surprise/trust account:trust wont:anticipation recommend:trust,False
+147339,2,NEGATIVE,Some of the card did not work when trying to enter them into my account. What do I do?,I was told some of the cards did not work. WHAT DO I DO!,14,True,0,2023-02-01 17:12:34.563,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",account:trust,False
+4312,1,NEGATIVE,Never got,Never got the $10,4,True,0,2019-11-24 05:03:22.587,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+111268,1,NEGATIVE,Issued unload and activated,I am not impressed to say the least.... ordered 2 and one came not loaded or activated. Quite embarrassing when it was given as a gift. Should be a simple task to activate and send?  Customer severe couldn't correct the problem,41,True,2,2018-02-09 07:09:07.936,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/fear/joy/sadness/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 1, ""joy"": 1, ""sadness"": 1, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise problem:fear/sadness,True
+7373,2,NEGATIVE,Activation process is a nightmare,I gave this as a gift and was embarrassed by how troublesome it was for the recipient to activate. It involved numerous phone calls and visits to the website before this could be used. Next time I am giving cash!,40,True,2,2020-12-02 13:12:50.377,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anticipation,anticipation,"{""anger"": 2, ""anticipation"": 5, ""disgust"": 0, ""fear"": 3, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 2}",nightmare:fear gift:anticipation/joy/surprise troublesome:anger/fear recipient:anticipation calls:anticipation/trust time:anticipation cash:anger/anticipation/fear/joy/trust,False
+132074,1,NEGATIVE,One Star,I never received these gift cards.,6,True,0,2016-12-22 11:34:20.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",star:anticipation/joy/trust gift:anticipation/joy/surprise,True
+144130,1,NEGATIVE,Not allowed to buy gift cards?,Pretty stupid. Nobody likes products that come with caveats.,9,True,0,2016-01-29 06:13:52.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",gift:anticipation/joy/surprise pretty:anticipation/joy/trust,True
+147013,1,NEGATIVE,not useful to add to apple wallet,Bought this for my daughters apple wallet so she did not have to worry about losing a credit card. Complete waste of time,23,True,1,2023-05-10 10:07:13.480,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/sadness,"{""anger"": 1, ""anticipation"": 2, ""disgust"": 1, ""fear"": 1, ""joy"": 0, ""sadness"": 2, ""surprise"": 0, ""trust"": 1}",worry:anticipation/fear/sadness losing:anger/sadness credit:trust waste:disgust time:anticipation,True
+88775,1,NEGATIVE,Zero Balance Cards,I ordered a large qty of these cards for holiday gifts for clients. All the cards from my order have come up as invalid when trying to be redeemed by my clients. I have contacted Amazon customer service multiple times and have not received any follow up on having this issue resolved or credited.,54,True,1,2020-01-03 20:27:52.360,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/sadness,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 1, ""surprise"": 0, ""trust"": 0}",holiday:anticipation/joy invalid:sadness,True
+29763,2,NEGATIVE,arrived damaged,"The card box arrived squished. The corner of the box is ripped. The card inside is made out of carton, not plastic and there is no value printed on the card.",31,True,2,2020-12-11 00:12:05.688,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+68157,1,NEGATIVE,Red Robin has poor customer service,"Received gift card from my daughter, followed instructions on gift card and took the card to the red robin and presented to cashier would not accept card, who then called manager who said I needed a pin number. I called amazon who intern gave me a number to call at red robin, who forward to me of two more more numbers to call at red robin with the same results, no call back or no one helpful to resolve this problem. Red Robin has poor customer service.",87,False,1,2017-04-27 16:44:42.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,joy,joy,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 1, ""joy"": 4, ""sadness"": 1, ""surprise"": 2, ""trust"": 3}",gift:anticipation/joy/surprise daughter:joy instructions:anticipation/trust gift:anticipation/joy/surprise cashier:trust helpful:joy/trust problem:fear/sadness,False
+4383,1,NEGATIVE,ZERO BALANCE!!!,Fandango card was empty!,4,True,0,2019-07-15 16:52:59.068,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False
+8324,1,NEGATIVE,Was Gauranteed two day delivery. Then received messaged it ...,Was Gauranteed two day delivery.  Then received messaged it was delayed and I should receive in 1-2 more days.  Now it's been four days and still no gift card!  And now I do not have it for when I needed it.,41,True,185,2018-05-18 01:22:20.541,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",delivery:anticipation delivery:anticipation gift:anticipation/joy/surprise,False
+60266,1,NEGATIVE,"THIEVES! Steal your money for ""not activated""","Took my money instantly. ""Not activated."" Zero help from Amazon, sent me to various departments. Talked with sweet people, who have no answers. READ the reviews. These people are telling the truth. NO response from Texas Roadhouse. WASTE OF MONEY and I'm angry.",43,False,0,2022-06-01 01:55:06.924,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anger,anger/trust,"{""anger"": 5, ""anticipation"": 4, ""disgust"": 2, ""fear"": 1, ""joy"": 4, ""sadness"": 1, ""surprise"": 4, ""trust"": 5}",steal:anger/fear/sadness money:anger/anticipation/joy/surprise/trust money:anger/anticipation/joy/surprise/trust sweet:anticipation/joy/surprise/trust truth:trust waste:disgust money:anger/anticipation/joy/surprise/trust angry:anger/disgust,True
+68556,1,NEGATIVE,outback going downhill,seating was torn with stuffing sticking out . steak was tough and inedible . Shrimp was floating in grease,19,True,0,2016-06-17 10:31:18.000,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,sadness,sadness,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 1, ""surprise"": 0, ""trust"": 0}",tough:sadness,False
+87088,1,NEGATIVE,Poop,Make it easier to find the amount on gift cards,10,True,1,2018-12-23 21:37:00.111,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,tie,anticipation/joy/surprise,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 0}",gift:anticipation/joy/surprise,True
+74536,2,NEGATIVE,Disappointed,"I ordered a gift card with a father's day card attached, and the envelope came sealed so I couldn't use it, and the card has a tear on the inside. Very disappointing considering it is a Father's Day gift!",39,True,0,2012-06-14 20:28:17.000,NEGATIVE,sadness,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""sadness""
+}",True,sadness,anticipation/joy/sadness/surprise,"{""anger"": 1, ""anticipation"": 2, ""disgust"": 1, ""fear"": 0, ""joy"": 2, ""sadness"": 2, ""surprise"": 2, ""trust"": 0}",disappointed:anger/disgust/sadness gift:anticipation/joy/surprise disappointing:sadness gift:anticipation/joy/surprise,True
+137373,1,NEGATIVE,Don't use it,"After two days I still haven't got my credit on my gift card, still shows a balance of zero. Within 5 minutes, that's a joke.",25,False,1,2019-04-04 19:48:06.753,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,anticipation/joy/surprise/trust,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 1, ""sadness"": 0, ""surprise"": 1, ""trust"": 1}",credit:trust gift:anticipation/joy/surprise,True
+45763,2,NEGATIVE,Don't order multiple cards at the same time,"Stick to one card per order. I ordered 5. They don't list the value on the card or the packaging, so you can't tell which is which. There was also no packing slip giving me any information. The gift card packaging says ""To check the purchased value of the gift card(s), simply match the last 4 digits of the serial number on the back of the gift card to those listed on www.amazon.com/yourorders."". When going into ""your orders"" on the app or the mobile website, the information is not available. It doesn't give a breakdown of each Amazon card individually. You must visit the website on a laptop or desktop to access the info. Please simplify this process.",118,True,12,2019-11-24 00:39:06.125,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 7, ""disgust"": 0, ""fear"": 0, ""joy"": 4, ""sadness"": 0, ""surprise"": 5, ""trust"": 1}",time:anticipation slip:surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise serial:anticipation gift:anticipation/joy/surprise mobile:anticipation simplify:anticipation/joy/surprise/trust,False
+148434,1,NEGATIVE,No activation code sent.,Not able to use the Master Card $25.00 card without the activation code.<br />Would just like to get the code so it can be used.<br />So far no communication at all.,31,True,0,2021-06-05 12:41:11.216,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,trust,trust,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 1}",communication:trust,False
+112187,2,NEGATIVE,Cheap card. Nice tin,The card inside was cheap. I didn’t realize it was a paper card and not a plastic one. Better off getting a card at the store.,26,True,0,2021-08-06 04:47:23.404,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 1, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",store:anticipation,False
+32472,1,NEGATIVE,gross USED gift card,The carboard the card was attached to was ripped and the card definitely has swipe marks.  Not exactly what you want in something you are planning on giving as a gift.,31,True,0,2022-12-12 20:15:13.319,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",True,anticipation,anticipation,"{""anger"": 0, ""anticipation"": 3, ""disgust"": 1, ""fear"": 0, ""joy"": 2, ""sadness"": 0, ""surprise"": 2, ""trust"": 1}",gross:disgust gift:anticipation/joy/surprise planning:anticipation/trust gift:anticipation/joy/surprise,False
+81382,1,NEGATIVE,A gift for my daughter,Purchased for a gift for my daughter for Mother's day. She received it ok. No problem.,16,False,0,2020-05-11 19:01:50.140,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False,joy,joy,"{""anger"": 0, ""anticipation"": 2, ""disgust"": 0, ""fear"": 1, ""joy"": 4, ""sadness"": 1, ""surprise"": 2, ""trust"": 0}",gift:anticipation/joy/surprise daughter:joy gift:anticipation/joy/surprise daughter:joy problem:fear/sadness,False
+132354,1,NEGATIVE,Step Father's Gift Cards Stolen,"I have purchased so many gift cards over the years and now the one thing has happened that always makes me think twice about ordering gift cards. The $50 gift card that I purchased for my Step Father was stolen out of his car. Unfortunately, he had all 3 gift cards (2 thru Amazon & 1 directly from Olive Garden) he received as presents for his birthday in the same place & all were taken.  I feel really bad, but I don't think there is anything that can be done.",90,True,3,2018-09-01 06:01:53.567,NEGATIVE,sadness,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""sadness""
+}",True,joy,joy,"{""anger"": 3, ""anticipation"": 6, ""disgust"": 1, ""fear"": 1, ""joy"": 7, ""sadness"": 1, ""surprise"": 6, ""trust"": 1}",gift:anticipation/joy/surprise stolen:anger gift:anticipation/joy/surprise gift:anticipation/joy/surprise gift:anticipation/joy/surprise father:trust stolen:anger gift:anticipation/joy/surprise garden:joy birthday:anticipation/joy/surprise bad:anger/disgust/fear/sadness,False
+148735,1,NEGATIVE,Not recommended at all.,Not recommended at all.,4,True,0,2020-11-19 02:39:01.170,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",True,none,,"{""anger"": 0, ""anticipation"": 0, ""disgust"": 0, ""fear"": 0, ""joy"": 0, ""sadness"": 0, ""surprise"": 0, ""trust"": 0}",,False

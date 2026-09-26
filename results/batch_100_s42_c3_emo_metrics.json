@@ -1,0 +1,353 @@
+{
+  "n_scored": 100,
+  "n_usable": 100,
+  "accuracy": 0.89,
+  "accuracy_ci95": [
+    0.8136853697209698,
+    0.9374586804477487
+  ],
+  "majority_label": "POSITIVE",
+  "majority_baseline": 0.89,
+  "always_positive_baseline": 0.89,
+  "balanced_accuracy": 0.8983656792645556,
+  "macro_f1": 0.9220010758472297,
+  "classes_absent": [
+    "NEUTRAL"
+  ],
+  "confusion_matrix": {
+    "POSITIVE": {
+      "POSITIVE": 79,
+      "NEUTRAL": 0,
+      "NEGATIVE": 1
+    },
+    "NEUTRAL": {
+      "POSITIVE": 9,
+      "NEUTRAL": 0,
+      "NEGATIVE": 0
+    },
+    "NEGATIVE": {
+      "POSITIVE": 1,
+      "NEUTRAL": 0,
+      "NEGATIVE": 10
+    }
+  },
+  "per_class": {
+    "POSITIVE": {
+      "support": 89,
+      "predicted": 80,
+      "correct": 79,
+      "recall": 0.8876404494382022,
+      "precision": 0.9875,
+      "f1": 0.9349112426035503,
+      "recall_ci95": [
+        0.8053880872134394,
+        0.9378132363311784
+      ]
+    },
+    "NEUTRAL": {
+      "support": 0,
+      "predicted": 9,
+      "correct": 0,
+      "recall": NaN,
+      "precision": 0.0,
+      "f1": NaN,
+      "recall_ci95": [
+        NaN,
+        NaN
+      ]
+    },
+    "NEGATIVE": {
+      "support": 11,
+      "predicted": 11,
+      "correct": 10,
+      "recall": 0.9090909090909091,
+      "precision": 0.9090909090909091,
+      "f1": 0.9090909090909091,
+      "recall_ci95": [
+        0.6226353745137962,
+        0.9837682477371741
+      ]
+    }
+  },
+  "by_star": [
+    {
+      "rating": 1,
+      "n": 11,
+      "agree": 0.9090909090909091
+    },
+    {
+      "rating": 4,
+      "n": 6,
+      "agree": 0.6666666666666666
+    },
+    {
+      "rating": 5,
+      "n": 83,
+      "agree": 0.9036144578313253
+    }
+  ],
+  "star_by_pred": {
+    "1": {
+      "POSITIVE": 1,
+      "NEUTRAL": 0,
+      "NEGATIVE": 10
+    },
+    "4": {
+      "POSITIVE": 4,
+      "NEUTRAL": 2,
+      "NEGATIVE": 0
+    },
+    "5": {
+      "POSITIVE": 75,
+      "NEUTRAL": 7,
+      "NEGATIVE": 1
+    }
+  },
+  "by_length": [
+    {
+      "text_len": "\u22645 words",
+      "n": 30,
+      "agree": 0.8333333333333334
+    },
+    {
+      "text_len": "6\u201320",
+      "n": 45,
+      "agree": 0.9333333333333333
+    },
+    {
+      "text_len": "21\u201360",
+      "n": 18,
+      "agree": 0.8888888888888888
+    },
+    {
+      "text_len": ">60",
+      "n": 7,
+      "agree": 0.8571428571428571
+    }
+  ],
+  "run": {
+    "run_id": "100_s42_c3_emo",
+    "labels": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "n": 100,
+    "seed": 42,
+    "sampling": "random",
+    "truth_rule": "4\u20135 -> POSITIVE, 3 -> NEUTRAL, 1\u20132 -> NEGATIVE",
+    "prompt_version": "v3",
+    "with_emotion": true,
+    "model": "cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit",
+    "temperature": 0,
+    "enable_thinking": false,
+    "scored_on": "2026-09-26"
+  },
+  "emotion": {
+    "n": 100,
+    "agreement": 0.12,
+    "agreement_when_lexicon_hit": 0.1518987341772152,
+    "agreement_lenient": 0.49,
+    "n_lexicon_none": 21,
+    "n_lexicon_unbreakable_tie": 44,
+    "n_lexicon_tied": 48,
+    "llm_counts": {
+      "anger": 10,
+      "anticipation": 1,
+      "disgust": 1,
+      "fear": 0,
+      "joy": 69,
+      "sadness": 0,
+      "surprise": 1,
+      "trust": 18
+    },
+    "lex_counts": {
+      "anger": 0,
+      "anticipation": 15,
+      "disgust": 0,
+      "fear": 2,
+      "joy": 11,
+      "sadness": 0,
+      "surprise": 2,
+      "trust": 5,
+      "tie": 44,
+      "none": 21
+    },
+    "crosstab_llm_by_lex": {
+      "anger": {
+        "anger": 0,
+        "anticipation": 2,
+        "disgust": 0,
+        "fear": 1,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 1,
+        "tie": 3,
+        "none": 3
+      },
+      "anticipation": {
+        "anger": 0,
+        "anticipation": 1,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "disgust": {
+        "anger": 0,
+        "anticipation": 1,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "fear": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "joy": {
+        "anger": 0,
+        "anticipation": 7,
+        "disgust": 0,
+        "fear": 1,
+        "joy": 11,
+        "sadness": 0,
+        "surprise": 2,
+        "trust": 4,
+        "tie": 30,
+        "none": 14
+      },
+      "sadness": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "surprise": {
+        "anger": 0,
+        "anticipation": 1,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "trust": {
+        "anger": 0,
+        "anticipation": 3,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 11,
+        "none": 4
+      }
+    },
+    "by_truth_class": {
+      "NEGATIVE": {
+        "n": 11,
+        "agree": 0.0,
+        "agree_lenient": 0.18181818181818182,
+        "llm_top": "anger",
+        "lex_top": "tie"
+      },
+      "POSITIVE": {
+        "n": 89,
+        "agree": 0.1348314606741573,
+        "agree_lenient": 0.5280898876404494,
+        "llm_top": "joy",
+        "lex_top": "tie"
+      }
+    },
+    "top_lexicon_words": [
+      [
+        "gift",
+        88
+      ],
+      [
+        "delivery",
+        8
+      ],
+      [
+        "money",
+        7
+      ],
+      [
+        "love",
+        6
+      ],
+      [
+        "good",
+        6
+      ],
+      [
+        "time",
+        6
+      ],
+      [
+        "happy",
+        5
+      ],
+      [
+        "credit",
+        5
+      ],
+      [
+        "wonderful",
+        4
+      ],
+      [
+        "deal",
+        4
+      ],
+      [
+        "present",
+        4
+      ],
+      [
+        "perfect",
+        3
+      ],
+      [
+        "fun",
+        3
+      ],
+      [
+        "waste",
+        3
+      ],
+      [
+        "excellent",
+        3
+      ]
+    ]
+  }
+}

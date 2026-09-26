@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review Sentiment Audit</title>
+<style>
+/* ───────────────────────── THEME ─────────────────────────
+   Recolor the whole dashboard by editing these tokens only.
+   Every chart, pill and control reads from them.
+   Class + method colors were checked with a colorblind-safety validator
+   (all pairs separable under deutan/protan/tritan simulation).          */
+:root {
+  color-scheme: light;
+  --surface-0: #f6f5f1;      /* page */
+  --surface-1: #fdfdfb;      /* cards */
+  --surface-2: #efeee9;      /* wells, tracks, stripes */
+  --line:      #e2e0d9;      /* hairlines */
+  --ink-1:     #151513;      /* primary text */
+  --ink-2:     #55544f;      /* secondary text */
+  --ink-3:     #85847d;      /* muted text */
+  --accent:    #2a4d8f;      /* focus, links, active tab */
+  --accent-soft: #e3e9f5;
+
+  /* class identity (marks only — text always stays in ink) */
+  --c-positive: #2a78d6;
+  --c-neutral:  #1baf7a;
+  --c-negative: #eb6834;
+
+  /* method identity: violet always means "the LLM" */
+  --m-llm:    #4a3aa7;
+  --m-lex:    #e87ba4;
+  --m-rating: #b4b2a9;       /* the star rating as reference */
+
+  /* status: model agrees / disagrees with the rating (always paired with ✓ / ✗) */
+  --good: #0ca30c;
+  --bad:  #d03b3b;
+
+  /* sequential ramp for heatmaps (low → high) */
+  --heat-lo: #eef3fb;
+  --heat-hi: #184f95;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Charter, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radius: 14px;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-0: #121211; --surface-1: #1b1b1a; --surface-2: #262624; --line: #33332f;
+  --ink-1: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8e86;
+  --accent: #8fb0ee; --accent-soft: #24304a;
+  --c-positive: #3987e5; --c-neutral: #199e70; --c-negative: #d95926;
+  --m-llm: #9085e9; --m-lex: #d55181; --m-rating: #6b6a64;
+  --heat-lo: #1f2530; --heat-hi: #5b9bec;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface-0: #121211; --surface-1: #1b1b1a; --surface-2: #262624; --line: #33332f;
+    --ink-1: #f4f3ee; --ink-2: #c3c2b7; --ink-3: #8f8e86;
+    --accent: #8fb0ee; --accent-soft: #24304a;
+    --c-positive: #3987e5; --c-neutral: #199e70; --c-negative: #d95926;
+    --m-llm: #9085e9; --m-lex: #d55181; --m-rating: #6b6a64;
+    --heat-lo: #1f2530; --heat-hi: #5b9bec;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--surface-0); color: var(--ink-1); font: 15px/1.5 var(--font-sans); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 64px; }
+a { color: var(--accent); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+code { font: 12.5px var(--font-mono); }
+
+header.top { display: flex; gap: 24px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; margin-bottom: 28px; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 6px; }
+h1 { font: 500 36px/1.1 var(--font-display); margin: 0; letter-spacing: -.01em; }
+.sub { color: var(--ink-2); margin: 8px 0 0; max-width: 64ch; }
+.theme-btn { background: var(--surface-1); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+
+.tabs { display: flex; gap: 6px; padding: 4px; background: var(--surface-2); border-radius: 999px; width: fit-content; max-width: 100%; overflow-x: auto; scrollbar-width: none; margin-bottom: 10px; }
+.tab { flex: none; white-space: nowrap; border: 0; background: transparent; padding: 7px 16px; border-radius: 999px; cursor: pointer; color: var(--ink-2); font-size: 14px; }
+.tab[aria-selected="true"] { background: var(--surface-1); color: var(--ink-1); box-shadow: 0 1px 2px rgba(0,0,0,.08); font-weight: 600; }
+.run-desc { font-size: 13px; color: var(--ink-3); margin: 0 0 22px 4px; }
+
+h3.section { font: 500 22px/1.2 var(--font-display); margin: 30px 0 4px; grid-column: span 12; }
+p.section-sub { grid-column: span 12; margin: 0 0 4px; color: var(--ink-2); font-size: 14px; max-width: 80ch; }
+
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr); }
+.card { background: var(--surface-1); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; min-width: 0; }
+.card h2 { font-size: 15px; font-weight: 600; margin: 0 0 2px; }
+.card .hint { font-size: 13px; color: var(--ink-3); margin: 0 0 18px; }
+.span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-7 { grid-column: span 7; }
+.span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; }
+@media (max-width: 900px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
+@media (max-width: 520px) { .wrap { padding: 20px 16px 48px; } h1 { font-size: 28px; } .card { padding: 18px 16px; } }
+
+.hero { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.hero-fig { font-size: 64px; font-weight: 650; letter-spacing: -.03em; line-height: 1; }
+.hero-cap { color: var(--ink-2); font-size: 14px; max-width: 44ch; }
+.hero-cap strong { color: var(--ink-1); }
+.tile .label { font-size: 13px; color: var(--ink-2); }
+.tile .value { font-size: 28px; font-weight: 620; letter-spacing: -.02em; margin-top: 4px; }
+.tile .foot { font-size: 12.5px; color: var(--ink-3); margin-top: 2px; }
+.mini-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+.mini-tiles .value { font-size: 24px; }
+
+.mix { display: flex; height: 12px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface-1); margin: 16px 0 10px; }
+.mix span { display: block; height: 100%; min-width: 4px; }
+.legend { display: flex; gap: 8px 16px; flex-wrap: wrap; font-size: 13px; color: var(--ink-2); }
+.key { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.sw { width: 12px; height: 8px; border-radius: 2px; display: inline-block; flex: none; }
+.callout { margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: var(--accent-soft); color: var(--ink-1); font-size: 13.5px; }
+
+/* horizontal bar charts (HTML, not canvas: crisp, accessible, recolorable) */
+.hbars { display: grid; grid-template-columns: max-content 1fr; gap: 8px 12px; align-items: center; }
+.hbars .lab { font-size: 13px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+.hbars .lane { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.bar-line { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.bar { height: 14px; border-radius: 0 4px 4px 0; flex: none; }
+.bar.min { min-width: 3px; }   /* tiny non-zero values never collapse to 0px */
+.bar-val { font-size: 12px; color: var(--ink-2); white-space: nowrap; }
+
+/* 100% stacked rows */
+.stack { display: flex; gap: 2px; height: 18px; }
+.stack span { height: 100%; min-width: 3px; cursor: default; }
+.stack span:first-child { border-radius: 4px 0 0 4px; } .stack span:last-child { border-radius: 0 4px 4px 0; } .stack span:only-child { border-radius: 4px; }
+.stack.empty { background: repeating-linear-gradient(135deg, var(--surface-2) 0 6px, transparent 6px 12px); border-radius: 4px; align-items: center; justify-content: center; font-size: 11.5px; color: var(--ink-3); }
+.stack-n { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+.stack-grid { display: grid; grid-template-columns: max-content 1fr max-content; gap: 10px 12px; align-items: center; }
+.stack-grid .lab { font-size: 13px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+.inseg { font-size: 11px; font-weight: 600; color: #fff; display: flex; align-items: center; justify-content: center; }
+
+/* confusion matrix */
+.cm { display: grid; gap: 3px; }
+.cm .axis { font-size: 12px; color: var(--ink-3); display: flex; align-items: center; }
+.cm .axis.col { justify-content: center; padding-bottom: 4px; text-align: center; }
+.cm .axis.row { justify-content: flex-end; padding-right: 10px; text-align: right; }
+.cell { border-radius: 8px; min-height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: 0; position: relative; }
+.cell .n { font-size: 21px; font-weight: 650; }
+.cell .p { font-size: 12px; opacity: .85; }
+.cell.diag::after { content: "✓"; position: absolute; top: 6px; right: 9px; font-size: 11px; opacity: .8; }
+.cell:hover { outline: 2px solid var(--accent); outline-offset: 1px; }
+.cell.na { cursor: default; background: repeating-linear-gradient(135deg, var(--surface-2) 0 6px, transparent 6px 12px); color: var(--ink-3); }
+.cell.na:hover { outline: none; }
+.cm-cap { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-3); margin-top: 10px; gap: 12px; }
+
+.bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 28px; }
+.bar-row .top { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; gap: 8px; }
+.bar-row .top .val { color: var(--ink-2); }
+.track { display: flex; gap: 2px; height: 16px; background: var(--surface-1); }
+.seg { height: 100%; min-width: 3px; cursor: pointer; }
+.seg:first-child { border-radius: 4px 0 0 4px; } .seg:last-child { border-radius: 0 4px 4px 0; } .seg:only-child { border-radius: 4px; }
+.seg.good { background: var(--good); } .seg.bad { background: var(--bad); }
+.bar-row .foot { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+
+table.small { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+table.small th, table.small td { padding: 7px 6px; border-bottom: 1px solid var(--line); text-align: left; }
+table.small th { font-size: 12px; color: var(--ink-3); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip { background: var(--surface-2); border-radius: 999px; padding: 3px 10px; font-size: 12.5px; color: var(--ink-2); }
+.chip b { color: var(--ink-1); }
+
+/* review table */
+.controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+.seg-ctl { display: inline-flex; background: var(--surface-2); border-radius: 999px; padding: 3px; }
+.seg-ctl button { white-space: nowrap; border: 0; background: transparent; padding: 5px 12px; border-radius: 999px; cursor: pointer; color: var(--ink-2); font-size: 13px; }
+.seg-ctl button[aria-pressed="true"] { background: var(--surface-1); color: var(--ink-1); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+select, input[type=search] { background: var(--surface-1); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 13px; }
+input[type=search] { min-width: 180px; flex: 1; }
+.reset { border: 0; background: none; color: var(--accent); cursor: pointer; font-size: 13px; }
+.count { font-size: 13px; color: var(--ink-2); margin: 0 0 10px; }
+.count b { color: var(--ink-1); font-size: 15px; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table.reviews { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+table.reviews th { text-align: left; font-weight: 600; font-size: 12px; color: var(--ink-3); padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--surface-1); white-space: nowrap; }
+table.reviews td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tbody tr.main { cursor: pointer; }
+tbody tr.main:hover td { background: var(--surface-2); }
+tr.detail td { background: var(--surface-2); font-size: 13px; color: var(--ink-2); }
+.rtitle { font-weight: 600; color: var(--ink-1); }
+.rtext { color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-width: 240px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: .02em; white-space: nowrap; }
+.emo { font-size: 12.5px; white-space: nowrap; color: var(--ink-2); }
+.emo.same { color: var(--ink-1); font-weight: 600; }
+.match { font-weight: 600; font-size: 12.5px; white-space: nowrap; display: inline-flex; gap: 5px; align-items: center; }
+.match .ic { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font-size: 11px; }
+.stars { color: var(--ink-2); white-space: nowrap; letter-spacing: 1px; }
+.empty { padding: 28px; text-align: center; color: var(--ink-3); }
+.more { margin-top: 12px; text-align: center; }
+.more button { border: 1px solid var(--line); background: var(--surface-1); border-radius: 999px; padding: 6px 16px; cursor: pointer; font-size: 13px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin-top: 8px; }
+.kv dt { color: var(--ink-3); } .kv dd { margin: 0; }
+pre.prompt { white-space: pre-wrap; font: 12.5px/1.55 var(--font-mono); background: var(--surface-2); padding: 14px 16px; border-radius: 10px; margin: 0; color: var(--ink-2); max-height: 340px; overflow: auto; }
+footer { margin-top: 28px; font-size: 13px; color: var(--ink-3); }
+footer p { margin: 4px 0; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">MBAX 6418 · Amazon Reviews ’23 — Gift Cards</p>
+      <h1>Review Sentiment Audit</h1>
+      <p class="sub">An LLM reads each review’s title and text — never its star rating — and labels the sentiment and primary emotion. This page shows how often it agrees with the reviewer’s stars, where it doesn’t, and how its emotions compare with a word-list method.</p>
+    </div>
+    <button class="theme-btn" id="themeBtn" type="button">Toggle theme</button>
+  </header>
+
+  <div class="tabs" role="tablist" id="tabs" aria-label="Scored run"></div>
+  <p class="run-desc" id="runDesc"></p>
+
+  <div class="grid">
+    <!-- headline -->
+    <section class="card span-8">
+      <div class="hero">
+        <div class="hero-fig num" id="heroFig"></div>
+        <div class="hero-cap" id="heroCap"></div>
+      </div>
+      <div class="mix" id="mix" aria-hidden="true"></div>
+      <div class="legend" id="mixLegend"></div>
+      <div class="callout" id="callout"></div>
+    </section>
+    <section class="card span-4" style="display:grid;gap:18px;align-content:start">
+      <div class="tile"><div class="label">Balanced accuracy</div><div class="value num" id="tBal"></div><div class="foot" id="tBalFoot"></div></div>
+      <div class="tile"><div class="label" id="tBaseLabel"></div><div class="value num" id="tBase"></div><div class="foot">What a model that ignores the text would score</div></div>
+      <div class="tile"><div class="label">Mismatches</div><div class="value num" id="tMiss"></div><div class="foot" id="tMissFoot"></div></div>
+    </section>
+
+    <!-- step 7: descriptive layer -->
+    <h3 class="section">Where the model succeeds and fails</h3>
+    <p class="section-sub">The data first, then what the model did with it.</p>
+    <section class="card span-5">
+      <h2>Star ratings in the full file</h2>
+      <p class="hint" id="starHint"></p>
+      <div class="hbars" id="starDist"></div>
+      <div class="legend" id="starLegend" style="margin-top:14px"></div>
+    </section>
+    <section class="card span-7">
+      <h2>What the model called each star level</h2>
+      <p class="hint">Share of this run’s reviews at each star rating that the model labeled each class.</p>
+      <div class="stack-grid" id="starPred"></div>
+      <div class="legend" id="starPredLegend" style="margin-top:14px"></div>
+    </section>
+
+    <section class="card span-5">
+      <h2>Rating says vs. model says</h2>
+      <p class="hint">How many reviews each class <i>should</i> have (by stars) vs. how many the model put there.</p>
+      <div class="hbars" id="rvm"></div>
+      <div class="legend" style="margin-top:14px">
+        <span class="key"><span class="sw" style="background:var(--m-rating)"></span>Rating says</span>
+        <span class="key"><span class="sw" style="background:var(--m-llm)"></span>Model says</span>
+      </div>
+    </section>
+    <section class="card span-7">
+      <h2>Where the answers land</h2>
+      <p class="hint">Rows = what the star rating says; columns = what the model said. Shade = share of the row. Click a cell to list those reviews.</p>
+      <div class="cm" id="cm"></div>
+      <div class="cm-cap"><span>Diagonal ✓ = agreement · off-diagonal = the direction of each mistake</span><span id="cmTotal"></span></div>
+    </section>
+    <section class="card span-12">
+      <h2>Hit rate by class</h2>
+      <p class="hint">Of the reviews in each rating class, how many the model labeled the same way (recall), with the 95% range. Click a segment to list them.</p>
+      <div class="bars" id="bars"></div>
+      <div class="legend" style="margin-top:16px">
+        <span class="key"><span class="dot" style="background:var(--good)"></span>✓ Agrees with rating</span>
+        <span class="key"><span class="dot" style="background:var(--bad)"></span>✗ Disagrees</span>
+      </div>
+    </section>
+
+    <!-- step 5: emotions -->
+    <h3 class="section" id="emoHead">Primary emotion: LLM vs. word list</h3>
+    <p class="section-sub" id="emoSub">Two independent takes. The LLM names one emotion per review; the word list counts matches in the NRC Emotion Lexicon and takes the highest. “Tie” = the top emotions were triggered by the same word, so no single answer exists; “none” = no lexicon word matched.</p>
+    <section class="card span-7" id="emoCard">
+      <h2>How often each emotion is chosen</h2>
+      <p class="hint">Number of reviews in this run assigned each emotion, by method.</p>
+      <div class="hbars" id="emoBars"></div>
+      <div class="legend" style="margin-top:14px">
+        <span class="key"><span class="sw" style="background:var(--m-llm)"></span>LLM</span>
+        <span class="key"><span class="sw" style="background:var(--m-lex)"></span>Word list (NRC)</span>
+      </div>
+    </section>
+    <section class="card span-5" id="emoStats">
+      <h2>Do they agree?</h2>
+      <p class="hint">Exact = same single emotion. Lenient = the LLM’s emotion is among the word list’s tied top emotions.</p>
+      <div class="mini-tiles">
+        <div class="tile"><div class="label">Exact agreement</div><div class="value num" id="eAgree"></div></div>
+        <div class="tile"><div class="label">Lenient agreement</div><div class="value num" id="eLenient"></div></div>
+        <div class="tile"><div class="label">Word list: no match</div><div class="value num" id="eNone"></div></div>
+        <div class="tile"><div class="label">Word list: unbreakable tie</div><div class="value num" id="eTie"></div></div>
+      </div>
+      <table class="small" id="eByClass"></table>
+      <p class="hint" style="margin:14px 0 0">Most-matched lexicon words (occurrences in this run):</p>
+      <div class="chips" id="eWords"></div>
+    </section>
+
+    <!-- steps 3–4: review table -->
+    <h3 class="section">Every review in this run</h3>
+    <section class="card span-12" id="reviews">
+      <p class="hint">Filter to any subset; click a row for the full text, the model’s raw reply and the lexicon words matched.</p>
+      <div class="controls">
+        <div class="seg-ctl" role="group" aria-label="Agreement filter" id="matchCtl">
+          <button type="button" data-v="all" aria-pressed="true">All</button>
+          <button type="button" data-v="correct">✓ Agrees</button>
+          <button type="button" data-v="wrong">✗ Mismatched</button>
+        </div>
+        <select id="fTruth" aria-label="Rating class"></select>
+        <select id="fPred" aria-label="Model label"></select>
+        <select id="fStars" aria-label="Stars"></select>
+        <select id="fEmo" aria-label="LLM emotion"></select>
+        <select id="fEmoAgree" aria-label="Emotion agreement"></select>
+        <input type="search" id="fQ" placeholder="Search title or text…" aria-label="Search reviews">
+        <button class="reset" id="reset" type="button">Reset</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div class="table-scroll">
+        <table class="reviews">
+          <thead><tr><th>#</th><th>Stars</th><th>Review</th><th>Rating says</th><th>Model says</th><th>Result</th><th class="emo-col">LLM emotion</th><th class="emo-col">Word list</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="more" id="more"></div>
+    </section>
+
+    <section class="card span-12">
+      <h2>How this run was produced</h2>
+      <p class="hint" id="methodHint"></p>
+      <pre class="prompt" id="prompt"></pre>
+    </section>
+  </div>
+
+  <footer>
+    <p><b>Data:</b> Amazon Reviews ’23, “Gift Cards” category — Hou, Li, He, Yan, Chen &amp; McAuley, <i>Bridging Language and Items for Retrieval and Recommendation</i> (2024), McAuley Lab, UC San Diego. <a href="https://amazon-reviews-2023.github.io">amazon-reviews-2023.github.io</a></p>
+    <p><b>Emotion lexicon:</b> NRC Word-Emotion Association Lexicon (EmoLex) v0.92 — Mohammad &amp; Turney (2013). <a href="https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">saifmohammad.com</a></p>
+    <p id="footMeta"></p>
+  </footer>
+</div>
+
+<script id="data" type="application/json">/*__DATA__*/null</script>
+<script>
+const DATA = JSON.parse(document.getElementById('data').textContent);
+const $ = s => document.querySelector(s);
+const pct = (x, d = 1) => (x == null || isNaN(x)) ? '—' : (x * 100).toFixed(d) + '%';
+const fmt = n => Number(n).toLocaleString('en-US');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
+const CLASSES = ['POSITIVE', 'NEUTRAL', 'NEGATIVE'];
+const classVar = l => CLASSES.includes(l) ? `var(--c-${l.toLowerCase()})` : 'var(--ink-3)';
+const EMOTIONS = ['anger', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust'];
+const isTrue = v => v === true || v === 'True' || v === 'true';
+const PAGE = 50;
+
+let run, state;
+const freshState = () => ({ match: 'all', truth: 'all', pred: 'all', stars: 'all', emo: 'all', emoAgree: 'all', q: '', open: new Set(), shown: PAGE });
+const truthOf = (stars, labels) => stars >= 4 ? 'POSITIVE' : (labels.includes('NEUTRAL') && stars === 3 ? 'NEUTRAL' : 'NEGATIVE');
+const hasEmotion = () => !!run.metrics.emotion;
+
+/* ── theme toggle ── */
+(() => {
+  let saved; try { saved = localStorage.getItem('theme'); } catch (e) {}
+  if (saved) document.documentElement.dataset.theme = saved;
+  $('#themeBtn').onclick = () => {
+    const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    renderMatrix();   // heat colors are computed from tokens
+  };
+})();
+
+/* ── tabs ── */
+function renderTabs() {
+  $('#tabs').innerHTML = DATA.runs.map(r =>
+    `<button class="tab" role="tab" data-id="${r.id}" aria-selected="${r === run}">${esc(r.title)}</button>`).join('');
+  $('#tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => selectRun(b.dataset.id));
+}
+function selectRun(id) {
+  run = DATA.runs.find(r => r.id === id) || DATA.runs.find(r => r.id === DATA.default_run) || DATA.runs[0];
+  state = freshState();
+  try { history.replaceState(null, '', '#' + run.id); } catch (e) {}
+  const m = run.meta;
+  $('#runDesc').textContent = `${m.sampling === 'balanced' ? 'Balanced' : 'Random'} sample of ${m.n} · ${m.labels.length} classes (${m.truth_rule}) · seed ${m.seed} · prompt ${m.prompt_version}`;
+  renderTabs(); renderHead(); renderStarDist(); renderStarPred(); renderRvm(); renderMatrix(); renderBars(); renderEmotion();
+  setupFilters(); renderTable(); renderMethod();
+}
+
+/* ── headline ── */
+function renderHead() {
+  const m = run.metrics, L = run.meta.labels;
+  const support = Object.fromEntries(L.map(l => [l, m.per_class[l].support]));
+  const [lo, hi] = m.accuracy_ci95;
+  const agree = run.rows.filter(r => isTrue(r.correct)).length;
+  const absent = m.classes_absent || [];
+  $('#heroFig').textContent = pct(m.accuracy);
+  $('#heroCap').innerHTML = `<strong>agreement with the star rating</strong> across <span class="num">${m.n_usable}</span> reviews
+    (<span class="num">${agree}</span> of <span class="num">${m.n_usable}</span>). 95% confidence range <span class="num">${pct(lo)}–${pct(hi)}</span>.`;
+  $('#mix').innerHTML = L.filter(l => support[l]).map(l => `<span title="${cap(l)}: ${support[l]}" style="flex:${support[l]};background:${classVar(l)}"></span>`).join('');
+  $('#mixLegend').innerHTML = L.map(l =>
+    `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)} by rating · <b class="num">${support[l]}</b> (${pct(support[l] / m.n_usable, 0)})</span>`).join('');
+  const majLabel = m.majority_label || 'POSITIVE';
+  const base = m.majority_baseline ?? m.always_positive_baseline;
+  const lift = m.accuracy - base;
+  let txt;
+  if (run.meta.sampling === 'random') {
+    txt = `<b>Read with care:</b> this sample mirrors the real data, where ${pct(support[majLabel] / m.n_usable, 0)} of reviews are ${cap(majLabel).toLowerCase()}.
+      A model that answered “${cap(majLabel)}” every time would already score <b>${pct(base)}</b> — this model adds <b>${(lift * 100).toFixed(1)} points</b> over that.
+      Only <b>${m.n_usable - support[majLabel]}</b> reviews test the other class${L.length > 2 ? 'es' : ''}.`;
+    if (absent.length) txt += ` <b>${absent.map(cap).join(', ')} does not appear at all</b>, so this run cannot show how the model handles it.`;
+    txt += ' Compare the balanced run.';
+  } else {
+    txt = `<b>Balanced sample:</b> ${m.n_usable / L.length} reviews per class, drawn from the whole file with fixed seed ${run.meta.seed}. Guessing any one class scores only <b>${pct(base)}</b>, so accuracy here weighs every class equally.`;
+  }
+  $('#callout').innerHTML = txt;
+  $('#tBal').textContent = pct(m.balanced_accuracy);
+  $('#tBalFoot').textContent = absent.length ? `Averaged over the classes present (${absent.map(cap).join(', ')} absent)` : 'Average hit rate across classes — immune to skew';
+  $('#tBaseLabel').textContent = run.meta.sampling === 'balanced' ? '“Always guess one class” baseline' : `“Always say ${cap(majLabel)}” baseline`;
+  $('#tBase').textContent = pct(base);
+  const miss = m.n_usable - agree;
+  $('#tMiss').textContent = miss;
+  $('#tMissFoot').innerHTML = `<a href="#reviews" id="missLink">Show the ${miss} mismatched review${miss === 1 ? '' : 's'} →</a>`;
+  $('#missLink').onclick = e => { e.preventDefault(); applyFilter({ match: 'wrong' }); };
+}
+
+/* ── generic horizontal bar: width is a share of the lane minus room for the value label ── */
+function barLine(value, max, color, label, title) {
+  const f = max ? value / max : 0;
+  return `<div class="bar-line"><div class="bar ${value > 0 ? 'min' : ''}" style="width:calc((100% - 96px) * ${f.toFixed(4)});background:${color}" title="${esc(title)}"></div><span class="bar-val num">${label}</span></div>`;
+}
+
+/* ── step 7a: full-file star distribution ── */
+function renderStarDist() {
+  const rc = DATA.dataset.rating_counts, N = DATA.dataset.n_reviews, L = run.meta.labels;
+  const max = Math.max(...Object.values(rc));
+  $('#starHint').innerHTML = `All <span class="num">${fmt(N)}</span> reviews, colored by the class this run’s rule assigns each star level — the imbalance every random sample inherits.`;
+  $('#starDist').innerHTML = [5, 4, 3, 2, 1].map(s => {
+    const n = rc[s] || 0, t = truthOf(s, L);
+    return `<div class="lab">${'★'.repeat(s)}</div><div class="lane" data-star="${s}" data-count="${n}">${barLine(n, max, classVar(t), `${fmt(n)} · ${pct(n / N)}`, `${s}★: ${fmt(n)} reviews → ${cap(t)}`)}</div>`;
+  }).join('');
+  $('#starLegend').innerHTML = L.map(l => `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)}</span>`).join('');
+}
+
+/* ── step 7b: model label by star level ── */
+function renderStarPred() {
+  const L = run.meta.labels;
+  let sp = run.metrics.star_by_pred;
+  if (!sp) { sp = {}; run.rows.forEach(r => { (sp[r.rating] ||= {}); sp[r.rating][r.pred] = (sp[r.rating][r.pred] || 0) + 1; }); }
+  $('#starPred').innerHTML = [5, 4, 3, 2, 1].map(s => {
+    const row = sp[s] || {}, n = L.reduce((a, l) => a + (row[l] || 0), 0), t = truthOf(s, L);
+    const bar = n ? `<div class="stack">${L.filter(l => row[l]).map(l => {
+        const share = row[l] / n, lbl = share >= 0.12 ? `${Math.round(share * 100)}%` : '';
+        return `<span class="inseg" data-star="${s}" data-label="${l}" data-count="${row[l]}" style="flex:${row[l]};background:${classVar(l)}" title="${s}★ → model said ${cap(l)}: ${row[l]} of ${n} (${pct(share)})">${lbl}</span>`;
+      }).join('')}</div>`
+      : `<div class="stack empty">none in this sample</div>`;
+    return `<div class="lab">${'★'.repeat(s)}</div>${bar}<div class="stack-n num">n=${n} · should be ${cap(t)}</div>`;
+  }).join('');
+  $('#starPredLegend').innerHTML = L.map(l => `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>Model: ${cap(l)}</span>`).join('');
+}
+
+/* ── step 7c: rating says vs model says ── */
+function renderRvm() {
+  const L = run.meta.labels, pc = run.metrics.per_class;
+  const predOf = l => pc[l].predicted ?? run.rows.filter(r => r.pred === l).length;
+  const max = Math.max(...L.flatMap(l => [pc[l].support, predOf(l)]));
+  $('#rvm').innerHTML = L.map(l => {
+    const sup = pc[l].support, pred = predOf(l);
+    const d = pred - sup, dTxt = d === 0 ? 'exact' : (d > 0 ? `+${d} over` : `${d} under`);
+    return `<div class="lab"><span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)}</span></div>
+      <div class="lane" data-class="${l}" data-support="${sup}" data-predicted="${pred}">
+        ${barLine(sup, max, 'var(--m-rating)', `${sup}`, `${cap(l)} by rating: ${sup}`)}
+        ${barLine(pred, max, 'var(--m-llm)', `${pred} <span style="color:var(--ink-3)">(${dTxt})</span>`, `Model said ${cap(l)}: ${pred}`)}
+      </div>`;
+  }).join('');
+}
+
+/* ── confusion matrix ── */
+function mixHex(a, b, t) {
+  const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const [A, B] = [p(a), p(b)];
+  const c = A.map((v, i) => Math.round(v + (B[i] - v) * t));
+  return { css: `rgb(${c.join(',')})`, lum: (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255 };
+}
+function renderMatrix() {
+  if (!run) return;
+  const L = run.meta.labels, cmx = run.metrics.confusion_matrix; // {pred: {truth: n}}
+  const cs = getComputedStyle(document.documentElement);
+  const lo = cs.getPropertyValue('--heat-lo').trim(), hi = cs.getPropertyValue('--heat-hi').trim();
+  const grid = $('#cm');
+  grid.style.gridTemplateColumns = `max-content repeat(${L.length}, 1fr)`;
+  let h = `<div></div>` + L.map(p => `<div class="axis col">Model: ${cap(p)}</div>`).join('');
+  let total = 0;
+  for (const t of L) {
+    const rowN = L.reduce((s, p) => s + (cmx[p]?.[t] || 0), 0);
+    h += `<div class="axis row">Rating: ${cap(t)}<br>n=${rowN}</div>`;
+    for (const p of L) {
+      const n = cmx[p]?.[t] || 0; total += n;
+      if (!rowN) { h += `<div class="cell na num" data-truth="${t}" data-pred="${p}" data-count="0" title="No ${cap(t)} reviews in this sample"><span class="p">none in sample</span></div>`; continue; }
+      const share = n / rowN, c = mixHex(lo, hi, share), ink = c.lum < 0.5 ? '#fff' : 'var(--ink-1)';
+      h += `<button class="cell num ${t === p ? 'diag' : ''}" style="background:${c.css};color:${ink}"
+              data-truth="${t}" data-pred="${p}" data-count="${n}"
+              title="${n} reviews rated ${cap(t)} → model said ${cap(p)} (${pct(share)} of row)">
+              <span class="n">${n}</span><span class="p">${pct(share, 0)}</span></button>`;
+    }
+  }
+  grid.innerHTML = h;
+  $('#cmTotal').textContent = `${total} reviews`;
+  grid.querySelectorAll('button.cell').forEach(c => c.onclick = () => applyFilter({ truth: c.dataset.truth, pred: c.dataset.pred }));
+}
+
+/* ── per-class hit rate ── */
+function renderBars() {
+  const L = run.meta.labels, pc = run.metrics.per_class, cmx = run.metrics.confusion_matrix;
+  $('#bars').innerHTML = L.map(l => {
+    const n = pc[l].support, ok = cmx[l]?.[l] || 0, bad = n - ok;
+    const head = `<div class="top"><span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)} <span style="color:var(--ink-3)">(rating)</span></span>`;
+    if (!n) return `<div class="bar-row">${head}<span class="val">—</span></div><div class="stack empty" style="height:16px">none in this sample</div><div class="foot">Can’t be measured: class absent</div></div>`;
+    const [clo, chi] = pc[l].recall_ci95;
+    const segs = [ok ? `<span class="seg good" style="flex:${ok}" data-t="${l}" data-m="correct" title="${ok} agree"></span>` : '',
+                  bad ? `<span class="seg bad" style="flex:${bad}" data-t="${l}" data-m="wrong" title="${bad} disagree"></span>` : ''].join('');
+    return `<div class="bar-row">${head}
+        <span class="val num"><b style="color:var(--ink-1)" data-class-recall="${l}">${pct(pc[l].recall)}</b> · ${ok}/${n}</span></div>
+      <div class="track">${segs}</div>
+      <div class="foot num">95% range ${pct(clo, 0)}–${pct(chi, 0)} · precision ${pct(pc[l].precision)}</div></div>`;
+  }).join('');
+  $('#bars').querySelectorAll('.seg').forEach(s => s.onclick = () => applyFilter({ truth: s.dataset.t, match: s.dataset.m }));
+}
+
+/* ── step 5: emotions ── */
+function renderEmotion() {
+  const on = hasEmotion();
+  ['#emoHead', '#emoSub', '#emoCard', '#emoStats'].forEach(s => $(s).hidden = !on);
+  document.querySelectorAll('.emo-col').forEach(c => c.hidden = !on);
+  $('#fEmo').hidden = $('#fEmoAgree').hidden = !on;
+  if (!on) return;
+  const e = run.metrics.emotion, cats = [...EMOTIONS, 'tie', 'none'];
+  const max = Math.max(...cats.map(c => Math.max(e.llm_counts[c] || 0, e.lex_counts[c] || 0)));
+  $('#emoBars').innerHTML = cats.map(c => {
+    const a = e.llm_counts[c], b = e.lex_counts[c] || 0;
+    const llm = a == null ? `<div class="bar-line"><span class="bar-val" style="color:var(--ink-3)">LLM: n/a (always picks one)</span></div>`
+                          : barLine(a, max, 'var(--m-llm)', `${a}`, `LLM: ${a} reviews → ${c}`);
+    return `<div class="lab">${cap(c)}</div><div class="lane" data-emo="${c}" data-llm="${a ?? ''}" data-lex="${b}">${llm}${barLine(b, max, 'var(--m-lex)', `${b}`, `Word list: ${b} reviews → ${c}`)}</div>`;
+  }).join('');
+  $('#eAgree').textContent = pct(e.agreement);
+  $('#eLenient').textContent = pct(e.agreement_lenient);
+  $('#eNone').textContent = `${e.n_lexicon_none} of ${e.n}`;
+  $('#eTie').textContent = `${e.n_lexicon_unbreakable_tie} of ${e.n}`;
+  const bt = e.by_truth_class;
+  $('#eByClass').innerHTML = `<thead><tr><th>Rating class</th><th>n</th><th>Exact</th><th>Lenient</th><th>LLM mostly</th><th>Word list mostly</th></tr></thead><tbody>` +
+    run.meta.labels.filter(l => bt[l]).map(l => `<tr data-class="${l}"><td><span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)}</span></td>
+      <td class="num">${bt[l].n}</td><td class="num">${pct(bt[l].agree, 0)}</td><td class="num">${pct(bt[l].agree_lenient, 0)}</td><td>${bt[l].llm_top}</td><td>${bt[l].lex_top}</td></tr>`).join('') + '</tbody>';
+  $('#eWords').innerHTML = e.top_lexicon_words.slice(0, 10).map(([w, n]) => `<span class="chip">${esc(w)} <b class="num">${n}</b></span>`).join('');
+}
+
+/* ── filters + table ── */
+function setupFilters() {
+  const L = run.meta.labels;
+  const opts = (all, xs, f = x => x) => `<option value="all">${all}</option>` + xs.map(x => `<option value="${x}">${f(x)}</option>`).join('');
+  const predVals = [...new Set([...L, ...run.rows.map(r => r.pred)])];
+  $('#fTruth').innerHTML = opts('Any rating class', L, l => 'Rating: ' + cap(l));
+  $('#fPred').innerHTML = opts('Any model label', predVals, l => 'Model: ' + cap(l));
+  $('#fStars').innerHTML = opts('Any stars', [5, 4, 3, 2, 1], s => '★'.repeat(s));
+  $('#fEmo').innerHTML = opts('Any LLM emotion', EMOTIONS.filter(x => run.rows.some(r => r.llm_emotion === x)), cap);
+  $('#fEmoAgree').innerHTML = opts('Emotions: any', ['same', 'different'], x => x === 'same' ? 'Emotions: LLM = word list' : 'Emotions: differ');
+  syncControls();
+}
+function syncControls() {
+  $('#fTruth').value = state.truth; $('#fPred').value = state.pred; $('#fStars').value = String(state.stars);
+  $('#fEmo').value = state.emo; $('#fEmoAgree').value = state.emoAgree; $('#fQ').value = state.q;
+  $('#matchCtl').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === state.match));
+}
+function applyFilter(patch) {
+  Object.assign(state, freshState(), patch);
+  syncControls(); renderTable();
+  $('#reviews').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function filtered() {
+  const q = state.q.trim().toLowerCase();
+  return run.rows.filter(r =>
+    (state.match === 'all' || (state.match === 'correct') === isTrue(r.correct)) &&
+    (state.truth === 'all' || r.truth === state.truth) &&
+    (state.pred === 'all' || r.pred === state.pred) &&
+    (state.stars === 'all' || String(r.rating) === String(state.stars)) &&
+    (state.emo === 'all' || r.llm_emotion === state.emo) &&
+    (state.emoAgree === 'all' || (state.emoAgree === 'same') === (r.llm_emotion === r.lex_emotion)) &&
+    (!q || (r.title + ' ' + r.text).toLowerCase().includes(q)));
+}
+const labelPill = l => `<span class="pill"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)}</span>`;
+function renderTable() {
+  const rows = filtered(), total = run.rows.length, emoOn = hasEmotion();
+  const parts = [];
+  if (state.match !== 'all') parts.push(state.match === 'correct' ? 'agreeing' : 'mismatched');
+  if (state.truth !== 'all') parts.push(`rated ${cap(state.truth)}`);
+  if (state.pred !== 'all') parts.push(`labeled ${cap(state.pred)}`);
+  if (state.stars !== 'all') parts.push(`${state.stars}★`);
+  if (state.emo !== 'all') parts.push(`LLM emotion ${state.emo}`);
+  if (state.emoAgree !== 'all') parts.push(state.emoAgree === 'same' ? 'emotions agree' : 'emotions differ');
+  if (state.q) parts.push(`matching “${esc(state.q)}”`);
+  $('#count').innerHTML = `Showing <b class="num" id="liveCount">${rows.length}</b> of <span class="num">${total}</span> reviews${parts.length ? ' — ' + parts.join(', ') : ''}`;
+  const vis = rows.slice(0, state.shown), cols = emoOn ? 8 : 6;
+  $('#tbody').innerHTML = vis.length ? vis.map(r => {
+    const ok = isTrue(r.correct), open = state.open.has(r.review_id), same = r.llm_emotion && r.llm_emotion === r.lex_emotion;
+    return `<tr class="main" data-id="${r.review_id}" aria-expanded="${open}">
+      <td class="num" style="color:var(--ink-3)">${r.review_id}</td>
+      <td class="stars" aria-label="${r.rating} stars">${'★'.repeat(r.rating)}<span style="opacity:.25">${'★'.repeat(5 - r.rating)}</span></td>
+      <td><div class="rtitle">${esc(r.title) || '<i>(no title)</i>'}</div><div class="rtext">${esc(r.text).replace(/&lt;br \/&gt;/g, ' ') || '<i>(no text)</i>'}</div></td>
+      <td>${labelPill(r.truth)}</td><td>${labelPill(r.pred)}</td>
+      <td><span class="match"><span class="ic" style="background:var(--${ok ? 'good' : 'bad'})">${ok ? '✓' : '✗'}</span>${ok ? 'Agrees' : 'Mismatch'}</span></td>` +
+      (emoOn ? `<td><span class="emo ${same ? 'same' : ''}">${esc(r.llm_emotion)}</span></td><td><span class="emo ${same ? 'same' : ''}">${esc(r.lex_emotion)}</span></td>` : '') + `</tr>` +
+      (open ? `<tr class="detail"><td></td><td colspan="${cols - 1}">
+        <div style="color:var(--ink-1);white-space:pre-wrap">${esc(r.text).replace(/&lt;br \/&gt;/g, '\n')}</div>
+        <dl class="kv"><dt>Model raw reply</dt><dd><code>${esc(r.raw_output)}</code></dd>
+        ${emoOn ? `<dt>Lexicon words matched</dt><dd>${esc(r.lex_words) || '—'}</dd><dt>Word-list top emotion(s)</dt><dd>${esc(r.lex_top) || '—'}</dd>` : ''}
+        <dt>Verified purchase</dt><dd>${isTrue(r.verified_purchase) ? 'Yes' : 'No'}</dd>
+        <dt>Helpful votes</dt><dd class="num">${r.helpful_vote}</dd><dt>Date</dt><dd class="num">${r.date}</dd>
+        <dt>Words</dt><dd class="num">${r.text_len}</dd></dl></td></tr>` : '');
+  }).join('') : `<tr><td colspan="${cols}" class="empty">No reviews match these filters.</td></tr>`;
+  $('#tbody').querySelectorAll('tr.main').forEach(tr => tr.onclick = () => {
+    const id = +tr.dataset.id; state.open.has(id) ? state.open.delete(id) : state.open.add(id); renderTable();
+  });
+  $('#more').innerHTML = rows.length > state.shown
+    ? `<button type="button" id="moreBtn">Show ${Math.min(PAGE, rows.length - state.shown)} more (${rows.length - state.shown} hidden)</button>` : '';
+  if ($('#moreBtn')) $('#moreBtn').onclick = () => { state.shown += PAGE; renderTable(); };
+}
+function wireControls() {
+  $('#matchCtl').querySelectorAll('button').forEach(b => b.onclick = () => { state.match = b.dataset.v; state.shown = PAGE; syncControls(); renderTable(); });
+  const bind = (sel, key) => $(sel).onchange = e => { state[key] = e.target.value; state.shown = PAGE; renderTable(); };
+  bind('#fTruth', 'truth'); bind('#fPred', 'pred'); bind('#fStars', 'stars'); bind('#fEmo', 'emo'); bind('#fEmoAgree', 'emoAgree');
+  $('#fQ').oninput = e => { state.q = e.target.value; state.shown = PAGE; renderTable(); };
+  $('#reset').onclick = () => { state = freshState(); syncControls(); renderTable(); };
+}
+
+/* ── method ── */
+function renderMethod() {
+  const m = run.meta;
+  $('#methodHint').innerHTML = `Model <code>${esc(m.model)}</code> · temperature ${m.temperature} · thinking ${m.enable_thinking ? 'on' : 'off'} ·
+    ${m.with_emotion ? 'answer forced to an enum JSON schema' : 'one-word answer'} · ${m.sampling} sample of ${m.n}, seed ${m.seed} ·
+    correct answer: ${esc(m.truth_rule)}. The model receives only this prompt plus the review’s title and text.`;
+  $('#prompt').textContent = DATA.prompts[run.id];
+  $('#footMeta').textContent = `Full file: ${fmt(DATA.dataset.n_reviews)} reviews. This view: results/batch_${m.run_id}.csv and its metrics JSON.`;
+}
+
+wireControls();
+selectRun(location.hash.slice(1));
+/* Optional deep link: ?match=wrong&truth=NEUTRAL&pred=NEGATIVE&stars=3&q=fee&section=reviews
+   opens the page pre-filtered (used for the README screenshots; handy for sharing a finding). */
+(() => {
+  const qp = new URLSearchParams(location.search), patch = {};
+  ['match', 'truth', 'pred', 'stars', 'emo', 'emoAgree', 'q'].forEach(k => { if (qp.get(k)) patch[k] = qp.get(k); });
+  if (Object.keys(patch).length) { Object.assign(state, freshState(), patch); syncControls(); renderTable(); }
+  // ?section=<id>[,<id>…] shows only those cards under the header (a focused, screenshot-friendly view)
+  const keep = (qp.get('section') || '').split(',').map(id => document.getElementById(id)).filter(Boolean);
+  if (keep.length) [...document.querySelector('.grid').children].forEach(c => { if (!keep.includes(c)) c.hidden = true; });
+})();
+</script>
+</body>
+</html>

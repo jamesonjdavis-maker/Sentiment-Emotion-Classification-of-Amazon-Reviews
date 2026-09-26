@@ -1,0 +1,52 @@
+100 already scored, 0 to go
+
+================ RESULTS ================
+Scored: 100   usable: 100   unparseable/error: 0
+Truth mix: 89 POSITIVE / 0 NEUTRAL / 11 NEGATIVE
+
+Agreement with rating (accuracy): 89.0%   95% CI 81.4%–93.7%
+'Always POSITIVE' baseline:  89.0%   <- accuracy must beat this
+Balanced accuracy (mean recall):  89.8%   <- skew-proof headline  (over present classes; ABSENT from sample: NEUTRAL)
+Macro F1:                         0.92
+
+Confusion matrix (rows = rating says, cols = model says):
+pred      POSITIVE  NEUTRAL  NEGATIVE
+truth                                
+POSITIVE        79        9         1
+NEUTRAL          0        0         0
+NEGATIVE         1        0        10
+
+Per class:
+  POSITIVE n=89  recall=88.8% (CI 81%–94%)  precision=98.8%  F1=0.93
+  NEUTRAL  n=0   recall=nan% (CI nan%–nan%)  precision=0.0%  F1=nan
+  NEGATIVE n=11  recall=90.9% (CI 62%–98%)  precision=90.9%  F1=0.91
+
+Model label by star rating:
+pred    POSITIVE  NEUTRAL  NEGATIVE
+rating                             
+1              1        0        10
+4              4        2         0
+5             75        7         1
+
+Agreement by review length:
+           n  agree
+text_len           
+≤5 words  30  83.3%
+6–20      45  93.3%
+21–60     18  88.9%
+>60        7  85.7%
+
+Disagreements (11):
+  #126402 5★ truth=POSITIVE pred=NEUTRAL | 'Amazon beats the competition' — 'Wish they would discount the gist cards by 5%'
+  #65840 4★ truth=POSITIVE pred=NEUTRAL | 'Nice if no defects' — "I've gotten Amazon gift cards in tins for years because they make the gift seem much nicer.  I'm generally hap"
+  #27187 1★ truth=NEGATIVE pred=POSITIVE | 'Gift card' — 'Not much you can say other than it works'
+  #57869 5★ truth=POSITIVE pred=NEUTRAL | "It's a gift card" — 'Duh'
+  #17849 5★ truth=POSITIVE pred=NEUTRAL | 'Cute box & fast delivery' — 'Gift for Christmas'
+  #108620 5★ truth=POSITIVE pred=NEUTRAL | 'Easy to order and quick delivery' — 'Christmas presents'
+  #25705 5★ truth=POSITIVE pred=NEUTRAL | 'Five Stars' — 'its a gift card :)'
+  #40178 5★ truth=POSITIVE pred=NEUTRAL | 'The product is as advertised.' — 'The product is as advertised.'
+  #56233 5★ truth=POSITIVE pred=NEUTRAL | 'Five Stars' — "What can I say, it's a gift card."
+  #46380 4★ truth=POSITIVE pred=NEUTRAL | 'Good gift. Cannot be redeemed in person at any theater box office.' — "It's hard to go wrong with gift cards but it's best to make sure the recipient knows exxactly how to redeem. M"
+  #59583 5★ truth=POSITIVE pred=NEGATIVE | 'R-R-Reload!' — 'Remember in House of the Dead you had to fire the toy gun offscreen to reload, before decimating more zombies?'
+
+Saved /Users/jamesondavis/App/mbax6418-sentiment/results/batch_100_s42_c3_emo.csv, *_wrong.csv, *_metrics.json

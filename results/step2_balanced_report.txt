@@ -1,0 +1,42 @@
+0 already scored, 100 to go
+
+================ STEP 2 RESULTS ================
+Scored: 100   usable: 100   unparseable/error: 0
+Truth mix: 50 POSITIVE / 50 NEGATIVE
+
+Agreement with rating (accuracy): 99.0%   95% CI 94.6%–99.8%
+'Always POSITIVE' baseline:        50.0%   <- accuracy must beat this
+Balanced accuracy (mean recall):  99.0%   <- skew-proof headline
+Macro F1:                         0.99
+
+Confusion matrix (rows = rating says, cols = model says):
+pred      POSITIVE  NEGATIVE
+truth                       
+POSITIVE        49         1
+NEGATIVE         0        50
+
+Per class:
+  POSITIVE n=50  recall=98.0% (CI 90%–100%)  precision=100.0%  F1=0.99
+  NEGATIVE n=50  recall=100.0% (CI 93%–100%)  precision=98.0%  F1=0.99
+
+Agreement by star rating (look at 3★ — the rule calls it NEGATIVE):
+         n  agree
+rating           
+1       39 100.0%
+2        7 100.0%
+3        4 100.0%
+4        1   0.0%
+5       49 100.0%
+
+Agreement by review length:
+           n  agree
+text_len           
+≤5 words  28 100.0%
+6–20      41 100.0%
+21–60     24  95.8%
+>60        7 100.0%
+
+Disagreements (1):
+  #27014 4★ truth=POSITIVE pred=NEGATIVE | 'Issue in distinguishing' — 'I ordered few cards of $25 and few of $50, all looks alike and came in same package. How to distinguish?'
+
+Saved /Users/jamesondavis/App/mbax6418-sentiment/results/batch_100_balanced_s42.csv, *_wrong.csv, *_metrics.json

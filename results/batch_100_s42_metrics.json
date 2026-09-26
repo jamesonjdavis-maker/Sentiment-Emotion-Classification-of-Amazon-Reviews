@@ -1,0 +1,97 @@
+{
+  "n_scored": 100,
+  "n_usable": 100,
+  "accuracy": 0.98,
+  "accuracy_ci95": [
+    0.9299868370580063,
+    0.9944981477650318
+  ],
+  "always_positive_baseline": 0.89,
+  "balanced_accuracy": 0.9489274770173646,
+  "macro_f1": 0.9489274770173646,
+  "confusion_matrix": {
+    "POSITIVE": {
+      "POSITIVE": 88,
+      "NEGATIVE": 1
+    },
+    "NEGATIVE": {
+      "POSITIVE": 1,
+      "NEGATIVE": 10
+    }
+  },
+  "per_class": {
+    "POSITIVE": {
+      "support": 89,
+      "recall": 0.9887640449438202,
+      "precision": 0.9887640449438202,
+      "f1": 0.9887640449438202,
+      "recall_ci95": [
+        0.9390660617800944,
+        0.9980138679065976
+      ]
+    },
+    "NEGATIVE": {
+      "support": 11,
+      "recall": 0.9090909090909091,
+      "precision": 0.9090909090909091,
+      "f1": 0.9090909090909091,
+      "recall_ci95": [
+        0.6226353745137962,
+        0.9837682477371741
+      ]
+    }
+  },
+  "by_star": [
+    {
+      "rating": 1,
+      "n": 11,
+      "agree": 0.9090909090909091
+    },
+    {
+      "rating": 4,
+      "n": 6,
+      "agree": 1.0
+    },
+    {
+      "rating": 5,
+      "n": 83,
+      "agree": 0.9879518072289156
+    }
+  ],
+  "by_length": [
+    {
+      "text_len": "\u22645 words",
+      "n": 30,
+      "agree": 1.0
+    },
+    {
+      "text_len": "6\u201320",
+      "n": 45,
+      "agree": 0.9777777777777777
+    },
+    {
+      "text_len": "21\u201360",
+      "n": 18,
+      "agree": 0.9444444444444444
+    },
+    {
+      "text_len": ">60",
+      "n": 7,
+      "agree": 1.0
+    }
+  ],
+  "run": {
+    "run_id": "100_s42",
+    "labels": [
+      "POSITIVE",
+      "NEGATIVE"
+    ],
+    "n": 100,
+    "seed": 42,
+    "sampling": "random",
+    "truth_rule": "rating >= 4 -> POSITIVE, else NEGATIVE",
+    "model": "cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit",
+    "temperature": 0,
+    "enable_thinking": false
+  }
+}

@@ -1,0 +1,9 @@
+review_id,rating,truth,title,text,text_len,verified_purchase,helpful_vote,date,pred,llm_emotion,raw_output,correct
+27187,1,NEGATIVE,Gift card,Not much you can say other than it works,9,True,2,2020-10-29 17:27:04.305,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+59583,5,POSITIVE,R-R-Reload!,"Remember in House of the Dead you had to fire the toy gun offscreen to reload, before decimating more zombies?  Well, reloading my balance is easier than that.  Thanks for making it easy to take my money, Jeff.",38,True,2,2021-07-24 03:57:33.987,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False

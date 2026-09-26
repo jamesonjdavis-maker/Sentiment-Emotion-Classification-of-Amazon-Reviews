@@ -1,0 +1,173 @@
+review_id,rating,truth,title,text,text_len,verified_purchase,helpful_vote,date,pred,llm_emotion,raw_output,correct
+124162,5,POSITIVE,Perfect to give as gift,"It's a gift card....,what more is there to say ?",10,True,0,2017-01-15 20:30:05.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+134558,5,POSITIVE,Easy to give as a gift.,Gas card.,2,True,0,2022-05-16 19:53:48.072,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+58529,5,POSITIVE,Well.  It’s my money so it’s pretty cool.,I used my own money to add to.. my......  own account.  I mean...  I guess this is a reviewable item?,20,True,0,2020-02-06 04:30:31.402,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+27014,4,POSITIVE,Issue in distinguishing,"I ordered few cards of $25 and few of $50, all looks alike and came in same package. How to distinguish?",21,True,0,2019-09-30 23:30:44.651,NEUTRAL,surprise,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""surprise""
+}",False
+134527,5,POSITIVE,Didn’t have to go anywhere got it the next day,Easy,1,True,0,2021-02-28 22:00:18.730,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+10572,3,NEUTRAL,Where Was The Personal Message?,"It is a gift card so there is not a lot to review there.  However, it has you fill out a section for the personal note which I did on two cards that I bought, nothing showed up. What was the point in having me fill out that section if they were not going to bother putting the note on there?. I had the cards shipped to me and then sent them out.  If they had gone straight to the giftee, they would not have had a clue who they were from.  So those shipping to the receiptant beward of that!  Other than that, they are cute cards and were shipped next day.  They were much appreicated after I wrote the personal message myself!",124,True,1,2012-12-26 19:14:03.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+61483,3,NEUTRAL,Giftable but not easy to add to wallet.,It is not easy to use. I cannot add to my Google wallet. So I would avoid it.,18,True,1,2021-03-12 22:09:29.471,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+141252,3,NEUTRAL,How to use and redeem,"I do not understand how this works, confusing to me.",10,True,0,2019-09-23 01:45:50.402,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+23870,3,NEUTRAL,Easy to give someone you care about,Was a birthday present for my new son-in-law. He was really appreciated it.,13,True,0,2016-11-01 17:31:19.000,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",False
+14812,3,NEUTRAL,Nice,Perfect as a gift for a graduate.,7,True,0,2020-04-30 17:09:25.985,POSITIVE,joy,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""joy""
+}",False
+97615,3,NEUTRAL,"Arrived heavily dent, feel embarrassed to gift away","Arrived heavily dent, feel embarrassed to gift away",8,False,0,2021-09-12 15:28:59.497,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False
+54708,3,NEUTRAL,Cannot use for all Amazon services!!,"This card was purchased for the purpose of paying my Prime subscription and Prime Video Channels monthly fee.  Although I had enough on my gift card to cover the fees, my subscriptions were suspended because the fees must be paid by credit card or check.  Really???  This doesn't make sense, but I confirmed it while chatting with an Amazon rep.  I'd like to know the reasoning behind this decision.",69,True,0,2021-07-26 22:55:08.363,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+126700,3,NEUTRAL,Card did not come with the note I requested.,"Card did not come with the note I requested, and small corner of peel off section to reveal code is missing, not sure why.  And the card does not indicate how much is on it.  It is a gift for someone so all the above is very annoying, and not good customer service.  Seems to be no way to check the value of the card (making sure it actually has the value stated loaded on it), before I give to the recipient.  Amazon just seems to have option to load it on to my own account which I do not want to do.",103,False,1,2020-04-29 19:03:52.211,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+50504,3,NEUTRAL,I thought the $6.95 charge was excesive,The loading charge I thought was excessive,7,False,1,2020-08-10 22:38:16.573,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+43213,3,NEUTRAL,Quick Shipping but..,I'm just frustrated that I couldn't add it to my Apple Pay wallet. It's not compatible in that way. There were times that my husband had the card and I needed it so it would have been super convenient if I were able to add it to my phone wallet.,50,True,0,2021-12-08 15:33:14.218,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+126778,3,NEUTRAL,Gift message not included.,I ordered this as a graduation gift and wrote my gift note to be included with the package and it was not included. Very disappointing,25,True,0,2022-05-02 18:46:48.420,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False
+96840,3,NEUTRAL,"If you're a patient person who doesn't mind, confusing, complicated, & difficult transactions, these are the giftcards for you!","Be prepared that very few people at Hyatt know how these giftcards work.  I've tried to use several giftcards at several locations on several different occasions, and each time, every Hyatt employee I've encountered (over the phone or in person) have to put me on hold and call corporate to figure out how to redeem them.  I'm literally sitting on hold right now trying to book an advanced reservation with one now and they can't seem to figure out how to apply a $100 gift card to a $500 reservation.  (15 minutes and counting).  This is the third time I've tried to use it.  The answer I just received is &#34;you can't use a gift card on an advanced booking rate&#34;----different answers with different hotels.  When I call the same hotel later tonight, I will get a different answer.  At a different hotel 2 months ago, they nearly lost their minds because first they said you couldn't use them in international hotels (wrong) and then they said you can only use one gift card per stay (also wrong---after calling corporate for 1 hour, they took them all).  Long story short:  you will experience resistance, confusion, and stress every time you try to use one---especially if you try to use more than one.  One thing to keep in mind:  The FULL balance of your giftcard has to be used---ie:  if you have a $200 balance and your booking is only $100, you will not be able to use the giftcard.  Your giftcard will pay for anything on your folio, however (ie:  spa treatments, meals, room service, etc).  Hope this helps.",269,False,1,2016-11-29 21:03:56.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+95640,3,NEUTRAL,Good product at a good price. Recommend.,Good product at a good price. Recommend.,7,True,0,2022-01-13 00:31:14.357,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+20269,3,NEUTRAL,Directions in wrong place,"Nice size and shape. Can easily be added to a holiday card. BUT … The directions for cashing in the gift card are written on the ugly, protective plastic wrapper. The wrapper is removed before giving the gift card so the recipient doesn’t get the directions!!!  The directions for cashing-in the gift card should be written in the decorative cover — not on the disposable wrapper. AND … The directions are wrong!!!  All you need to do is log onto your Amazon account and click on the “Gift Card” tab. Then select “redeem.”  This information should be included on the card-sleeve.",101,True,0,2022-12-02 14:45:01.494,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+7325,3,NEUTRAL,came damaged,"The gift card came dinged and damaged, no way was suitable for gift giving. It was shipped in a box so it was damaged before I even got it so poor quality control. I ended up using it myself and bought a new one at a local store in better shape for the gift.",54,True,0,2022-08-16 11:50:12.241,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+69976,3,NEUTRAL,Quick,Reload quick,2,True,0,2019-06-23 18:47:47.699,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+32923,3,NEUTRAL,Not great,Not great,2,True,0,2020-04-13 20:51:22.270,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+33885,3,NEUTRAL,Lost $100.00,It did not work. I lost the money. Lost,9,False,0,2021-06-25 12:00:58.748,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+55743,3,NEUTRAL,Three Stars,"The amount purchased ia correct, but the card has swipe marks.",11,True,0,2017-03-04 03:49:17.000,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+4421,3,NEUTRAL,Old glue caused the card to detach,The Actual card came detached from the cardboard.  Old glue maybe?,11,True,3,2018-02-06 13:48:14.832,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+55503,3,NEUTRAL,Easy to use,Easy to use and send.,5,True,0,2022-07-31 18:44:22.863,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+74726,3,NEUTRAL,""" FROM WHO ??? """,No Message of To /From ! Left in Drive Way ! Process seems poorly set up !,17,True,1,2015-12-14 01:04:57.000,NEGATIVE,anger,"{
+  ""sentiment"": ""NEGATIVE"",
+  ""emotion"": ""anger""
+}",False
+1274,3,NEUTRAL,Make sure you order the gift card of your choice,"Cute Amazon box, but not the gift box I chose<br />I ordered the gold gift box with gift card as a wedding anniversary gift for someone.<br />I ended up with a plain cute smile mail box instead. there was no gift receipt in the box so they had no idea who sent it. The gift card did work though.",59,True,0,2022-06-06 13:59:54.284,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+38328,3,NEUTRAL,Three Stars,Really not all that impressed,5,True,0,2014-09-14 23:10:51.000,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+144360,3,NEUTRAL,the survey was a bit misleading.,the survey was a bit misleading. I was under the impression that by doing the survey I received a gift card,21,True,1,2015-01-06 07:49:10.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+13570,3,NEUTRAL,It's a gift card,It's a gift card...don't understand why you are charged an activation fee...other sites have them without one,17,True,0,2020-12-10 20:08:26.848,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+89200,3,NEUTRAL,Slow Shipping,"It’s a gift card so nothing to really rate, but I’m withholding 2 stars because shipping took forever.",18,True,0,2019-01-22 03:03:29.323,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+140378,3,NEUTRAL,Tricky Checkout,I purchase this by accident.  Be careful when you order anything from Amazon.  Check out is a little tricky.,19,True,1,2017-07-19 00:25:56.742,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+98853,3,NEUTRAL,Paper gift card,"Beautiful box, but paper gift card inside box looked like it had been folded in half.",16,True,0,2021-01-02 19:44:16.891,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+141463,3,NEUTRAL,Gift card undelivabe,"I wanted my gift card to go family in Italy, but I was not able to have it shipped there for some reason was on your undelivable site.<br />Very disappointed",30,True,2,2018-10-23 21:24:34.541,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False
+13401,3,NEUTRAL,Debit over credit gift card ?,Limited use,2,True,0,2019-11-12 19:08:53.368,NEGATIVE,disgust,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""disgust""
+}",False
+123861,3,NEUTRAL,I am not get $5 gift for my first gift card,I am not get $5 gift for my first gift card,11,True,1,2016-11-08 05:47:04.000,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+122876,3,NEUTRAL,No se a podido utilizar,Nose que paso que  el primer día apareció el saldo y luego se desapareció,14,True,0,2021-12-30 23:21:33.510,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+135062,3,NEUTRAL,Three Stars,Little disappointed because the movie could only be used at one location In Oklahoma city,15,True,0,2017-01-20 19:14:56.000,NEGATIVE,sadness,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""sadness""
+}",False
+8942,3,NEUTRAL,Had trouble with every purchase,"Not sure why, but had trouble everywhere I used this card. It worked eventually but I used it a total of 3 places and not a single transaction was straightforward.  I had to return an item that I'd initially purchased with this card and it took about 3 days for the return to post back to the card.",58,True,0,2019-01-21 12:10:22.140,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False
+38107,2,NEGATIVE,If it is a gift maybe go into the store,"The gift card works fine and the convenience was amazing. The condition of the gift card after it arrived....not so much. To use my daughters words, they dropped it on the ground and then walked on it all day, picked it up and shoved it in the packaging without even wiping it off.",53,True,2,2019-12-21 15:20:03.778,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+112729,1,NEGATIVE,It was something.,It was something.,3,True,1,2023-01-02 23:23:13.853,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+81382,1,NEGATIVE,A gift for my daughter,Purchased for a gift for my daughter for Mother's day. She received it ok. No problem.,16,False,0,2020-05-11 19:01:50.140,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False

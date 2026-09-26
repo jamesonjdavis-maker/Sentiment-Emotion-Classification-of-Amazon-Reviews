@@ -1,0 +1,378 @@
+{
+  "n_scored": 150,
+  "n_usable": 150,
+  "accuracy": 0.7133333333333334,
+  "accuracy_ci95": [
+    0.6363493407951355,
+    0.7796629731693578
+  ],
+  "majority_label": "POSITIVE",
+  "majority_baseline": 0.3333333333333333,
+  "always_positive_baseline": 0.3333333333333333,
+  "balanced_accuracy": 0.7133333333333333,
+  "macro_f1": 0.6826377519641728,
+  "classes_absent": [],
+  "confusion_matrix": {
+    "POSITIVE": {
+      "POSITIVE": 45,
+      "NEUTRAL": 5,
+      "NEGATIVE": 1
+    },
+    "NEUTRAL": {
+      "POSITIVE": 5,
+      "NEUTRAL": 15,
+      "NEGATIVE": 2
+    },
+    "NEGATIVE": {
+      "POSITIVE": 0,
+      "NEUTRAL": 30,
+      "NEGATIVE": 47
+    }
+  },
+  "per_class": {
+    "POSITIVE": {
+      "support": 50,
+      "predicted": 51,
+      "correct": 45,
+      "recall": 0.9,
+      "precision": 0.8823529411764706,
+      "f1": 0.8910891089108911,
+      "recall_ci95": [
+        0.7863950966521162,
+        0.956524876008429
+      ]
+    },
+    "NEUTRAL": {
+      "support": 50,
+      "predicted": 22,
+      "correct": 15,
+      "recall": 0.3,
+      "precision": 0.6818181818181818,
+      "f1": 0.4166666666666667,
+      "recall_ci95": [
+        0.1910338908960936,
+        0.4375061227736339
+      ]
+    },
+    "NEGATIVE": {
+      "support": 50,
+      "predicted": 77,
+      "correct": 47,
+      "recall": 0.94,
+      "precision": 0.6103896103896104,
+      "f1": 0.7401574803149605,
+      "recall_ci95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ]
+    }
+  },
+  "by_star": [
+    {
+      "rating": 1,
+      "n": 39,
+      "agree": 0.9487179487179487
+    },
+    {
+      "rating": 2,
+      "n": 11,
+      "agree": 0.9090909090909091
+    },
+    {
+      "rating": 3,
+      "n": 50,
+      "agree": 0.3
+    },
+    {
+      "rating": 4,
+      "n": 1,
+      "agree": 0.0
+    },
+    {
+      "rating": 5,
+      "n": 49,
+      "agree": 0.9183673469387755
+    }
+  ],
+  "star_by_pred": {
+    "1": {
+      "POSITIVE": 0,
+      "NEUTRAL": 2,
+      "NEGATIVE": 37
+    },
+    "2": {
+      "POSITIVE": 1,
+      "NEUTRAL": 0,
+      "NEGATIVE": 10
+    },
+    "3": {
+      "POSITIVE": 5,
+      "NEUTRAL": 15,
+      "NEGATIVE": 30
+    },
+    "4": {
+      "POSITIVE": 0,
+      "NEUTRAL": 1,
+      "NEGATIVE": 0
+    },
+    "5": {
+      "POSITIVE": 45,
+      "NEUTRAL": 4,
+      "NEGATIVE": 0
+    }
+  },
+  "by_length": [
+    {
+      "text_len": "\u22645 words",
+      "n": 36,
+      "agree": 0.7777777777777778
+    },
+    {
+      "text_len": "6\u201320",
+      "n": 59,
+      "agree": 0.6440677966101694
+    },
+    {
+      "text_len": "21\u201360",
+      "n": 42,
+      "agree": 0.7857142857142857
+    },
+    {
+      "text_len": ">60",
+      "n": 13,
+      "agree": 0.6153846153846154
+    }
+  ],
+  "run": {
+    "run_id": "150_balanced_s42_c3_emo",
+    "labels": [
+      "POSITIVE",
+      "NEUTRAL",
+      "NEGATIVE"
+    ],
+    "n": 150,
+    "seed": 42,
+    "sampling": "balanced",
+    "truth_rule": "4\u20135 -> POSITIVE, 3 -> NEUTRAL, 1\u20132 -> NEGATIVE",
+    "prompt_version": "v3",
+    "with_emotion": true,
+    "model": "cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit",
+    "temperature": 0,
+    "enable_thinking": false,
+    "scored_on": "2026-09-26"
+  },
+  "emotion": {
+    "n": 150,
+    "agreement": 0.16,
+    "agreement_when_lexicon_hit": 0.2,
+    "agreement_lenient": 0.31333333333333335,
+    "n_lexicon_none": 30,
+    "n_lexicon_unbreakable_tie": 51,
+    "n_lexicon_tied": 62,
+    "llm_counts": {
+      "anger": 56,
+      "anticipation": 2,
+      "disgust": 14,
+      "fear": 1,
+      "joy": 39,
+      "sadness": 6,
+      "surprise": 1,
+      "trust": 31
+    },
+    "lex_counts": {
+      "anger": 3,
+      "anticipation": 19,
+      "disgust": 1,
+      "fear": 2,
+      "joy": 21,
+      "sadness": 4,
+      "surprise": 3,
+      "trust": 16,
+      "tie": 51,
+      "none": 30
+    },
+    "crosstab_llm_by_lex": {
+      "anger": {
+        "anger": 3,
+        "anticipation": 9,
+        "disgust": 1,
+        "fear": 1,
+        "joy": 1,
+        "sadness": 2,
+        "surprise": 3,
+        "trust": 10,
+        "tie": 20,
+        "none": 6
+      },
+      "anticipation": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 1,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 1,
+        "none": 0
+      },
+      "disgust": {
+        "anger": 0,
+        "anticipation": 3,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 1,
+        "sadness": 1,
+        "surprise": 0,
+        "trust": 1,
+        "tie": 2,
+        "none": 6
+      },
+      "fear": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 1,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 0
+      },
+      "joy": {
+        "anger": 0,
+        "anticipation": 3,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 14,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 17,
+        "none": 5
+      },
+      "sadness": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 1,
+        "sadness": 1,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 4,
+        "none": 0
+      },
+      "surprise": {
+        "anger": 0,
+        "anticipation": 0,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 0,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 0,
+        "tie": 0,
+        "none": 1
+      },
+      "trust": {
+        "anger": 0,
+        "anticipation": 4,
+        "disgust": 0,
+        "fear": 0,
+        "joy": 3,
+        "sadness": 0,
+        "surprise": 0,
+        "trust": 5,
+        "tie": 7,
+        "none": 12
+      }
+    },
+    "by_truth_class": {
+      "NEGATIVE": {
+        "n": 50,
+        "agree": 0.08,
+        "agree_lenient": 0.1,
+        "llm_top": "anger",
+        "lex_top": "tie"
+      },
+      "NEUTRAL": {
+        "n": 50,
+        "agree": 0.06,
+        "agree_lenient": 0.18,
+        "llm_top": "anger",
+        "lex_top": "tie"
+      },
+      "POSITIVE": {
+        "n": 50,
+        "agree": 0.34,
+        "agree_lenient": 0.66,
+        "llm_top": "joy",
+        "lex_top": "tie"
+      }
+    },
+    "top_lexicon_words": [
+      [
+        "gift",
+        143
+      ],
+      [
+        "money",
+        14
+      ],
+      [
+        "account",
+        13
+      ],
+      [
+        "love",
+        10
+      ],
+      [
+        "time",
+        9
+      ],
+      [
+        "perfect",
+        8
+      ],
+      [
+        "store",
+        7
+      ],
+      [
+        "good",
+        7
+      ],
+      [
+        "recommend",
+        6
+      ],
+      [
+        "credit",
+        6
+      ],
+      [
+        "birthday",
+        5
+      ],
+      [
+        "relative",
+        5
+      ],
+      [
+        "holiday",
+        4
+      ],
+      [
+        "pretty",
+        4
+      ],
+      [
+        "recipient",
+        4
+      ]
+    ]
+  }
+}

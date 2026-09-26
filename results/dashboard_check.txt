@@ -1,0 +1,10 @@
+Dashboard verification — verify_dashboard.js run in the browser against dashboard.html (2026-09-26)
+
+Desktop viewport (1280px): 422 checks, 0 mismatches, across all 4 runs.
+  Covers: hero accuracy, balanced accuracy, majority baseline, mismatch count; every confusion-matrix
+  cell; per-class recall; full-file star counts; model-label-by-star segments; rating-vs-model counts;
+  emotion agreement / none / tie tiles; every emotion bar vs metrics JSON AND vs a recount of the saved
+  rows; filter live counts (mismatched, agreeing, each matrix cell, each star level, emotion filters,
+  text search) and the exact row IDs for the mismatched filter; every non-zero bar/segment >= 3px wide.
+
+Phone viewport (375px): 156 bars/segments re-measured, 0 collapsed below 3px, no horizontal page overflow.

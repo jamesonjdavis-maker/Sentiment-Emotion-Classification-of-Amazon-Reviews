@@ -1,0 +1,45 @@
+review_id,rating,truth,title,text,text_len,verified_purchase,helpful_vote,date,pred,llm_emotion,raw_output,correct
+126402,5,POSITIVE,Amazon beats the competition,Wish they would discount the gist cards by 5%,9,True,0,2016-05-01 12:56:12.000,NEUTRAL,anticipation,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""anticipation""
+}",False
+65840,4,POSITIVE,Nice if no defects,"I've gotten Amazon gift cards in tins for years because they make the gift seem much nicer.  I'm generally happy with them, but I really don't like that you can't see the value.  If you get multiple cards in the same tin with different values, there's no easy way to tell which is which.  Once I got one on which the paint was so scuffed up I didn't feel comfortable giving it as a gift, but Amazon wasn't willing to replace the tin.  I'm guessing the tins are all prefilled with cards, so they couldn't do that, but it was disappointing.  Fortunately, shipping is free, and I had a few more days before I needed to give the card, so I was able to order a second one and use the original gift card myself.",135,True,6,2022-09-15 02:54:59.506,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+27187,1,NEGATIVE,Gift card,Not much you can say other than it works,9,True,2,2020-10-29 17:27:04.305,POSITIVE,trust,"{
+""sentiment"": ""POSITIVE"",
+""emotion"": ""trust""
+}",False
+57869,5,POSITIVE,It's a gift card,Duh,1,True,0,2021-04-05 17:25:54.877,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+17849,5,POSITIVE,Cute box & fast delivery,Gift for Christmas,3,True,0,2022-12-23 18:59:27.775,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+108620,5,POSITIVE,Easy to order and quick delivery,Christmas presents,2,True,0,2020-01-16 21:20:09.741,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+25705,5,POSITIVE,Five Stars,its a gift card :),5,True,0,2018-03-27 18:02:08.938,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+40178,5,POSITIVE,The product is as advertised.,The product is as advertised.,5,True,0,2023-03-19 20:15:09.005,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+56233,5,POSITIVE,Five Stars,"What can I say, it's a gift card.",8,True,0,2014-08-18 03:19:16.000,NEUTRAL,trust,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""trust""
+}",False
+46380,4,POSITIVE,Good gift. Cannot be redeemed in person at any theater box office.,It's hard to go wrong with gift cards but it's best to make sure the recipient knows exxactly how to redeem. My sister goes to the movies a lot so I was shocked she has never used Fandango.<br />Cannot be redeemed in person at any theater box office.,48,False,1,2017-01-29 21:38:33.000,NEUTRAL,surprise,"{
+""sentiment"": ""NEUTRAL"",
+""emotion"": ""surprise""
+}",False
+59583,5,POSITIVE,R-R-Reload!,"Remember in House of the Dead you had to fire the toy gun offscreen to reload, before decimating more zombies?  Well, reloading my balance is easier than that.  Thanks for making it easy to take my money, Jeff.",38,True,2,2021-07-24 03:57:33.987,NEGATIVE,anger,"{
+""sentiment"": ""NEGATIVE"",
+""emotion"": ""anger""
+}",False

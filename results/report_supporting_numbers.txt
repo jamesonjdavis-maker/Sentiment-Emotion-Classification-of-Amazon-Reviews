@@ -1,0 +1,42 @@
+== Data ==
+reviews: 152,410
+date range: 2008-08-06 -> 2023-09-06
+empty text: 49   empty title: 0
+median words in text: 8
+4–5★ share: 88.5%   3★: 2.1%   1–2★: 9.3%
+
+== Sentiment labels: prompt v1 vs v2 (same reviews) ==
+100_s42: 0 of 100 changed
+100_balanced_s42: 0 of 100 changed
+total: 0 of 200 changed
+
+== Random 100, 3-class ==
+stars present: {1: 11, 4: 6, 5: 83}
+predicted NEUTRAL by star: {4: 2, 5: 7}
+
+== Balanced 2-class: 3★ reviews ==
+3★ reviews: 4, labeled: {'NEGATIVE': 4}
+
+== Balanced 3-class: emotions ==
+'gift' matches: 143 occurrences across 68 of 150 reviews
+unbreakable ties: 51; involving 'gift': 36
+most common tied sets: {'anticipation/joy/surprise': 22, 'anticipation/joy': 6, 'anticipation/joy/surprise/trust': 5}
+reviews whose only lexicon match is 'gift': 12
+negative reviews (n=50): LLM says anger 38, word list says anger 2
+positive reviews labeled neutral: 5 -> stars {5: 4, 4: 1}
+
+== NRC lexicon: emotions linked to common complaint words ==
+scam: (no emotion)
+refund: (no emotion)
+card: (no emotion)
+amazon: (no emotion)
+cheated: (no emotion)
+useless: (no emotion)
+ripoff: (no emotion)
+fraud: anger
+gift: anticipation/joy/surprise
+money: anger/anticipation/joy/surprise/trust
+
+== Endpoint probe: thinking on vs off ==
+thinking=True: 1.24s, completion tokens 174 (reasoning 169), answer 'POSITIVE'
+thinking=False: 0.11s, completion tokens 3 (reasoning 0), answer 'POSITIVE'

@@ -1,0 +1,86 @@
+0 already scored, 150 to go
+
+================ RESULTS ================
+Scored: 150   usable: 150   unparseable/error: 0
+Truth mix: 50 POSITIVE / 50 NEUTRAL / 50 NEGATIVE
+
+Agreement with rating (accuracy): 71.3%   95% CI 63.6%–78.0%
+'Always POSITIVE' baseline:  33.3%   <- accuracy must beat this
+Balanced accuracy (mean recall):  71.3%   <- skew-proof headline
+Macro F1:                         0.68
+
+Confusion matrix (rows = rating says, cols = model says):
+pred      POSITIVE  NEUTRAL  NEGATIVE
+truth                                
+POSITIVE        45        5         0
+NEUTRAL          5       15        30
+NEGATIVE         1        2        47
+
+Per class:
+  POSITIVE n=50  recall=90.0% (CI 79%–96%)  precision=88.2%  F1=0.89
+  NEUTRAL  n=50  recall=30.0% (CI 19%–44%)  precision=68.2%  F1=0.42
+  NEGATIVE n=50  recall=94.0% (CI 84%–98%)  precision=61.0%  F1=0.74
+
+Model label by star rating:
+pred    POSITIVE  NEUTRAL  NEGATIVE
+rating                             
+1              0        2        37
+2              1        0        10
+3              5       15        30
+4              0        1         0
+5             45        4         0
+
+Agreement by review length:
+           n  agree
+text_len           
+≤5 words  36  77.8%
+6–20      59  64.4%
+21–60     42  78.6%
+>60       13  61.5%
+
+Disagreements (43):
+  #124162 5★ truth=POSITIVE pred=NEUTRAL | 'Perfect to give as gift' — "It's a gift card....,what more is there to say ?"
+  #134558 5★ truth=POSITIVE pred=NEUTRAL | 'Easy to give as a gift.' — 'Gas card.'
+  #58529 5★ truth=POSITIVE pred=NEUTRAL | 'Well.  It’s my money so it’s pretty cool.' — 'I used my own money to add to.. my......  own account.  I mean...  I guess this is a reviewable item?'
+  #27014 4★ truth=POSITIVE pred=NEUTRAL | 'Issue in distinguishing' — 'I ordered few cards of $25 and few of $50, all looks alike and came in same package. How to distinguish?'
+  #134527 5★ truth=POSITIVE pred=NEUTRAL | 'Didn’t have to go anywhere got it the next day' — 'Easy'
+  #10572 3★ truth=NEUTRAL pred=NEGATIVE | 'Where Was The Personal Message?' — 'It is a gift card so there is not a lot to review there.  However, it has you fill out a section for the perso'
+  #61483 3★ truth=NEUTRAL pred=NEGATIVE | 'Giftable but not easy to add to wallet.' — 'It is not easy to use. I cannot add to my Google wallet. So I would avoid it.'
+  #141252 3★ truth=NEUTRAL pred=NEGATIVE | 'How to use and redeem' — 'I do not understand how this works, confusing to me.'
+  #23870 3★ truth=NEUTRAL pred=POSITIVE | 'Easy to give someone you care about' — 'Was a birthday present for my new son-in-law. He was really appreciated it.'
+  #14812 3★ truth=NEUTRAL pred=POSITIVE | 'Nice' — 'Perfect as a gift for a graduate.'
+  #97615 3★ truth=NEUTRAL pred=NEGATIVE | 'Arrived heavily dent, feel embarrassed to gift away' — 'Arrived heavily dent, feel embarrassed to gift away'
+  #54708 3★ truth=NEUTRAL pred=NEGATIVE | 'Cannot use for all Amazon services!!' — 'This card was purchased for the purpose of paying my Prime subscription and Prime Video Channels monthly fee. '
+  #126700 3★ truth=NEUTRAL pred=NEGATIVE | 'Card did not come with the note I requested.' — 'Card did not come with the note I requested, and small corner of peel off section to reveal code is missing, n'
+  #50504 3★ truth=NEUTRAL pred=NEGATIVE | 'I thought the $6.95 charge was excesive' — 'The loading charge I thought was excessive'
+  #43213 3★ truth=NEUTRAL pred=NEGATIVE | 'Quick Shipping but..' — "I'm just frustrated that I couldn't add it to my Apple Pay wallet. It's not compatible in that way. There were"
+  #126778 3★ truth=NEUTRAL pred=NEGATIVE | 'Gift message not included.' — 'I ordered this as a graduation gift and wrote my gift note to be included with the package and it was not incl'
+  #96840 3★ truth=NEUTRAL pred=NEGATIVE | "If you're a patient person who doesn't mind, confusing, complicated, & difficult transactions, these are the giftcards for you!" — "Be prepared that very few people at Hyatt know how these giftcards work.  I've tried to use several giftcards "
+  #95640 3★ truth=NEUTRAL pred=POSITIVE | 'Good product at a good price. Recommend.' — 'Good product at a good price. Recommend.'
+  #20269 3★ truth=NEUTRAL pred=NEGATIVE | 'Directions in wrong place' — 'Nice size and shape. Can easily be added to a holiday card. BUT … The directions for cashing in the gift card '
+  #7325 3★ truth=NEUTRAL pred=NEGATIVE | 'came damaged' — 'The gift card came dinged and damaged, no way was suitable for gift giving. It was shipped in a box so it was '
+  #69976 3★ truth=NEUTRAL pred=POSITIVE | 'Quick' — 'Reload quick'
+  #32923 3★ truth=NEUTRAL pred=NEGATIVE | 'Not great' — 'Not great'
+  #33885 3★ truth=NEUTRAL pred=NEGATIVE | 'Lost $100.00' — 'It did not work. I lost the money. Lost'
+  #55743 3★ truth=NEUTRAL pred=NEGATIVE | 'Three Stars' — 'The amount purchased ia correct, but the card has swipe marks.'
+  #4421 3★ truth=NEUTRAL pred=NEGATIVE | 'Old glue caused the card to detach' — 'The Actual card came detached from the cardboard.  Old glue maybe?'
+  #55503 3★ truth=NEUTRAL pred=POSITIVE | 'Easy to use' — 'Easy to use and send.'
+  #74726 3★ truth=NEUTRAL pred=NEGATIVE | '" FROM WHO ??? "' — 'No Message of To /From ! Left in Drive Way ! Process seems poorly set up !'
+  #1274 3★ truth=NEUTRAL pred=NEGATIVE | 'Make sure you order the gift card of your choice' — 'Cute Amazon box, but not the gift box I chose<br />I ordered the gold gift box with gift card as a wedding ann'
+  #38328 3★ truth=NEUTRAL pred=NEGATIVE | 'Three Stars' — 'Really not all that impressed'
+  #144360 3★ truth=NEUTRAL pred=NEGATIVE | 'the survey was a bit misleading.' — 'the survey was a bit misleading. I was under the impression that by doing the survey I received a gift card'
+  #13570 3★ truth=NEUTRAL pred=NEGATIVE | "It's a gift card" — "It's a gift card...don't understand why you are charged an activation fee...other sites have them without one"
+  #89200 3★ truth=NEUTRAL pred=NEGATIVE | 'Slow Shipping' — 'It’s a gift card so nothing to really rate, but I’m withholding 2 stars because shipping took forever.'
+  #140378 3★ truth=NEUTRAL pred=NEGATIVE | 'Tricky Checkout' — 'I purchase this by accident.  Be careful when you order anything from Amazon.  Check out is a little tricky.'
+  #98853 3★ truth=NEUTRAL pred=NEGATIVE | 'Paper gift card' — 'Beautiful box, but paper gift card inside box looked like it had been folded in half.'
+  #141463 3★ truth=NEUTRAL pred=NEGATIVE | 'Gift card undelivabe' — 'I wanted my gift card to go family in Italy, but I was not able to have it shipped there for some reason was o'
+  #13401 3★ truth=NEUTRAL pred=NEGATIVE | 'Debit over credit gift card ?' — 'Limited use'
+  #123861 3★ truth=NEUTRAL pred=NEGATIVE | 'I am not get $5 gift for my first gift card' — 'I am not get $5 gift for my first gift card'
+  #122876 3★ truth=NEUTRAL pred=NEGATIVE | 'No se a podido utilizar' — 'Nose que paso que  el primer día apareció el saldo y luego se desapareció'
+  #135062 3★ truth=NEUTRAL pred=NEGATIVE | 'Three Stars' — 'Little disappointed because the movie could only be used at one location In Oklahoma city'
+  #8942 3★ truth=NEUTRAL pred=NEGATIVE | 'Had trouble with every purchase' — 'Not sure why, but had trouble everywhere I used this card. It worked eventually but I used it a total of 3 pla'
+  #38107 2★ truth=NEGATIVE pred=POSITIVE | 'If it is a gift maybe go into the store' — 'The gift card works fine and the convenience was amazing. The condition of the gift card after it arrived....n'
+  #112729 1★ truth=NEGATIVE pred=NEUTRAL | 'It was something.' — 'It was something.'
+  #81382 1★ truth=NEGATIVE pred=NEUTRAL | 'A gift for my daughter' — "Purchased for a gift for my daughter for Mother's day. She received it ok. No problem."
+
+Saved /Users/jamesondavis/App/mbax6418-sentiment/results/batch_150_balanced_s42_c3_emo.csv, *_wrong.csv, *_metrics.json

@@ -1,0 +1,41 @@
+0 already scored, 100 to go
+
+================ RESULTS ================
+Scored: 100   usable: 100   unparseable/error: 0
+Truth mix: 89 POSITIVE / 11 NEGATIVE
+
+Agreement with rating (accuracy): 98.0%   95% CI 93.0%–99.4%
+'Always POSITIVE' baseline:  89.0%   <- accuracy must beat this
+Balanced accuracy (mean recall):  94.9%   <- skew-proof headline
+Macro F1:                         0.95
+
+Confusion matrix (rows = rating says, cols = model says):
+pred      POSITIVE  NEGATIVE
+truth                       
+POSITIVE        88         1
+NEGATIVE         1        10
+
+Per class:
+  POSITIVE n=89  recall=98.9% (CI 94%–100%)  precision=98.9%  F1=0.99
+  NEGATIVE n=11  recall=90.9% (CI 62%–98%)  precision=90.9%  F1=0.91
+
+Model label by star rating:
+pred    POSITIVE  NEGATIVE
+rating                    
+1              1        10
+4              6         0
+5             82         1
+
+Agreement by review length:
+           n  agree
+text_len           
+≤5 words  30 100.0%
+6–20      45  97.8%
+21–60     18  94.4%
+>60        7 100.0%
+
+Disagreements (2):
+  #27187 1★ truth=NEGATIVE pred=POSITIVE | 'Gift card' — 'Not much you can say other than it works'
+  #59583 5★ truth=POSITIVE pred=NEGATIVE | 'R-R-Reload!' — 'Remember in House of the Dead you had to fire the toy gun offscreen to reload, before decimating more zombies?'
+
+Saved /Users/jamesondavis/App/mbax6418-sentiment/results/batch_100_s42_emo.csv, *_wrong.csv, *_metrics.json
