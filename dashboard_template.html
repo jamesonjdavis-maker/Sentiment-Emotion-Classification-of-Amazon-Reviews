@@ -191,7 +191,7 @@ tr.detail td { background: var(--surface-2); font-size: 13px; color: var(--ink-2
 .match { font-weight: 600; font-size: 12.5px; white-space: nowrap; display: inline-flex; gap: 5px; align-items: center; }
 .match .ic { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font-size: 11px; }
 .stars { color: var(--ink-2); white-space: nowrap; letter-spacing: 1px; }
-.empty { padding: 28px; text-align: center; color: var(--ink-3); }
+td.empty { padding: 28px; text-align: center; color: var(--ink-3); }
 .more { margin-top: 12px; text-align: center; }
 .more button { border: 1px solid var(--line); background: var(--surface-1); border-radius: 999px; padding: 6px 16px; cursor: pointer; font-size: 13px; }
 .kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin-top: 8px; }
@@ -415,6 +415,10 @@ function renderHead() {
     txt += ' Compare the balanced run.';
   } else {
     txt = `<b>Balanced sample:</b> ${m.n_usable / L.length} reviews per class, drawn from the whole file with fixed seed ${run.meta.seed}. Guessing any one class scores only <b>${pct(base)}</b>, so accuracy here weighs every class equally.`;
+    // Honest caveat: classes are balanced, star levels inside them are not.
+    const pos = run.rows.filter(r => r.truth === 'POSITIVE'), five = pos.filter(r => r.rating === 5).length;
+    const neg = run.rows.filter(r => r.truth === 'NEGATIVE'), one = neg.filter(r => r.rating === 1).length;
+    txt += ` <b>Within</b> each class the stars still follow the file: <span id="withinMix">${five} of ${pos.length} positives are 5★ and ${one} of ${neg.length} negatives are 1★</span>, so milder 4★ and 2★ reviews are barely tested.`;
   }
   $('#callout').innerHTML = txt;
   $('#tBal').textContent = pct(m.balanced_accuracy);

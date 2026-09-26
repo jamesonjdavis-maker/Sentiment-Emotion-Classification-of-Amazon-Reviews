@@ -6,9 +6,12 @@
     0.9455124752390653,
     0.9982326134344526
   ],
+  "majority_label": "POSITIVE",
+  "majority_baseline": 0.5,
   "always_positive_baseline": 0.5,
   "balanced_accuracy": 0.99,
   "macro_f1": 0.98999899989999,
+  "classes_absent": [],
   "confusion_matrix": {
     "POSITIVE": {
       "POSITIVE": 49,
@@ -22,6 +25,8 @@
   "per_class": {
     "POSITIVE": {
       "support": 50,
+      "predicted": 49,
+      "correct": 49,
       "recall": 0.98,
       "precision": 1.0,
       "f1": 0.98989898989899,
@@ -32,6 +37,8 @@
     },
     "NEGATIVE": {
       "support": 50,
+      "predicted": 51,
+      "correct": 50,
       "recall": 1.0,
       "precision": 0.9803921568627451,
       "f1": 0.99009900990099,
@@ -68,6 +75,28 @@
       "agree": 1.0
     }
   ],
+  "star_by_pred": {
+    "1": {
+      "POSITIVE": 0,
+      "NEGATIVE": 39
+    },
+    "2": {
+      "POSITIVE": 0,
+      "NEGATIVE": 7
+    },
+    "3": {
+      "POSITIVE": 0,
+      "NEGATIVE": 4
+    },
+    "4": {
+      "POSITIVE": 0,
+      "NEGATIVE": 1
+    },
+    "5": {
+      "POSITIVE": 49,
+      "NEGATIVE": 0
+    }
+  },
   "by_length": [
     {
       "text_len": "\u22645 words",
@@ -100,8 +129,11 @@
     "seed": 42,
     "sampling": "balanced",
     "truth_rule": "rating >= 4 -> POSITIVE, else NEGATIVE",
+    "prompt_version": "v1",
+    "with_emotion": false,
     "model": "cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit",
     "temperature": 0,
-    "enable_thinking": false
+    "enable_thinking": false,
+    "scored_on": "2026-09-26"
   }
 }

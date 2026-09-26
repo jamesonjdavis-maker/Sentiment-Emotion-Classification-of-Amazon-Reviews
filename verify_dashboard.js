@@ -45,6 +45,13 @@
       });
     });
 
+    // honest-imbalance caveat on balanced runs
+    if (r.meta.sampling === 'balanced') {
+      const pos = r.rows.filter(x => x.truth === 'POSITIVE'), neg = r.rows.filter(x => x.truth === 'NEGATIVE');
+      chk('within-class caveat', $('#withinMix').textContent,
+          `${pos.filter(x => x.rating === 5).length} of ${pos.length} positives are 5★ and ${neg.filter(x => x.rating === 1).length} of ${neg.length} negatives are 1★`);
+    }
+
     // step 5: emotions
     if (m.emotion) {
       const e = m.emotion;
@@ -77,6 +84,8 @@
       applyFilter({ emo: 'anger' }); chk('filter LLM anger', cnt(), m.emotion.llm_counts.anger);
     }
     applyFilter({ q: 'scam' }); chk('filter search "scam"', cnt(), r.rows.filter(x => (x.title + ' ' + x.text).toLowerCase().includes('scam')).length);
+    // "none in this sample" placeholders keep bar height (caught a CSS class collision once)
+    document.querySelectorAll('.stack.empty').forEach(el => chk('placeholder height <= 18px', el.getBoundingClientRect().height <= 18, true));
   }
   selectRun(DATA.default_run);
   const bad = out.filter(x => x.includes('MISMATCH'));

@@ -1,0 +1,23 @@
+== Sample selection (re-drawn with the saved seed) ==
+100_balanced_s42_emo         IDENTICAL review IDs; correct answers identical
+100_balanced_s42             IDENTICAL review IDs; correct answers identical
+100_s42_c3_emo               IDENTICAL review IDs; correct answers identical
+100_s42_emo                  IDENTICAL review IDs; correct answers identical
+100_s42                      IDENTICAL review IDs; correct answers identical
+150_balanced_s42_c3_emo      IDENTICAL review IDs; correct answers identical
+
+== The model never sees the rating (balanced 3-class run, every request captured) ==
+requests captured: 150
+user message is exactly the title+text template in every request: True
+distinct system prompts: 1; words about stars/ratings in them: none
+(review text itself may mention stars — e.g. 'Five stars' titles — that is the reviewer's own words)
+
+== Re-scoring the balanced 3-class run live ==
+sentiment labels identical: 149 of 150
+LLM emotions identical:     145 of 150
+  changed #143800: POSITIVE/joy -> POSITIVE/trust  ('Totally worth the $25')
+  changed #45556: POSITIVE/trust -> POSITIVE/joy  ("Very simple to use and it's very quick.")
+  changed #134527: NEUTRAL/trust -> POSITIVE/joy  ('Didn’t have to go anywhere got it the next day')
+  changed #85175: NEUTRAL/anticipation -> NEUTRAL/trust  ('gift card')
+  changed #148735: NEGATIVE/anger -> NEGATIVE/disgust  ('Not recommended at all.')
+accuracy on re-run: 72.0% (saved: 71.3%)

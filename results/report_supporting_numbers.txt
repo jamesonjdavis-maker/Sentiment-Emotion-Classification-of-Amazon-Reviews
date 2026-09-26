@@ -25,6 +25,10 @@ reviews whose only lexicon match is 'gift': 12
 negative reviews (n=50): LLM says anger 38, word list says anger 2
 positive reviews labeled neutral: 5 -> stars {5: 4, 4: 1}
 
+== Star mix inside each class of the balanced runs ==
+100_balanced_s42_emo: {'NEGATIVE': {1: 39, 2: 7, 3: 4}, 'POSITIVE': {4: 1, 5: 49}}
+150_balanced_s42_c3_emo: {'NEGATIVE': {1: 39, 2: 11}, 'NEUTRAL': {3: 50}, 'POSITIVE': {4: 1, 5: 49}}
+
 == NRC lexicon: emotions linked to common complaint words ==
 scam: (no emotion)
 refund: (no emotion)

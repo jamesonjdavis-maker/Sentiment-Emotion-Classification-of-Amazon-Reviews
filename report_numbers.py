@@ -67,6 +67,13 @@ say(f"negative reviews (n={len(neg)}): LLM says anger {int((neg.llm_emotion == '
 pos_neu = d[(d.truth == "POSITIVE") & (d.pred == "NEUTRAL")]
 say(f"positive reviews labeled neutral: {len(pos_neu)} -> stars {vc(pos_neu.rating)}")
 
+# ── balance *within* each class of the balanced runs ──
+say("\n== Star mix inside each class of the balanced runs ==")
+for tag in ["100_balanced_s42_emo", "150_balanced_s42_c3_emo"]:
+    b = pd.read_csv(R / f"batch_{tag}.csv")
+    mix = {t: dict(sorted(vc(g.rating).items())) for t, g in b.groupby("truth")}
+    say(f"{tag}: {mix}")
+
 # ── lexicon coverage of complaint words ──
 say("\n== NRC lexicon: emotions linked to common complaint words ==")
 lex = {}
@@ -94,6 +101,10 @@ if "--probe" in sys.argv:
             f"(reasoning {rt}), answer {resp.choices[0].message.content.strip()!r}")
 
 out = R / "report_supporting_numbers.txt"
+if "--probe" not in sys.argv and out.exists():   # keep the last saved probe rather than dropping it
+    old = out.read_text()
+    if "== Endpoint probe" in old:
+        lines.append("\n" + old[old.index("== Endpoint probe"):].rstrip())
 out.write_text("\n".join(lines) + "\n")
 print("\n".join(lines))
 print(f"\nSaved {out}")

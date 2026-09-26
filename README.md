@@ -13,7 +13,7 @@ An LLM reads each Amazon gift-card review's **title and text only** — never it
 
 ![Dashboard overview — balanced 3-class run](screenshots/dashboard_overview.png)
 
-**Headline:** on positive vs. negative the model is nearly perfect (99.0% on a balanced sample). The moment a neutral class is added, agreement drops to **71.3%**, because **3-star reviews mostly don't get their own class — 30 of 50 were labeled negative.** A random sample hides this completely: it contains no 3-star reviews at all.
+**Headline:** on positive vs. negative the model agrees with the stars 99.0% of the time on a balanced sample of 100 — though mostly on clear-cut 5★ and 1★ reviews. The moment a neutral class is added, agreement drops to **71.3%**, because **3-star reviews mostly don't get their own class — 30 of 50 were labeled negative.** A random sample hides this completely: it contains no 3-star reviews at all.
 
 ---
 
@@ -75,7 +75,11 @@ Balancing did two different things depending on the task:
 
 The lesson: a random sample from this file can look excellent while never testing the hardest class.
 
+**A second, subtler imbalance:** "balanced" here means equal numbers *per class*, drawn at random from the file — so each class inherits the file's skew *within* it. In both balanced runs the 50 positives are 49 five-star and 1 four-star, and the negatives are dominated by one-star reviews (39 of 50, the rest two-star, plus 4 three-star in the 2-class run). The 99.0% two-class score is therefore mostly a test on the clearest, most extreme reviews; the milder 2★ and 4★ reviews are barely tested. Sampling per *star level* would be the next step to probe them.
+
 ![Lopsided 2-class run — note the baseline callout](screenshots/dashboard_lopsided_2class.png)
+
+![Random 3-class run — the neutral class is simply absent](screenshots/dashboard_random_3class.png)
 
 ### 2. Where do the mistakes go?
 
@@ -129,10 +133,11 @@ Balanced 3-class run (150 reviews):
 | Colors | Neutral was first drawn in gray, which failed a colorblind/chroma validator; yellow and pink failed next to orange. | Blue / aqua / orange passes every pairwise check in light and dark mode. |
 | UI | Run tabs wrapped into a broken pill on phones; a filter label broke onto two lines; review text showed raw `<br />` tags. | Scrolling tabs, `nowrap` labels, `<br />` converted to spaces/newlines. |
 | Screenshots | The in-app browser pane and headless Chrome both captured **blank** images after scrolling. | Added a `?section=` deep link that shows just the requested card under the header, and captured with headless Chrome. |
+| Repeatability | Re-scoring live at temperature 0 still changed 1 of 150 sentiment labels and 5 of 150 emotions (GPU batching nondeterminism). | Published numbers are computed only from the saved raw output; the re-run result is reported openly (see *Repeatability, checked*). |
 | Reproducibility | The full-file star chart needed the raw data, which isn't committed. | The generator saves `results/dataset_summary.json`, so the dashboard rebuilds from a fresh clone. |
 | Working with the agent | <!-- Add your own experience here: e.g. early on the agent wrote scripts without running them because of a saved preference, and switching it to "run everything" was faster; anything you had to correct or re-check yourself. --> | |
 
-**Numbers check:** `verify_dashboard.js` compares every number on the page against the saved metrics and rows, in the browser: **422 checks, 0 mismatches** across all 4 runs, plus a width check on 156 bars and segments at phone width (record in `results/dashboard_check.txt`).
+**Numbers check:** `verify_dashboard.js` compares every number on the page against the saved metrics and rows, in the browser: **429 checks, 0 mismatches** across all 4 runs, plus a width check on 156 bars and segments at phone width (record in `results/dashboard_check.txt`).
 
 ---
 
@@ -169,6 +174,15 @@ python report_numbers.py        # supporting figures quoted in this report (add 
 
 Scoring resumes where it left off, and a re-run with the same seed re-uses the saved rows rather than calling the model again.
 
+**Repeatability, checked** (`python check_repeatability.py` → `results/repeatability_check.txt`):
+
+- **Which reviews are used is fixed.** Re-drawing every saved run with its seed (42) gives identical review IDs and correct answers for all six runs.
+- **Every published number regenerates exactly.** Recomputing all metrics from the saved rows and rebuilding the dashboard reproduces the committed files byte for byte.
+- **Live re-scoring is close but not perfectly deterministic, even at temperature 0.** Re-sending all 150 reviews of the balanced 3-class run gave 149 of 150 identical sentiment labels and 145 of 150 identical emotions (accuracy 72.0% vs. the saved 71.3%, well inside its 95% range). This is typical of a shared GPU inference server, where request batching causes tiny floating-point differences. The saved raw output is therefore the record every number is computed from.
+- **The model never sees the rating.** The same check captures every request sent to the endpoint: the user message is exactly the title + text template in all 150, and the prompt contains no mention of stars or ratings.
+
+**Number audit:** `python check_readme_numbers.py` recomputes every figure quoted in this README from the saved output and confirms it appears here exactly (`results/readme_number_check.txt`).
+
 ## Files
 
 | Deliverable | File |
@@ -179,13 +193,14 @@ Scoring resumes where it left off, and a re-run with the same seed re-uses the s
 | Dashboard generator | `build_dashboard.py` + `dashboard_template.html` |
 | One balanced run's raw output | `results/batch_150_balanced_s42_c3_emo.csv` (every review, correct answer, prediction, LLM emotion, raw model reply, word-list emotion and matched words) |
 | Final dashboard | `dashboard.html` |
-| Supporting | `spot_check.py`, `verify_dashboard.js`, `report_numbers.py` (→ `results/report_supporting_numbers.txt`), `results/*_metrics.json`, `results/*_report.txt`, `ISSUES_LOG.md` |
+| Supporting | `spot_check.py`, `verify_dashboard.js`, `report_numbers.py`, `check_repeatability.py`, `check_readme_numbers.py`, `results/*_metrics.json`, `results/*_report.txt`, `ISSUES_LOG.md` |
 
 `data/` (raw reviews and the NRC lexicon) and `.env` are git-ignored.
 
 ## Limitations
 
 - Samples are small (100–150 reviews), so per-class figures carry wide confidence ranges, shown throughout.
+- Balanced samples are balanced by class, not by star level: 4★ (1 review per run) and 2★ reviews are barely represented.
 - The star rating is treated as the truth, but some ratings clearly disagree with their own text.
 - One model at one temperature; the prompt's edge-case rules (e.g. "'ok' is neutral") shape the neutral results.
 - LLM emotions have no ground truth; the comparison shows disagreement, not which method is right.
