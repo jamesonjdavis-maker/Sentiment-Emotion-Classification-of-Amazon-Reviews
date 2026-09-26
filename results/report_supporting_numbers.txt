@@ -23,6 +23,13 @@ unbreakable ties: 51; involving 'gift': 36
 most common tied sets: {'anticipation/joy/surprise': 22, 'anticipation/joy': 6, 'anticipation/joy/surprise/trust': 5}
 reviews whose only lexicon match is 'gift': 12
 negative reviews (n=50): LLM says anger 38, word list says anger 2
+3★ reviews labeled negative (n=30): LLM emotions {'anger': 18, 'disgust': 8, 'sadness': 4}
+LLM emotion x model sentiment: anger: NEGATIVE 56; anticipation: NEUTRAL 2; disgust: NEGATIVE 14; fear: NEGATIVE 1; joy: POSITIVE 39; sadness: NEGATIVE 6; surprise: NEUTRAL 1; trust: NEUTRAL 19, POSITIVE 12
+negative reviews where LLM says anger but word list matches nothing: 4
+  #7482 1★ "Card doesn't work" — 'Issue with cards not working.'
+  #4312 1★ 'Never got' — 'Never got the $10'
+  #4383 1★ 'ZERO BALANCE!!!' — 'Fandango card was empty!'
+  #148735 1★ 'Not recommended at all.' — 'Not recommended at all.'
 positive reviews labeled neutral: 5 -> stars {5: 4, 4: 1}
 
 == Star mix inside each class of the balanced runs ==

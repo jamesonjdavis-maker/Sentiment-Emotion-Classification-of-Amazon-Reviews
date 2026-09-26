@@ -116,10 +116,22 @@ need("negatives: one-star", f"{mix['NEGATIVE'][1]} of 50")
 m2 = ast.literal_eval(re.search(r"100_balanced_s42_emo: (\{.*\})", sup).group(1))
 need("2-class: 3★ among negatives", f"{m2['NEGATIVE'][3]} three-star in the 2-class run")
 
+# ── Q2/Q3 evidence ──
+nn = ast.literal_eval(re.search(r"3★ reviews labeled negative \(n=\d+\): LLM emotions (\{.*\})", sup).group(1))
+need("neutral→negative emotions", f"anger {nn['anger']}, disgust {nn['disgust']}, sadness {nn['sadness']}")
+xl = re.search(r"LLM emotion x model sentiment: (.*)", sup).group(1)
+xd = {e.split(": ")[0]: dict((kv.rsplit(" ", 1)[0], int(kv.rsplit(" ", 1)[1])) for kv in e.split(": ")[1].split(", ")) for e in xl.split("; ")}
+need("joy only positive", f"only on reviews it called positive ({xd['joy']['POSITIVE']})")
+need("negative emotions", f"({xd['anger']['NEGATIVE']}, {xd['disgust']['NEGATIVE']}, {xd['sadness']['NEGATIVE']}, {xd['fear']['NEGATIVE']})")
+need("trust split", f"neutral ({xd['trust']['NEUTRAL']}) and positive ({xd['trust']['POSITIVE']})")
+need("anger-but-no-match count", re.search(r"matches nothing: (\d+)", sup).group(1) + " of the 50 negative reviews")
+need("real example present", "#4383" in sup and "ZERO BALANCE!!!")
+
 # ── verification + probe ──
 chk = (R / "dashboard_check.txt").read_text()
 need("dashboard checks", re.search(r"(\d+) checks, 0 mismatches", chk).group(1) + " checks, 0 mismatches")
-need("phone-width bars", re.search(r"\): (\d+) bars", chk).group(1) + " bars and segments")
+g = re.findall(r"(\d+)px: (\d+) checks, 0 failures", chk)
+need("geometry checks", " / ".join(n for _, n in g) + " checks")
 probe = re.search(r"thinking=True: ([\d.]+)s.*reasoning (\d+).*\nthinking=False: ([\d.]+)s", sup).groups()
 need("thinking tokens", f"{probe[1]} hidden tokens")
 need("thinking latency", f"{probe[0]} s to {probe[2]} s")

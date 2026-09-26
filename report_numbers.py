@@ -64,6 +64,15 @@ say(f"reviews whose only lexicon match is 'gift': {int(only_gift.sum())}")
 neg = d[d.truth == "NEGATIVE"]
 say(f"negative reviews (n={len(neg)}): LLM says anger {int((neg.llm_emotion == 'anger').sum())}, "
     f"word list says anger {int((neg.lex_emotion == 'anger').sum())}")
+nn = d[(d.truth == "NEUTRAL") & (d.pred == "NEGATIVE")]
+say(f"3★ reviews labeled negative (n={len(nn)}): LLM emotions {vc(nn.llm_emotion)}")
+x = pd.crosstab(d.llm_emotion, d.pred)
+say("LLM emotion x model sentiment: " + "; ".join(
+    f"{e}: " + ", ".join(f"{p} {int(x.loc[e, p])}" for p in x.columns if x.loc[e, p]) for e in x.index))
+ex = d[(d.truth == "NEGATIVE") & (d.llm_emotion == "anger") & (d.lex_emotion == "none")]
+say(f"negative reviews where LLM says anger but word list matches nothing: {len(ex)}")
+for r in ex.itertuples():
+    say(f"  #{r.review_id} {r.rating}★ {r.title!r} — {str(r.text)[:80]!r}")
 pos_neu = d[(d.truth == "POSITIVE") & (d.pred == "NEUTRAL")]
 say(f"positive reviews labeled neutral: {len(pos_neu)} -> stars {vc(pos_neu.rating)}")
 

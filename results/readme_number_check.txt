@@ -1,4 +1,4 @@
-81 README figures recomputed from saved output: 81 match, 0 missing
+87 README figures recomputed from saved output: 87 match, 0 missing
 OK      total reviews: '152,410'
 OK      1★ count: '12,326'
 OK      1★ share: '8.1%'
@@ -73,8 +73,14 @@ OK      no-match count: '30 of 150 matched nothing'
 OK      positives: five-star: '49 five-star and 1 four-star'
 OK      negatives: one-star: '39 of 50'
 OK      2-class: 3★ among negatives: '4 three-star in the 2-class run'
+OK      neutral→negative emotions: 'anger 18, disgust 8, sadness 4'
+OK      joy only positive: 'only on reviews it called positive (39)'
+OK      negative emotions: '(56, 14, 6, 1)'
+OK      trust split: 'neutral (19) and positive (12)'
+OK      anger-but-no-match count: '4 of the 50 negative reviews'
+OK      real example present: 'ZERO BALANCE!!!'
 OK      dashboard checks: '429 checks, 0 mismatches'
-OK      phone-width bars: '156 bars and segments'
+OK      geometry checks: '228 / 228 / 223 checks'
 OK      thinking tokens: '169 hidden tokens'
 OK      thinking latency: '1.24 s to 0.11 s'
 OK      re-run labels identical: '149 of 150'
@@ -82,4 +88,4 @@ OK      re-run emotions identical: '145 of 150'
 OK      re-run accuracy: '72.0%'
 
 Numbers in the README not covered by a check (review by hand):
-3 23 42 100 20% 256 375 0.92 1280 2013 2024 6.95 6418
+3 18 23 42 70 1.5 100 167 20% 256 309 33% 375 768 0.92 1280 2013 2024 6.95 6418

@@ -1,11 +1,26 @@
-Dashboard verification — verify_dashboard.js run in the browser against dashboard.html (2026-09-26, re-run after final edits)
+Dashboard verification — verify_dashboard.js run in the browser against the final dashboard.html (2026-09-26)
 
-Desktop viewport (1280px): 429 checks, 0 mismatches, across all 4 runs.
-  Covers: hero accuracy, balanced accuracy, majority baseline, mismatch count; every confusion-matrix
-  cell; per-class recall; full-file star counts; model-label-by-star segments; rating-vs-model counts;
-  emotion agreement / none / tie tiles; every emotion bar vs metrics JSON AND vs a recount of the saved
-  rows; filter live counts (mismatched, agreeing, each matrix cell, each star level, emotion filters,
-  text search) and the exact row IDs for the mismatched filter; the within-class star-mix caveat; placeholder heights; every non-zero bar/segment >= 3px wide.
+1) Numbers (desktop, 1280px): 429 checks, 0 mismatches, across all 4 runs.
+   Hero accuracy, balanced accuracy, majority baseline, mismatch count; every confusion-matrix cell;
+   per-class recall; full-file star counts; model-label-by-star segments; rating-vs-model counts;
+   within-class star-mix caveat; emotion agreement / none / tie tiles; every emotion bar vs the
+   metrics JSON AND vs a recount of the saved rows; filter live counts (mismatched, agreeing, each
+   matrix cell, each star level, emotion filters, text search) and the exact row IDs for the
+   mismatched filter; "none in this sample" placeholder heights.
 
-Phone viewport (375px): 156 bars/segments re-measured, 0 collapsed below 3px, no horizontal page overflow.
+2) Geometry (Step 7 small-element / label-interaction check), all 4 runs per width:
+   1280px: 228 checks, 0 failures (in-bar labels shown 24, hidden 3)
+    768px: 228 checks, 0 failures (in-bar labels shown 24, hidden 3)
+    375px: 223 checks, 0 failures (in-bar labels shown 17, hidden 10)
+   Every non-zero bar/segment >= 3px; bar lengths proportional to values within 1.5px; in-bar labels
+   fit their segment (text width + 8px padding); every hidden label verified genuinely too wide;
+   value labels inside their card; no horizontal page overflow.
+
 Browser console: no errors.
+
+Found and fixed during this check (before-fix measurements at 375px):
+- in-bar labels "33%" (text 24px in a 23px segment) and "30%" (23px in 20px) overflowed their segments;
+- cause: the stacked-bar column was 70px of a 309px chart because the "n=… · should be …" note beside it
+  took 149px. After moving the note under the bar on phones, the bar is 167px wide.
+- first label-fit test used scrollWidth (always equal to the box when text fits) → hid all labels
+  ("shown 0"); fixed by measuring the text width.

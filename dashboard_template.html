@@ -97,7 +97,12 @@ p.section-sub { grid-column: span 12; margin: 0 0 4px; color: var(--ink-2); font
 .span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-7 { grid-column: span 7; }
 .span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; }
 @media (max-width: 900px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
-@media (max-width: 520px) { .wrap { padding: 20px 16px 48px; } h1 { font-size: 28px; } .card { padding: 18px 16px; } }
+@media (max-width: 520px) {
+  .wrap { padding: 20px 16px 48px; } h1 { font-size: 28px; } .card { padding: 18px 16px; }
+  /* phones: the "n=… · should be …" note moves under its bar so the bar keeps the full width */
+  .stack-grid { grid-template-columns: max-content 1fr; row-gap: 2px; }
+  .stack-grid .stack-n { grid-column: 2; margin-bottom: 8px; }
+}
 
 .hero { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
 .hero-fig { font-size: 64px; font-weight: 650; letter-spacing: -.03em; line-height: 1; }
@@ -457,14 +462,26 @@ function renderStarPred() {
   $('#starPred').innerHTML = [5, 4, 3, 2, 1].map(s => {
     const row = sp[s] || {}, n = L.reduce((a, l) => a + (row[l] || 0), 0), t = truthOf(s, L);
     const bar = n ? `<div class="stack">${L.filter(l => row[l]).map(l => {
-        const share = row[l] / n, lbl = share >= 0.12 ? `${Math.round(share * 100)}%` : '';
-        return `<span class="inseg" data-star="${s}" data-label="${l}" data-count="${row[l]}" style="flex:${row[l]};background:${classVar(l)}" title="${s}★ → model said ${cap(l)}: ${row[l]} of ${n} (${pct(share)})">${lbl}</span>`;
+        const share = row[l] / n;
+        return `<span class="inseg" data-star="${s}" data-label="${l}" data-count="${row[l]}" data-lbl="${Math.round(share * 100)}%" style="flex:${row[l]};background:${classVar(l)}" title="${s}★ → model said ${cap(l)}: ${row[l]} of ${n} (${pct(share)})"></span>`;
       }).join('')}</div>`
       : `<div class="stack empty">none in this sample</div>`;
     return `<div class="lab">${'★'.repeat(s)}</div>${bar}<div class="stack-n num">n=${n} · should be ${cap(t)}</div>`;
   }).join('');
   $('#starPredLegend').innerHTML = L.map(l => `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>Model: ${cap(l)}</span>`).join('');
+  fitSegmentLabels();
 }
+/* Show a percentage inside a segment only if it actually fits (measured, with 4px padding each side).
+   A fixed share threshold overflowed at phone width; re-measured on every resize. */
+const textWidth = el => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect().width; };
+function fitSegmentLabels() {
+  document.querySelectorAll('#starPred .inseg').forEach(el => {
+    el.textContent = el.dataset.lbl;
+    if (textWidth(el) + 8 > el.clientWidth) el.textContent = '';   // measure the text itself, not scrollWidth
+  });
+}
+let _fitTimer;
+addEventListener('resize', () => { clearTimeout(_fitTimer); _fitTimer = setTimeout(fitSegmentLabels, 60); });
 
 /* ── step 7c: rating says vs model says ── */
 function renderRvm() {
