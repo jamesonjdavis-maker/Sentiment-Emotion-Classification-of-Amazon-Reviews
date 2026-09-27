@@ -88,4 +88,4 @@ OK      re-run emotions identical: '145 of 150'
 OK      re-run accuracy: '72.0%'
 
 Numbers in the README not covered by a check (review by hand):
-3 18 23 42 70 1.5 100 167 20% 256 309 33% 375 768 0.92 1280 2013 2024 6.95
+3 18 23 42 70 100 167 20% 256 309 33% 375 768 84% 0.92 1280 2013 2024 6.95

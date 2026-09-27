@@ -1,10 +1,31 @@
 # Review Sentiment Audit: Amazon Gift Card Reviews
 
-An LLM reads each Amazon gift-card review's **title and text only**, never its star rating, and labels its sentiment (positive / neutral / negative) and primary emotion. The star rating is then used as the "correct answer" to score it, and the results are presented in a single-file, offline dashboard.
+This project tests how well an AI language model (LLM) can read an Amazon gift card review and tell whether the reviewer was happy, unhappy, or in between. The model only sees the review's **title and text**, never its star rating. Afterwards, the star rating is used as the "correct answer" to check the model's work. The model also names the reviewer's main emotion, and that is compared with a simpler word-counting method. Everything is shown in an interactive dashboard.
 
 ![Dashboard overview, balanced 3-class run](screenshots/dashboard_overview.png)
 
-**Headline:** on positive vs. negative the model agrees with the stars 99.0% of the time on a balanced sample of 100, though mostly on clear-cut 5-star and 1-star reviews. The moment a neutral class is added, agreement drops to **71.3%**, because **3-star reviews mostly don't get their own class: 30 of 50 were labeled negative.** A random sample hides this completely: it contains no 3-star reviews at all.
+## The short version
+
+- **Telling happy from unhappy reviews is easy for the model.** On an even mix of 50 good and 50 bad reviews, it agreed with the star rating 99.0% of the time. Most of those reviews were very clear-cut (5-star or 1-star), though.
+- **Middle-of-the-road reviews are where it struggles.** When 3-star reviews are added as their own "neutral" group, agreement drops to **71.3%**, because **3-star reviews mostly don't get their own class: 30 of 50 were labeled negative.** Reading them, most 3-star reviews are complaints, so the model is often reacting to what people wrote rather than the score they gave.
+- **A random sample hides this problem.** 84% of all reviews are 5 stars. In a random 100, there were no 3-star reviews at all, so the weakness never showed up.
+- **The two emotion methods rarely agree** (16.0% of the time). The word-counting method misses most complaints, because words like "scam" and "refund" aren't in its word list, and the word "gift" throws it off.
+
+---
+
+## Key terms
+
+| Term | Meaning here |
+|---|---|
+| **Agreement / accuracy** | The share of reviews where the model's label matches the star rating. |
+| **Correct answer** | The label the star rating implies. With 2 classes: 4 or more stars is positive, otherwise negative. With 3 classes: 4 to 5 stars positive, 3-star neutral, 1 to 2 stars negative. |
+| **Baseline** | The score you would get by always guessing the most common answer. A model is only useful if it beats this. |
+| **Balanced sample** | An equal number of reviews from each class, so the rare classes get tested properly. A **random** sample instead mirrors the real (very lopsided) data. |
+| **Balanced accuracy** | The average hit rate across classes. Unlike plain accuracy, it can't be inflated by one large class. |
+| **Recall** (hit rate) | Of the reviews that truly belong to a class, how many the model found. |
+| **Precision** | Of the reviews the model put in a class, how many truly belong there. |
+| **95% range** | The range the true value most likely falls in. With only 50 to 100 reviews, these ranges are wide. |
+| **Confusion matrix** | A table of what the stars say against what the model said. The diagonal is agreement; everything else shows which way the mistakes go. |
 
 ---
 
@@ -12,9 +33,9 @@ An LLM reads each Amazon gift-card review's **title and text only**, never its s
 
 - **Source:** Amazon Reviews '23, *Gift Cards* category, by Hou, Li, He, Yan, Chen & McAuley, *Bridging Language and Items for Retrieval and Recommendation* (2024), McAuley Lab, UC San Diego.
   Dataset page: <https://amazon-reviews-2023.github.io> · File: <https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/raw/review_categories/Gift_Cards.jsonl.gz>
-- **Size:** 152,410 reviews (2008-08-06 → 2023-09-06), gzipped JSON Lines, one review per line.
-- **Fields kept:** `rating` (the correct answer, never shown to the model), `title` and `text` (the only model input), plus `verified_purchase`, `helpful_vote`, `timestamp`, `asin`, `parent_asin`, `user_id`, and a word count / image count for slicing. 49 reviews have empty text; none have an empty title.
-- **The data is heavily imbalanced:**
+- **Size:** 152,410 reviews written between 2008-08-06 and 2023-09-06.
+- **What I kept:** the star `rating` (the correct answer, never shown to the model), the `title` and `text` (the only things the model reads), plus a few extra details such as whether it was a verified purchase, helpful votes, and the date. 49 reviews have empty text; every review has a title.
+- **The data is very lopsided:**
 
 | Stars | Reviews | Share |
 |---|---:|---:|
@@ -24,32 +45,34 @@ An LLM reads each Amazon gift-card review's **title and text only**, never its s
 | 2 stars | 1,873 | 1.2% |
 | 1 star | 12,326 | 8.1% |
 
-88.5% of all reviews are 4 to 5 stars; only 2.1% are 3 stars. Any random sample inherits this.
+88.5% of all reviews are 4 or 5 stars, and only 2.1% are 3 stars. Any random sample inherits this imbalance.
 
-- **Emotion word list:** NRC Word-Emotion Association Lexicon (EmoLex) v0.92, by Mohammad & Turney (2013), <https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm>. Downloaded by the script and **not committed** (its terms ask that it not be redistributed); the script verifies its SHA-256 before use.
+- **Emotion word list:** the NRC Word-Emotion Association Lexicon (EmoLex) v0.92, by Mohammad & Turney (2013), <https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm>. The script downloads it automatically. It is **not included in this repository** because its terms ask that it not be redistributed, and the script checks the file's fingerprint (SHA-256) before using it.
 
-## Model and setup
+## How it works
 
-| | |
+1. **The prompt** (`sentiment.py`) gives the model a review's title and text, plus rules for tricky cases (for example, if the title and text disagree, the text wins). The model must answer with a fixed label so the answer can be read automatically.
+2. **The scoring script** (`score_batch.py`) picks a sample of reviews with a fixed random seed (42), sends each one to the model, then compares the answers with the star ratings.
+3. **The word-list script** (`emotion_lexicon.py`) counts emotion words in each review and picks the emotion with the most matches.
+4. **The dashboard generator** (`build_dashboard.py`) turns the saved results into `dashboard.html`.
+
+| Setting | Value |
 |---|---|
-| Endpoint | Class OpenAI-compatible endpoint (`http://dobolyi.com:9001/v1`), called with the `openai` Python client |
+| Model endpoint | The class's OpenAI-compatible endpoint (`http://dobolyi.com:9001/v1`), called with the `openai` Python library |
 | Model | `cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit` |
-| Settings | temperature 0 · "thinking" disabled · emotion runs use an enum-constrained JSON schema, so the server can only return valid labels |
-| Sampling | fixed seed 42 for every run; balanced runs draw an equal number per class from the **whole file** |
-| Unparseable replies | 0 in every run |
+| Settings | temperature 0 (least random); the model's "thinking" step turned off; answers restricted to the allowed labels |
+| Unreadable answers | 0 in every run |
 
-## Runs
+## Results
 
-| Run | Classes | Sample | Agreement with rating (95% CI) | "Always say majority" baseline | Balanced accuracy |
+| Run | Classes | Sample | Agreement with rating (95% range) | Baseline | Balanced accuracy |
 |---|---|---|---|---|---|
 | Step 2, random | 2 | 100 random | **98.0%** (93.0 to 99.4%) | 89.0% | 94.9% |
 | Step 2, balanced | 2 | 50 / 50 | **99.0%** (94.6 to 99.8%) | 50.0% | 99.0% |
-| Step 6, random | 3 | 100 random | **89.0%** (81.4 to 93.7%) | 89.0% | 89.8% *(neutral absent)* |
+| Step 6, random | 3 | 100 random | **89.0%** (81.4 to 93.7%) | 89.0% | 89.8% *(no neutral reviews in sample)* |
 | Step 6, balanced | 3 | 50 / 50 / 50 | **71.3%** (63.6 to 78.0%) | 33.3% | 71.3% |
 
-Correct-answer rules. 2-class: 4 or more stars positive, else negative. 3-class: 4 to 5 stars positive, 3-star neutral, 1 to 2 stars negative.
-
-Adding the emotion question to the prompt (Step 5) changed **0 of 200** sentiment labels on the two 2-class samples, so the Step 2 numbers carry over unchanged.
+Asking the model for an emotion as well (Step 5) changed **0 of 200** of its sentiment answers, so the Step 2 results still stand.
 
 ---
 
@@ -57,40 +80,40 @@ Adding the emotion question to the prompt (Step 5) changed **0 of 200** sentimen
 
 ### 1. Why did the lopsided run look so accurate, and what did equal sampling change?
 
-The random 100 mirrors the file: **89 positive, 11 negative, and zero 2-star or 3-star reviews**. A model that ignored the text and always answered "positive" would already score **89.0%**, so the 98.0% headline is only 9 points of real skill, and the negative class rests on 11 reviews; its 90.9% recall has a 95% range of 62 to 98%.
+The random sample of 100 looks like the real data: **89 positive, 11 negative, and zero 2-star or 3-star reviews**. A "model" that ignored the text and always said "positive" would already score **89.0%**. So the impressive 98.0% is really only 9 points better than guessing. The negative side was tested on just 11 reviews, so its 90.9% hit rate is uncertain (the 95% range is 62 to 98%).
 
-Balancing did two different things depending on the task:
+Testing with equal numbers from each class showed two different things:
 
-- **Two classes: the hunch did *not* hold.** The brief hints that the lopsided result flatters the model. Here it didn't: on a 50/50 sample the model scored **99.0%**, catching **50/50** negatives. Positive vs. negative is genuinely easy for this model; the imbalance inflated the *baseline*, not the model.
-- **Three classes: balancing exposed the real weakness.** The random 3-class run scores **89.0%, exactly the always-positive baseline**, because it contains **no neutral reviews at all**, so neutral performance is simply unmeasurable. Its only visible symptom is 9 positive reviews (7 five-star, 2 four-star) wrongly called neutral. The balanced 3-class run, 50 per class, drops to **71.3%**, with neutral recall of just **30.0%** (15/50; 95% range 19 to 44%).
+- **With two classes, the warning in the assignment did *not* hold up.** I expected the lopsided result to flatter the model. It didn't: on 50 positive and 50 negative reviews the model scored **99.0%** and caught **50/50** negatives. Telling positive from negative really is easy for this model. The imbalance made the *baseline* look high, not the model.
+- **With three classes, balancing exposed the real weakness.** The random 3-class run scores **89.0%, exactly the always-positive baseline**, because it has **no neutral reviews at all**, so it can't measure how the model handles them. The only sign of trouble is 9 positive reviews (7 five-star, 2 four-star) wrongly called neutral. With 50 reviews per class, agreement drops to **71.3%**, and the model finds only **30.0%** (15/50; 95% range 19 to 44%) of the neutral reviews.
 
-The lesson: a random sample from this file can look excellent while never testing the hardest class.
+**Lesson:** a random sample of this data can look excellent while never testing the hardest class.
 
-**A second, subtler imbalance:** "balanced" here means equal numbers *per class*, drawn at random from the file, so each class inherits the file's skew *within* it. In both balanced runs the 50 positives are 49 five-star and 1 four-star, and the negatives are dominated by one-star reviews (39 of 50, the rest two-star, plus 4 three-star in the 2-class run). The 99.0% two-class score is therefore mostly a test on the clearest, most extreme reviews; the milder 2-star and 4-star reviews are barely tested. Sampling per *star level* would be the next step to probe them.
+**A second, hidden imbalance.** "Balanced" here means an equal number *per class*, picked at random from the whole file, so the imbalance survives *inside* each class. In both balanced runs, the 50 positives are 49 five-star and 1 four-star, and the negatives are mostly 1-star (39 of 50, the rest 2-star, plus 4 three-star in the 2-class run). So the 99.0% score mostly tests the clearest, most extreme reviews; milder 2-star and 4-star reviews are barely tested. Sampling an equal number per *star level* would be the next step.
 
-![Lopsided 2-class run with the baseline callout](screenshots/dashboard_lopsided_2class.png)
+![Lopsided 2-class run with the baseline note](screenshots/dashboard_lopsided_2class.png)
 
-![Random 3-class run: the neutral class is simply absent](screenshots/dashboard_random_3class.png)
+![Random 3-class run: the neutral class is simply missing](screenshots/dashboard_random_3class.png)
 
 ### 2. Where do the mistakes go?
 
-Confusion matrix, balanced 3-class run (rows = what the stars say, columns = what the model said):
+Confusion matrix for the balanced 3-class run (rows are what the stars say; columns are what the model said):
 
-| Rating says ↓ / Model says → | Positive | Neutral | Negative | n |
+| Stars say ↓ / Model says → | Positive | Neutral | Negative | Total |
 |---|---:|---:|---:|---:|
 | **Positive** | **45** | 5 | 0 | 50 |
 | **Neutral** | 5 | **15** | 30 | 50 |
 | **Negative** | 1 | 2 | **47** | 50 |
 
-- **Neutral collapses downward into negative, not the other way round.** 30 of 50 three-star reviews (60%) were labeled negative; only 2 of 50 negative reviews (4%) were called neutral.
-- As a result the model **over-predicts negative: 77 labels vs. 50 true negatives**, so negative precision is only **61.0%** even though negative recall is **94.0%**. Neutral is under-predicted (22 labels vs. 50).
-- Positive is mostly right (**90.0%** recall); its 5 misses went to neutral: terse, flat reviews such as *"It's a gift card....,what more is there to say ?"* (5 stars) and *"Gas card."* (5 stars).
-- **Reading the 30 neutral→negative reviews, most are complaints**: a missing gift message, a dented card, a $6.95 loading fee, a card that won't add to Apple/Google Wallet. The model's own emotion labels agree: all 30 got a negative emotion (anger 18, disgust 8, sadness 4). The text is negative; the reviewer just chose a middling score. So much of this "error" is a disagreement between what reviewers *write* and what they *rate*, not a misreading. The model is judging text, and 3-star text in this category is mostly unhappy.
-- The same pattern is visible in the 2-class balanced run: all 4 three-star reviews it happened to include were labeled negative.
+- **Neutral reviews get pushed down to negative, not the other way around.** 30 of 50 three-star reviews (60%) were labeled negative, but only 2 of 50 negative reviews (4%) were called neutral.
+- **So the model says "negative" too often:** 77 labels vs. 50 true negatives. It finds nearly all real negatives (hit rate **94.0%**), but only **61.0%** of its "negative" labels are right. It says "neutral" too rarely: 22 labels vs. 50.
+- **Positive reviews are mostly right** (hit rate **90.0%**). All of its 5 misses went to neutral, and they are short, flat reviews such as *"It's a gift card....,what more is there to say ?"* (5 stars) and *"Gas card."* (5 stars).
+- **Most of the 30 three-star reviews labeled negative are actually complaints:** a missing gift message, a dented card, a $6.95 loading fee, a card that won't work with Apple or Google Wallet. The model's emotion labels agree: every one got a negative emotion (anger 18, disgust 8, sadness 4). The reviewers wrote negative text but gave a middle score. So many of these "mistakes" are really a gap between what people *write* and how they *rate*. The model judges the text, and 3-star text in this category is mostly unhappy.
+- **The 2-class balanced run shows the same thing:** all 4 three-star reviews it included were labeled negative.
 
 ![Filtered to the 30 three-star reviews labeled negative](screenshots/dashboard_filter_neutral_to_negative.png)
 
-A few 2-class "mistakes" also look like rating errors rather than model errors: a 1-star review reading *"Not much you can say other than it works"*, and a 5-star review that is a joke about the *House of the Dead* video game.
+Some 2-class "mistakes" look more like wrong star ratings than model errors: a 1-star review that says *"Not much you can say other than it works"*, and a 5-star review that is just a joke about the *House of the Dead* video game.
 
 ### 3. How do the LLM's emotions and the word list's emotions differ, and why?
 
@@ -99,104 +122,104 @@ Balanced 3-class run (150 reviews):
 | | LLM | Word list (NRC) |
 |---|---|---|
 | Most common answers | anger 56, joy 39, trust 31, disgust 14 | joy 21, anticipation 19, trust 16 |
-| No answer possible | n/a | **none 30** (no lexicon word matched) · **tie 51** (tied top emotions triggered by the same word) |
+| No single answer | n/a | **none 30** (no emotion words found) · **tie 51** (several emotions tied, all from the same word) |
 
-- **They rarely agree: 16.0% exact**, 31.3% if the LLM's emotion merely appears among the word list's tied top emotions.
-- **Agreement collapses on unhappy reviews:** exact agreement is 34% for positive reviews but **6% for neutral and 8% for negative**. On the 50 negative reviews the LLM says *anger* 38 times; the word list says *anger* twice.
-- **Why:**
-  1. **The words that carry complaints aren't in the lexicon.** "scam", "refund", "card", "amazon", "cheated", "useless" and "ripoff" have no emotion in NRC. Real example: a 1-star review titled *"ZERO BALANCE!!!"* that reads *"Fandango card was empty!"* matches no lexicon word at all, while the LLM calls it anger; 4 of the 50 negative reviews look like this.
-  2. **Domain words dominate and mislead.** "gift" is linked to anticipation, joy *and* surprise, and matched 143 times across 68 of the 150 reviews. 36 of the 51 ties involve "gift", and 22 ties are exactly its anticipation/joy/surprise set. "money" is linked to anger, anticipation, joy, surprise *and* trust at once. The word list is scoring the product category, not the reviewer's feeling.
-  3. **No context:** the lexicon can't handle negation ("not happy"), sarcasm, or the fact that *what happened* (a card that didn't activate) implies anger without any emotional words.
-  4. **Reviews are short** (median 8 words), so a word count has very little to work with: 30 of 150 matched nothing.
-- **Caveat on the LLM side:** its emotions aren't checked against any ground truth either. They are internally consistent with its sentiment labels: *joy* appears only on reviews it called positive (39), *anger*, *disgust*, *sadness* and *fear* only on reviews it called negative (56, 14, 6, 1), and *trust* splits between neutral (19) and positive (12). That consistency is partly by design: the prompt's definitions (e.g. "satisfied → trust or joy") shape the choice, and both labels come from the same reply.
+- **They rarely agree: 16.0% exact.** Even counting a match whenever the LLM's emotion is one of the word list's tied choices, they agree only 31.3% of the time.
+- **They disagree most on unhappy reviews.** Exact agreement is 34% for positive reviews but **6% for neutral and 8% for negative**. On the 50 negative reviews, the LLM says *anger* 38 times; the word list says *anger* twice.
+- **Why they differ:**
+  1. **Complaint words are missing from the word list.** "scam", "refund", "card", "amazon", "cheated", "useless" and "ripoff" have no emotion attached. For example, a 1-star review titled *"ZERO BALANCE!!!"* that reads *"Fandango card was empty!"* contains no listed words at all, while the LLM reads it as anger. 4 of the 50 negative reviews are like this.
+  2. **Everyday product words mislead it.** The word list links "gift" to anticipation, joy *and* surprise, and "gift" matched 143 times across 68 of the 150 reviews. 36 of the 51 ties involve "gift", and 22 ties are exactly its anticipation/joy/surprise set. "money" is linked to five emotions at once. So the word list mostly measures what the product is, not how the reviewer feels.
+  3. **It ignores context.** It can't handle "not happy", sarcasm, or situations that imply anger without emotional words (like a card that didn't activate).
+  4. **Reviews are very short** (median 8 words), so there is little to count: 30 of 150 matched nothing.
+- **A caution about the LLM:** there is no "correct answer" for emotions, so neither method can be scored. The LLM's emotions are at least consistent with its sentiment labels: *joy* appears only on reviews it called positive (39); *anger*, *disgust*, *sadness* and *fear* only on reviews it called negative (56, 14, 6, 1); and *trust* is split between neutral (19) and positive (12). Part of that consistency comes from the prompt's own definitions and from both labels coming in the same answer.
 
 ![Emotion comparison](screenshots/dashboard_emotions.png)
 
-### 4. Bugs and issues hit along the way, and the workarounds
+### 4. Problems I ran into, and how I fixed them
 
-| Where | Issue | Workaround |
+| Where | Problem | Fix |
 |---|---|---|
-| Model call | The class model is a *thinking* model: by default it spent 169 hidden tokens reasoning (saved probe in `results/report_supporting_numbers.txt`) before answering, so a short reply limit returned **empty** answers, and reasoning text containing both labels could fool the parser. | Disabled thinking through the chat template, and strip any `<think>` block before parsing. Replies went from 1.24 s to 0.11 s in the saved probe. |
-| Parsing | Free-text JSON from a model can be malformed. | Used the endpoint's enum-constrained JSON schema: 0 unparseable replies across all runs. |
-| Sampling | The random 100 contained no 2-star or 3-star reviews, so neutral recall was 0/0 and balanced accuracy / macro-F1 came out `NaN`, and `NaN` isn't valid JSON, which would have broken the dashboard. | Averages now use only the classes present and name the absent class; `NaN` → `null`; the dashboard shows hatched "none in this sample" areas instead of a fake 0%. |
-| Word list | My first tie-break ("earliest word wins") couldn't separate emotions triggered by the *same* word and silently fell back to alphabetical order, handing ~20% of reviews to "anticipation". | Unbreakable ties are now labeled `tie`, with the tied set kept; agreement is reported both strictly and leniently. |
-| Charts | Very small values (the 1.2% 2-star bar, a 1-review segment, a 4-star row with n=1) risk rendering at 0 px, the layout bug the brief warns about. | `min-width: 3px` on every non-zero bar, then verified by **measuring rendered geometry in the browser** (see below). |
-| Charts | A geometry check at phone width found two in-bar labels ("33%", "30%") wider than their segments, spilling onto the neighbouring colour: a label/positioning interaction. The same check showed why: on phones the stacked bars got only 70 px of 309, because the "n=50 · should be Neutral" note beside them took 149 px. | The note moves under the bar on narrow screens (bar now 167 px), and in-bar labels are shown only when measured to fit, re-measured on resize. |
-| Charts | My first label-fit test compared `scrollWidth` to the segment width, which is always "too wide" when text fits, so it hid **every** label, and the matching check passed vacuously. Caught only because the check also reports how many labels are shown (0). | Measure the text's own width; the check now also confirms each hidden label genuinely wouldn't fit. |
-| Colors | Neutral was first drawn in gray, which failed a colorblind/chroma validator; yellow and pink failed next to orange. | Blue / aqua / orange passes every pairwise check in light and dark mode. |
-| UI | Run tabs wrapped into a broken pill on phones; a filter label broke onto two lines; review text showed raw `<br />` tags. | Scrolling tabs, `nowrap` labels, `<br />` converted to spaces/newlines. |
-| Screenshots | The in-app browser pane and headless Chrome both captured **blank** images after scrolling. | Added a `?section=` deep link that shows just the requested card under the header, and captured with headless Chrome. |
-| Repeatability | Re-scoring live at temperature 0 still changed 1 of 150 sentiment labels and 5 of 150 emotions (GPU batching nondeterminism). | Published numbers are computed only from the saved raw output; the re-run result is reported openly (see *Repeatability, checked*). |
-| Reproducibility | The full-file star chart needed the raw data, which isn't committed. | The generator saves `results/dataset_summary.json`, so the dashboard rebuilds from a fresh clone. |
-| Working with the agent | At first the agent only wrote scripts for me to run (it had saved that preference from an earlier project), and an early answer about "why do we need an API" was confusing. The agent drives the work; the endpoint does the classifying. | Told it to run everything itself; clarified the split between agent (writes/runs code) and endpoint (labels reviews). <!-- REVIEW: rewrite in your own words and add anything else you noticed. --> |
-| Working with the agent | The agent's own drafts contained mistakes that only checks caught: the alphabetical tie-break above, a draft sentence saying "gift" appeared in 143 *reviews* (it is 143 *matches* in 68 reviews), and the within-class star skew was missed until I asked for an audit against the standing considerations. | Asked for every claim to be recomputed from saved files: `check_readme_numbers.py` now re-derives all README figures, and `check_repeatability.py` re-tests the rating-never-seen and repeatability rules. |
+| Model | The class model "thinks" before answering. By default it spent 169 hidden tokens reasoning (saved in `results/report_supporting_numbers.txt`), so short replies came back **empty**, and its reasoning could mention both labels and confuse the code reading the answer. | Turned the thinking step off and strip any leftover thinking text. Replies went from 1.24 s to 0.11 s. |
+| Model answers | Free-form answers can come back in the wrong format. | Restricted the model to a fixed list of allowed answers: 0 unreadable replies in every run. |
+| Sampling | The random sample had no 2-star or 3-star reviews, so some averages couldn't be calculated and came out as "not a number", which would have broken the dashboard. | Averages now use only the classes that are present and say which one is missing; the dashboard shows "none in this sample" instead of a misleading 0%. |
+| Word list | My first rule for breaking ties couldn't choose between emotions triggered by the *same* word, and quietly fell back to alphabetical order. That handed about 20% of reviews to "anticipation". | Those cases are now labeled `tie`, and agreement is reported both strictly and loosely. |
+| Charts | Very small values (the 1.2% 2-star bar, a single review, a 4-star row with only 1 review) could shrink to nothing on screen, the problem the assignment warns about. | Every non-zero bar has a minimum width, and I measured the drawn bars in the browser to confirm (see below). |
+| Charts | On phones, two percentage labels ("33%", "30%") were wider than their bars and spilled over. The cause: the bars got only 70 px of 309, because the note beside them ("n=50 · should be Neutral") took 149 px. | On narrow screens the note now sits under the bar (bar now 167 px wide), and labels only show when they fit. |
+| Charts | My first fix for the labels measured the wrong thing and hid **every** label, and the check still passed. I only caught it because the check also counts how many labels are showing (it said 0). | The fix now measures the text itself, and the check confirms each hidden label really wouldn't fit. |
+| Colors | Gray for "neutral" failed a colorblind-safety check; yellow and pink were too close to orange. | Blue, aqua and orange pass every check in light and dark mode. |
+| Layout | On phones the run tabs broke across lines, a filter button wrapped, and some reviews showed raw `<br />` code. | Tabs scroll sideways, buttons stay on one line, and the code is converted to normal line breaks. |
+| Screenshots | Screenshots came out blank after scrolling. | Added a link option that shows just one section of the page, then captured that. |
+| Repeatability | Re-running the model on the same reviews at temperature 0 still changed 1 of 150 sentiment labels and 5 of 150 emotions (a normal side effect of shared computing servers). | All published numbers come from the saved results, and the re-run difference is reported openly (see *Repeatability* below). |
+| Rebuilding | The star chart needed the raw data, which isn't in the repository. | The generator saves a small summary file (`results/dataset_summary.json`), so the dashboard rebuilds from a fresh copy. |
+| Working with the agent | At first the agent only wrote scripts for me to run (a preference it had saved from an earlier project), and an early answer about "why do we need an API" was confusing. The agent does the work; the endpoint does the classifying. | Told it to run everything itself, and clarified the difference between the agent (writes and runs code) and the endpoint (labels the reviews). |
+| Working with the agent | The agent's own drafts had mistakes that only checks caught: the alphabetical tie-break above, a sentence saying "gift" appeared in 143 *reviews* (it is 143 *matches* in 68 reviews), and the imbalance inside each class, which was missed until I asked for a full audit. | Had every number in this report recomputed from the saved files: `check_readme_numbers.py` re-derives them all, and `check_repeatability.py` re-tests that the model never sees the rating and that results repeat. |
 
-**Numbers check:** `verify_dashboard.js` compares every number on the page against the saved metrics and rows, in the browser: **429 checks, 0 mismatches** across all 4 runs.
+**Numbers check:** `verify_dashboard.js` compares every number shown on the dashboard with the saved results, inside the browser: **429 checks, 0 mismatches** across all 4 runs.
 
-**Geometry check:** the same script measures every rendered bar at 1280, 768 and 375 px: each non-zero bar is at least 3 px, bar lengths are proportional to their values within 1.5 px, in-bar labels fit, and value labels stay inside their cards: **0 failures at all three widths** (228 / 228 / 221 checks). Record: `results/dashboard_check.txt`.
+**Chart check:** the same script measures every bar at desktop, tablet and phone widths (1280, 768 and 375 px). It confirms that every non-zero bar is at least 3 px wide, bar lengths match their values, labels fit, and nothing spills out of its box: **0 failures at all three widths** (228 / 228 / 221 checks). Record: `results/dashboard_check.txt`.
 
 ---
 
 ## The dashboard
 
-`dashboard.html` is one self-contained file: open it in any browser, with no server or internet needed. Tabs switch between the four runs; it opens on the balanced 3-class run.
+`dashboard.html` is a single file: open it in any browser, with no internet connection needed. Tabs at the top switch between the four runs; it opens on the balanced 3-class run.
 
-- Headline agreement with a 95% range, the "always guess" baseline, balanced accuracy, and a plain-language note on imbalance.
-- The full-file star distribution; what the model called each star level; rating-says vs. model-says counts; a clickable confusion matrix; per-class hit rates with confidence ranges.
-- LLM vs. word-list emotions, with agreement by class and the most-matched lexicon words.
-- A filterable review table (agrees / mismatched, rating class, model label, stars, LLM emotion, emotion agreement, text search) with a live count. Clicking a matrix cell or a bar filters it, and each row expands to the full text, the model's raw reply and the lexicon words matched.
-- Light and dark themes. All colors are variables in one block at the top of the file, so it can be recolored in one place.
-- Deep links: e.g. `dashboard.html?truth=NEUTRAL&pred=NEGATIVE#150_balanced_s42_c3_emo`.
+- The headline agreement with its 95% range, the guessing baseline, balanced accuracy, and a plain-language note about the imbalance.
+- Charts of the star ratings in the full data, what the model called each star level, how many reviews each class should have vs. how many the model gave it, a clickable confusion matrix, and the hit rate for each class.
+- The LLM's emotions next to the word list's, with agreement by class and the most-matched words.
+- A table of every review, with filters (agrees or not, class, model label, stars, emotion, text search) and a live count. Clicking a chart filters the table, and clicking a row shows the full review, the model's exact reply, and the words the word list matched.
+- Light and dark themes. All colors are set in one place at the top of the file, so they are easy to change.
+- Links can open a filtered view, e.g. `dashboard.html?truth=NEUTRAL&pred=NEGATIVE#150_balanced_s42_c3_emo`.
 
 ![Dark theme](screenshots/dashboard_dark.png)
 
-## Reproduce
+## How to reproduce it
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env            # endpoint URL, key and model name
-python data_loader.py           # Step 0: download + read the data (~12 MB)
-python spot_check.py            # Step 1: prompt spot-check
-python score_batch.py                                          # Step 2: random 100, 2-class
-python score_batch.py --balanced                               # Step 2: 50/50
-python score_batch.py --emotion && python score_batch.py --emotion --balanced   # Step 5: + emotion
-python score_batch.py --classes 3 --emotion                    # Step 6: random 100, 3-class
+cp .env.example .env            # endpoint address, key and model name
+python data_loader.py           # Step 0: download and read the data (about 12 MB)
+python spot_check.py            # Step 1: quick test of the prompt
+python score_batch.py                                          # Step 2: random 100, 2 classes
+python score_batch.py --balanced                               # Step 2: 50 / 50
+python score_batch.py --emotion && python score_batch.py --emotion --balanced   # Step 5: add emotion
+python score_batch.py --classes 3 --emotion                    # Step 6: random 100, 3 classes
 python score_batch.py --classes 3 --emotion --balanced --n 150 # Step 6: 50 per class
-python emotion_lexicon.py       # Step 5: word-list emotions (downloads NRC on first run)
-python build_dashboard.py       # writes dashboard.html
-python report_numbers.py        # supporting figures quoted in this report (add --probe to re-time the endpoint)
+python emotion_lexicon.py       # Step 5: word-list emotions (downloads the word list the first time)
+python build_dashboard.py       # builds dashboard.html
+python report_numbers.py        # extra figures quoted in this report
 ```
 
-Scoring resumes where it left off, and a re-run with the same seed re-uses the saved rows rather than calling the model again.
+If a run is interrupted, re-running it picks up where it stopped, and a finished run reuses its saved answers instead of asking the model again.
 
-**Repeatability, checked** (`python check_repeatability.py` → `results/repeatability_check.txt`):
+**Repeatability** (`python check_repeatability.py`, saved in `results/repeatability_check.txt`):
 
-- **Which reviews are used is fixed.** Re-drawing every saved run with its seed (42) gives identical review IDs and correct answers for all six runs.
-- **Every published number regenerates exactly.** Recomputing all metrics from the saved rows and rebuilding the dashboard reproduces the committed files byte for byte.
-- **Live re-scoring is close but not perfectly deterministic, even at temperature 0.** Re-sending all 150 reviews of the balanced 3-class run gave 149 of 150 identical sentiment labels and 145 of 150 identical emotions (accuracy 72.0% vs. the saved 71.3%, well inside its 95% range). This is typical of a shared GPU inference server, where request batching causes tiny floating-point differences. The saved raw output is therefore the record every number is computed from.
-- **The model never sees the rating.** The same check captures every request sent to the endpoint: the user message is exactly the title + text template in all 150, and the prompt contains no mention of stars or ratings.
+- **The same reviews are picked every time.** Re-drawing each run with its seed (42) gives exactly the same reviews for all six saved runs.
+- **Every published number can be rebuilt exactly.** Recalculating from the saved results reproduces the same files, byte for byte.
+- **Asking the model again gives almost, but not exactly, the same answers.** Re-sending all 150 reviews of the balanced 3-class run gave 149 of 150 identical sentiment labels and 145 of 150 identical emotions (accuracy 72.0% instead of the saved 71.3%, well within its 95% range). This is normal for shared computing servers. That is why every number here comes from the saved results.
+- **The model never sees the rating.** The same check records every message sent to the model: each one contains only the title and text, and the instructions never mention stars or ratings.
 
-**Number audit:** `python check_readme_numbers.py` recomputes every figure quoted in this README from the saved output and confirms it appears here exactly (`results/readme_number_check.txt`).
+**Number audit:** `python check_readme_numbers.py` recalculates every number in this README from the saved results and confirms it matches (`results/readme_number_check.txt`).
 
 ## Files
 
-| Deliverable | File |
+| What | File |
 |---|---|
-| The prompt | `sentiment.py` (v1 two-class · v2 + emotion · v3 three-class + emotion) |
-| Scoring script | `score_batch.py` (uses `llm_client.py`, `data_loader.py`) |
+| The prompt | `sentiment.py` (version 1: two classes · version 2: plus emotion · version 3: three classes plus emotion) |
+| Scoring script | `score_batch.py` (uses `llm_client.py` and `data_loader.py`) |
 | Word-list emotion script | `emotion_lexicon.py` |
-| Dashboard generator | `build_dashboard.py` + `dashboard_template.html` |
-| One balanced run's raw output | `results/batch_150_balanced_s42_c3_emo.csv` (every review, correct answer, prediction, LLM emotion, raw model reply, word-list emotion and matched words) |
+| Dashboard generator | `build_dashboard.py` and `dashboard_template.html` |
+| Raw output of one balanced run | `results/batch_150_balanced_s42_c3_emo.csv` (every review, its correct answer, the model's answer and emotion, the model's exact reply, and the word-list emotion) |
 | Final dashboard | `dashboard.html` |
-| Supporting | `spot_check.py`, `verify_dashboard.js`, `report_numbers.py`, `check_repeatability.py`, `check_readme_numbers.py`, `results/*_metrics.json`, `results/*_report.txt`, `ISSUES_LOG.md` |
+| Supporting checks and records | `spot_check.py`, `verify_dashboard.js`, `report_numbers.py`, `check_repeatability.py`, `check_readme_numbers.py`, `results/*_metrics.json`, `results/*_report.txt`, `ISSUES_LOG.md` |
 
-`data/` (raw reviews and the NRC lexicon) and `.env` are git-ignored.
+The raw data and word list (`data/`) and the private settings file (`.env`) are not included.
 
 ## Limitations
 
-- Samples are small (100 to 150 reviews), so per-class figures carry wide confidence ranges, shown throughout.
-- Balanced samples are balanced by class, not by star level: 4-star (1 review per run) and 2-star reviews are barely represented.
-- The star rating is treated as the truth, but some ratings clearly disagree with their own text.
-- One model at one temperature; the prompt's edge-case rules (e.g. "'ok' is neutral") shape the neutral results.
-- LLM emotions have no ground truth; the comparison shows disagreement, not which method is right.
+- The samples are small (100 to 150 reviews), so the numbers for each class have wide 95% ranges.
+- The balanced samples are balanced by class, not by star level, so 4-star reviews (1 per run) and 2-star reviews are barely tested.
+- The star rating is treated as the truth, but some ratings clearly don't match their own review text.
+- Only one model and one setting were tested, and the prompt's rules (for example, "'ok' is neutral") affect how neutral reviews are labeled.
+- Emotions have no correct answer, so the comparison shows where the two methods disagree, not which one is right.
