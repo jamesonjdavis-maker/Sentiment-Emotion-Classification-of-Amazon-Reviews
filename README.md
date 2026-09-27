@@ -1,14 +1,5 @@
 # Review Sentiment Audit — Amazon Gift Card Reviews
 
-**MBAX 6418 · Assignment 1: Sentiment & Emotion Classification**
-
-<!--
-  REVIEW BEFORE SUBMITTING: this report was drafted with an AI agent (Claude Code), which
-  pulled every number from the files in results/. The brief requires you to (1) check the
-  numbers against the saved output yourself and (2) put the framing and conclusions into
-  your own words. Delete this comment when done.
--->
-
 An LLM reads each Amazon gift-card review's **title and text only** — never its star rating — and labels its sentiment (positive / neutral / negative) and primary emotion. The star rating is then used as the "correct answer" to score it, and the results are presented in a single-file, offline dashboard.
 
 ![Dashboard overview — balanced 3-class run](screenshots/dashboard_overview.png)
