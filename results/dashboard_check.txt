@@ -1,4 +1,4 @@
-Dashboard verification — verify_dashboard.js run in the browser against the final dashboard.html (2026-09-26)
+Dashboard verification — verify_dashboard.js run in the browser against the final dashboard.html (2026-09-26, re-run after replacing star symbols and dashes with words)
 
 1) Numbers (desktop, 1280px): 429 checks, 0 mismatches, across all 4 runs.
    Hero accuracy, balanced accuracy, majority baseline, mismatch count; every confusion-matrix cell;
@@ -11,7 +11,7 @@ Dashboard verification — verify_dashboard.js run in the browser against the fi
 2) Geometry (Step 7 small-element / label-interaction check), all 4 runs per width:
    1280px: 228 checks, 0 failures (in-bar labels shown 24, hidden 3)
     768px: 228 checks, 0 failures (in-bar labels shown 24, hidden 3)
-    375px: 223 checks, 0 failures (in-bar labels shown 17, hidden 10)
+    375px: 221 checks, 0 failures (in-bar labels shown 16, hidden 11)
    Every non-zero bar/segment >= 3px; bar lengths proportional to values within 1.5px; in-bar labels
    fit their segment (text width + 8px padding); every hidden label verified genuinely too wide;
    value labels inside their card; no horizontal page overflow.

@@ -22,7 +22,7 @@
   --accent:    #2a4d8f;      /* focus, links, active tab */
   --accent-soft: #e3e9f5;
 
-  /* class identity (marks only — text always stays in ink) */
+  /* class identity (marks only; text always stays in ink) */
   --c-positive: #2a78d6;
   --c-neutral:  #1baf7a;
   --c-negative: #eb6834;
@@ -195,7 +195,7 @@ tr.detail td { background: var(--surface-2); font-size: 13px; color: var(--ink-2
 .emo.same { color: var(--ink-1); font-weight: 600; }
 .match { font-weight: 600; font-size: 12.5px; white-space: nowrap; display: inline-flex; gap: 5px; align-items: center; }
 .match .ic { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; color: #fff; font-size: 11px; }
-.stars { color: var(--ink-2); white-space: nowrap; letter-spacing: 1px; }
+.stars { color: var(--ink-2); white-space: nowrap; }
 td.empty { padding: 28px; text-align: center; color: var(--ink-3); }
 .more { margin-top: 12px; text-align: center; }
 .more button { border: 1px solid var(--line); background: var(--surface-1); border-radius: 999px; padding: 6px 16px; cursor: pointer; font-size: 13px; }
@@ -211,9 +211,9 @@ footer p { margin: 4px 0; }
 <div class="wrap">
   <header class="top">
     <div>
-      <p class="eyebrow">MBAX 6418 · Amazon Reviews ’23 — Gift Cards</p>
+      <p class="eyebrow">Amazon Reviews ’23 · Gift Cards</p>
       <h1>Review Sentiment Audit</h1>
-      <p class="sub">An LLM reads each review’s title and text — never its star rating — and labels the sentiment and primary emotion. This page shows how often it agrees with the reviewer’s stars, where it doesn’t, and how its emotions compare with a word-list method.</p>
+      <p class="sub">An LLM reads each review’s title and text, never its star rating, and labels the sentiment and primary emotion. This page shows how often it agrees with the reviewer’s stars, where it doesn’t, and how its emotions compare with a word-list method.</p>
     </div>
     <button class="theme-btn" id="themeBtn" type="button">Toggle theme</button>
   </header>
@@ -305,7 +305,7 @@ footer p { margin: 4px 0; }
       <div class="chips" id="eWords"></div>
     </section>
 
-    <!-- steps 3–4: review table -->
+    <!-- steps 3 and 4: review table -->
     <h3 class="section">Every review in this run</h3>
     <section class="card span-12" id="reviews">
       <p class="hint">Filter to any subset; click a row for the full text, the model’s raw reply and the lexicon words matched.</p>
@@ -341,8 +341,8 @@ footer p { margin: 4px 0; }
   </div>
 
   <footer>
-    <p><b>Data:</b> Amazon Reviews ’23, “Gift Cards” category — Hou, Li, He, Yan, Chen &amp; McAuley, <i>Bridging Language and Items for Retrieval and Recommendation</i> (2024), McAuley Lab, UC San Diego. <a href="https://amazon-reviews-2023.github.io">amazon-reviews-2023.github.io</a></p>
-    <p><b>Emotion lexicon:</b> NRC Word-Emotion Association Lexicon (EmoLex) v0.92 — Mohammad &amp; Turney (2013). <a href="https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">saifmohammad.com</a></p>
+    <p><b>Data:</b> Amazon Reviews ’23, “Gift Cards” category, by Hou, Li, He, Yan, Chen &amp; McAuley, <i>Bridging Language and Items for Retrieval and Recommendation</i> (2024), McAuley Lab, UC San Diego. <a href="https://amazon-reviews-2023.github.io">amazon-reviews-2023.github.io</a></p>
+    <p><b>Emotion lexicon:</b> NRC Word-Emotion Association Lexicon (EmoLex) v0.92, by Mohammad &amp; Turney (2013). <a href="https://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">saifmohammad.com</a></p>
     <p id="footMeta"></p>
   </footer>
 </div>
@@ -351,13 +351,16 @@ footer p { margin: 4px 0; }
 <script>
 const DATA = JSON.parse(document.getElementById('data').textContent);
 const $ = s => document.querySelector(s);
-const pct = (x, d = 1) => (x == null || isNaN(x)) ? '—' : (x * 100).toFixed(d) + '%';
+const pct = (x, d = 1) => (x == null || isNaN(x)) ? 'n/a' : (x * 100).toFixed(d) + '%';
 const fmt = n => Number(n).toLocaleString('en-US');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
 const CLASSES = ['POSITIVE', 'NEUTRAL', 'NEGATIVE'];
 const classVar = l => CLASSES.includes(l) ? `var(--c-${l.toLowerCase()})` : 'var(--ink-3)';
 const EMOTIONS = ['anger', 'anticipation', 'disgust', 'fear', 'joy', 'sadness', 'surprise', 'trust'];
+// saved run settings write rules with an en dash and "->"; display them as "4 to 5 → POSITIVE"
+const ruleText = t => String(t).replace(/(\d)\u2013(\d)/g, '$1 to $2').replace(/ -> /g, ' → ');
+const starText = n => `${n} star${+n === 1 ? '' : 's'}`;
 const isTrue = v => v === true || v === 'True' || v === 'true';
 const PAGE = 50;
 
@@ -390,7 +393,7 @@ function selectRun(id) {
   state = freshState();
   try { history.replaceState(null, '', '#' + run.id); } catch (e) {}
   const m = run.meta;
-  $('#runDesc').textContent = `${m.sampling === 'balanced' ? 'Balanced' : 'Random'} sample of ${m.n} · ${m.labels.length} classes (${m.truth_rule}) · seed ${m.seed} · prompt ${m.prompt_version}`;
+  $('#runDesc').textContent = `${m.sampling === 'balanced' ? 'Balanced' : 'Random'} sample of ${m.n} · ${m.labels.length} classes (${ruleText(m.truth_rule)}) · seed ${m.seed} · prompt ${m.prompt_version}`;
   renderTabs(); renderHead(); renderStarDist(); renderStarPred(); renderRvm(); renderMatrix(); renderBars(); renderEmotion();
   setupFilters(); renderTable(); renderMethod();
 }
@@ -404,7 +407,7 @@ function renderHead() {
   const absent = m.classes_absent || [];
   $('#heroFig').textContent = pct(m.accuracy);
   $('#heroCap').innerHTML = `<strong>agreement with the star rating</strong> across <span class="num">${m.n_usable}</span> reviews
-    (<span class="num">${agree}</span> of <span class="num">${m.n_usable}</span>). 95% confidence range <span class="num">${pct(lo)}–${pct(hi)}</span>.`;
+    (<span class="num">${agree}</span> of <span class="num">${m.n_usable}</span>). 95% confidence range <span class="num">${pct(lo)} to ${pct(hi)}</span>.`;
   $('#mix').innerHTML = L.filter(l => support[l]).map(l => `<span title="${cap(l)}: ${support[l]}" style="flex:${support[l]};background:${classVar(l)}"></span>`).join('');
   $('#mixLegend').innerHTML = L.map(l =>
     `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)} by rating · <b class="num">${support[l]}</b> (${pct(support[l] / m.n_usable, 0)})</span>`).join('');
@@ -414,7 +417,7 @@ function renderHead() {
   let txt;
   if (run.meta.sampling === 'random') {
     txt = `<b>Read with care:</b> this sample mirrors the real data, where ${pct(support[majLabel] / m.n_usable, 0)} of reviews are ${cap(majLabel).toLowerCase()}.
-      A model that answered “${cap(majLabel)}” every time would already score <b>${pct(base)}</b> — this model adds <b>${(lift * 100).toFixed(1)} points</b> over that.
+      A model that answered “${cap(majLabel)}” every time would already score <b>${pct(base)}</b>; this model adds <b>${(lift * 100).toFixed(1)} points</b> over that.
       Only <b>${m.n_usable - support[majLabel]}</b> reviews test the other class${L.length > 2 ? 'es' : ''}.`;
     if (absent.length) txt += ` <b>${absent.map(cap).join(', ')} does not appear at all</b>, so this run cannot show how the model handles it.`;
     txt += ' Compare the balanced run.';
@@ -423,11 +426,11 @@ function renderHead() {
     // Honest caveat: classes are balanced, star levels inside them are not.
     const pos = run.rows.filter(r => r.truth === 'POSITIVE'), five = pos.filter(r => r.rating === 5).length;
     const neg = run.rows.filter(r => r.truth === 'NEGATIVE'), one = neg.filter(r => r.rating === 1).length;
-    txt += ` <b>Within</b> each class the stars still follow the file: <span id="withinMix">${five} of ${pos.length} positives are 5★ and ${one} of ${neg.length} negatives are 1★</span>, so milder 4★ and 2★ reviews are barely tested.`;
+    txt += ` <b>Within</b> each class the stars still follow the file: <span id="withinMix">${five} of ${pos.length} positives are 5-star and ${one} of ${neg.length} negatives are 1-star</span>, so milder 4-star and 2-star reviews are barely tested.`;
   }
   $('#callout').innerHTML = txt;
   $('#tBal').textContent = pct(m.balanced_accuracy);
-  $('#tBalFoot').textContent = absent.length ? `Averaged over the classes present (${absent.map(cap).join(', ')} absent)` : 'Average hit rate across classes — immune to skew';
+  $('#tBalFoot').textContent = absent.length ? `Averaged over the classes present (${absent.map(cap).join(', ')} absent)` : 'Average hit rate across classes, immune to skew';
   $('#tBaseLabel').textContent = run.meta.sampling === 'balanced' ? '“Always guess one class” baseline' : `“Always say ${cap(majLabel)}” baseline`;
   $('#tBase').textContent = pct(base);
   const miss = m.n_usable - agree;
@@ -446,10 +449,10 @@ function barLine(value, max, color, label, title) {
 function renderStarDist() {
   const rc = DATA.dataset.rating_counts, N = DATA.dataset.n_reviews, L = run.meta.labels;
   const max = Math.max(...Object.values(rc));
-  $('#starHint').innerHTML = `All <span class="num">${fmt(N)}</span> reviews, colored by the class this run’s rule assigns each star level — the imbalance every random sample inherits.`;
+  $('#starHint').innerHTML = `All <span class="num">${fmt(N)}</span> reviews, colored by the class this run’s rule assigns each star level: the imbalance every random sample inherits.`;
   $('#starDist').innerHTML = [5, 4, 3, 2, 1].map(s => {
     const n = rc[s] || 0, t = truthOf(s, L);
-    return `<div class="lab">${'★'.repeat(s)}</div><div class="lane" data-star="${s}" data-count="${n}">${barLine(n, max, classVar(t), `${fmt(n)} · ${pct(n / N)}`, `${s}★: ${fmt(n)} reviews → ${cap(t)}`)}</div>`;
+    return `<div class="lab">${starText(s)}</div><div class="lane" data-star="${s}" data-count="${n}">${barLine(n, max, classVar(t), `${fmt(n)} · ${pct(n / N)}`, `${starText(s)}: ${fmt(n)} reviews → ${cap(t)}`)}</div>`;
   }).join('');
   $('#starLegend').innerHTML = L.map(l => `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)}</span>`).join('');
 }
@@ -463,10 +466,10 @@ function renderStarPred() {
     const row = sp[s] || {}, n = L.reduce((a, l) => a + (row[l] || 0), 0), t = truthOf(s, L);
     const bar = n ? `<div class="stack">${L.filter(l => row[l]).map(l => {
         const share = row[l] / n;
-        return `<span class="inseg" data-star="${s}" data-label="${l}" data-count="${row[l]}" data-lbl="${Math.round(share * 100)}%" style="flex:${row[l]};background:${classVar(l)}" title="${s}★ → model said ${cap(l)}: ${row[l]} of ${n} (${pct(share)})"></span>`;
+        return `<span class="inseg" data-star="${s}" data-label="${l}" data-count="${row[l]}" data-lbl="${Math.round(share * 100)}%" style="flex:${row[l]};background:${classVar(l)}" title="${starText(s)} → model said ${cap(l)}: ${row[l]} of ${n} (${pct(share)})"></span>`;
       }).join('')}</div>`
       : `<div class="stack empty">none in this sample</div>`;
-    return `<div class="lab">${'★'.repeat(s)}</div>${bar}<div class="stack-n num">n=${n} · should be ${cap(t)}</div>`;
+    return `<div class="lab">${starText(s)}</div>${bar}<div class="stack-n num">n=${n} · should be ${cap(t)}</div>`;
   }).join('');
   $('#starPredLegend').innerHTML = L.map(l => `<span class="key"><span class="dot" style="background:${classVar(l)}"></span>Model: ${cap(l)}</span>`).join('');
   fitSegmentLabels();
@@ -539,14 +542,14 @@ function renderBars() {
   $('#bars').innerHTML = L.map(l => {
     const n = pc[l].support, ok = cmx[l]?.[l] || 0, bad = n - ok;
     const head = `<div class="top"><span class="key"><span class="dot" style="background:${classVar(l)}"></span>${cap(l)} <span style="color:var(--ink-3)">(rating)</span></span>`;
-    if (!n) return `<div class="bar-row">${head}<span class="val">—</span></div><div class="stack empty" style="height:16px">none in this sample</div><div class="foot">Can’t be measured: class absent</div></div>`;
+    if (!n) return `<div class="bar-row">${head}<span class="val">n/a</span></div><div class="stack empty" style="height:16px">none in this sample</div><div class="foot">Can’t be measured: class absent</div></div>`;
     const [clo, chi] = pc[l].recall_ci95;
     const segs = [ok ? `<span class="seg good" style="flex:${ok}" data-t="${l}" data-m="correct" title="${ok} agree"></span>` : '',
                   bad ? `<span class="seg bad" style="flex:${bad}" data-t="${l}" data-m="wrong" title="${bad} disagree"></span>` : ''].join('');
     return `<div class="bar-row">${head}
         <span class="val num"><b style="color:var(--ink-1)" data-class-recall="${l}">${pct(pc[l].recall)}</b> · ${ok}/${n}</span></div>
       <div class="track">${segs}</div>
-      <div class="foot num">95% range ${pct(clo, 0)}–${pct(chi, 0)} · precision ${pct(pc[l].precision)}</div></div>`;
+      <div class="foot num">95% range ${pct(clo, 0)} to ${pct(chi, 0)} · precision ${pct(pc[l].precision)}</div></div>`;
   }).join('');
   $('#bars').querySelectorAll('.seg').forEach(s => s.onclick = () => applyFilter({ truth: s.dataset.t, match: s.dataset.m }));
 }
@@ -584,7 +587,7 @@ function setupFilters() {
   const predVals = [...new Set([...L, ...run.rows.map(r => r.pred)])];
   $('#fTruth').innerHTML = opts('Any rating class', L, l => 'Rating: ' + cap(l));
   $('#fPred').innerHTML = opts('Any model label', predVals, l => 'Model: ' + cap(l));
-  $('#fStars').innerHTML = opts('Any stars', [5, 4, 3, 2, 1], s => '★'.repeat(s));
+  $('#fStars').innerHTML = opts('Any stars', [5, 4, 3, 2, 1], starText);
   $('#fEmo').innerHTML = opts('Any LLM emotion', EMOTIONS.filter(x => run.rows.some(r => r.llm_emotion === x)), cap);
   $('#fEmoAgree').innerHTML = opts('Emotions: any', ['same', 'different'], x => x === 'same' ? 'Emotions: LLM = word list' : 'Emotions: differ');
   syncControls();
@@ -617,17 +620,17 @@ function renderTable() {
   if (state.match !== 'all') parts.push(state.match === 'correct' ? 'agreeing' : 'mismatched');
   if (state.truth !== 'all') parts.push(`rated ${cap(state.truth)}`);
   if (state.pred !== 'all') parts.push(`labeled ${cap(state.pred)}`);
-  if (state.stars !== 'all') parts.push(`${state.stars}★`);
+  if (state.stars !== 'all') parts.push(`${state.stars}-star`);
   if (state.emo !== 'all') parts.push(`LLM emotion ${state.emo}`);
   if (state.emoAgree !== 'all') parts.push(state.emoAgree === 'same' ? 'emotions agree' : 'emotions differ');
   if (state.q) parts.push(`matching “${esc(state.q)}”`);
-  $('#count').innerHTML = `Showing <b class="num" id="liveCount">${rows.length}</b> of <span class="num">${total}</span> reviews${parts.length ? ' — ' + parts.join(', ') : ''}`;
+  $('#count').innerHTML = `Showing <b class="num" id="liveCount">${rows.length}</b> of <span class="num">${total}</span> reviews${parts.length ? ': ' + parts.join(', ') : ''}`;
   const vis = rows.slice(0, state.shown), cols = emoOn ? 8 : 6;
   $('#tbody').innerHTML = vis.length ? vis.map(r => {
     const ok = isTrue(r.correct), open = state.open.has(r.review_id), same = r.llm_emotion && r.llm_emotion === r.lex_emotion;
     return `<tr class="main" data-id="${r.review_id}" aria-expanded="${open}">
       <td class="num" style="color:var(--ink-3)">${r.review_id}</td>
-      <td class="stars" aria-label="${r.rating} stars">${'★'.repeat(r.rating)}<span style="opacity:.25">${'★'.repeat(5 - r.rating)}</span></td>
+      <td class="stars">${starText(r.rating)}</td>
       <td><div class="rtitle">${esc(r.title) || '<i>(no title)</i>'}</div><div class="rtext">${esc(r.text).replace(/&lt;br \/&gt;/g, ' ') || '<i>(no text)</i>'}</div></td>
       <td>${labelPill(r.truth)}</td><td>${labelPill(r.pred)}</td>
       <td><span class="match"><span class="ic" style="background:var(--${ok ? 'good' : 'bad'})">${ok ? '✓' : '✗'}</span>${ok ? 'Agrees' : 'Mismatch'}</span></td>` +
@@ -635,7 +638,7 @@ function renderTable() {
       (open ? `<tr class="detail"><td></td><td colspan="${cols - 1}">
         <div style="color:var(--ink-1);white-space:pre-wrap">${esc(r.text).replace(/&lt;br \/&gt;/g, '\n')}</div>
         <dl class="kv"><dt>Model raw reply</dt><dd><code>${esc(r.raw_output)}</code></dd>
-        ${emoOn ? `<dt>Lexicon words matched</dt><dd>${esc(r.lex_words) || '—'}</dd><dt>Word-list top emotion(s)</dt><dd>${esc(r.lex_top) || '—'}</dd>` : ''}
+        ${emoOn ? `<dt>Lexicon words matched</dt><dd>${esc(r.lex_words) || 'none'}</dd><dt>Word-list top emotion(s)</dt><dd>${esc(r.lex_top) || 'none'}</dd>` : ''}
         <dt>Verified purchase</dt><dd>${isTrue(r.verified_purchase) ? 'Yes' : 'No'}</dd>
         <dt>Helpful votes</dt><dd class="num">${r.helpful_vote}</dd><dt>Date</dt><dd class="num">${r.date}</dd>
         <dt>Words</dt><dd class="num">${r.text_len}</dd></dl></td></tr>` : '');
@@ -660,7 +663,7 @@ function renderMethod() {
   const m = run.meta;
   $('#methodHint').innerHTML = `Model <code>${esc(m.model)}</code> · temperature ${m.temperature} · thinking ${m.enable_thinking ? 'on' : 'off'} ·
     ${m.with_emotion ? 'answer forced to an enum JSON schema' : 'one-word answer'} · ${m.sampling} sample of ${m.n}, seed ${m.seed} ·
-    correct answer: ${esc(m.truth_rule)}. The model receives only this prompt plus the review’s title and text.`;
+    correct answer: ${esc(ruleText(m.truth_rule))}. The model receives only this prompt plus the review’s title and text.`;
   $('#prompt').textContent = DATA.prompts[run.id];
   $('#footMeta').textContent = `Full file: ${fmt(DATA.dataset.n_reviews)} reviews. This view: results/batch_${m.run_id}.csv and its metrics JSON.`;
 }

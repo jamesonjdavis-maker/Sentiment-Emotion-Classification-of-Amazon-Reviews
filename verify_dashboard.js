@@ -49,7 +49,7 @@
     if (r.meta.sampling === 'balanced') {
       const pos = r.rows.filter(x => x.truth === 'POSITIVE'), neg = r.rows.filter(x => x.truth === 'NEGATIVE');
       chk('within-class caveat', $('#withinMix').textContent,
-          `${pos.filter(x => x.rating === 5).length} of ${pos.length} positives are 5★ and ${neg.filter(x => x.rating === 1).length} of ${neg.length} negatives are 1★`);
+          `${pos.filter(x => x.rating === 5).length} of ${pos.length} positives are 5-star and ${neg.filter(x => x.rating === 1).length} of ${neg.length} negatives are 1-star`);
     }
 
     // step 5: emotions

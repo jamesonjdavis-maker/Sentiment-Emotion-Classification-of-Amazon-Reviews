@@ -43,7 +43,7 @@ for tag, label in [("100_s42_emo", "2-class random"), ("100_balanced_s42_emo", "
                    ("100_s42_c3_emo", "3-class random"), ("150_balanced_s42_c3_emo", "3-class balanced")]:
     m = M(tag)
     lo, hi = m["accuracy_ci95"]
-    need(f"{label} accuracy+CI", f"**{p1(m['accuracy'])}** ({p1(lo)[:-1]}–{p1(hi)})")
+    need(f"{label} accuracy+CI", f"**{p1(m['accuracy'])}** ({p1(lo)[:-1]} to {p1(hi)})")
     need(f"{label} baseline", p1(m["majority_baseline"]))
     need(f"{label} balanced acc", p1(m["balanced_accuracy"]))
 
@@ -53,7 +53,7 @@ need("random: positive count", f"{m['per_class']['POSITIVE']['support']} positiv
 need("random: negative count", f"{m['per_class']['NEGATIVE']['support']} negative")
 nr = m["per_class"]["NEGATIVE"]
 need("random: negative recall", p1(nr["recall"]))
-need("random: negative recall CI", f"{p0(nr['recall_ci95'][0])[:-1]}–{p0(nr['recall_ci95'][1])}")
+need("random: negative recall CI", f"{p0(nr['recall_ci95'][0])[:-1]} to {p0(nr['recall_ci95'][1])}")
 need("random: lift over baseline", f"{(m['accuracy'] - m['majority_baseline']) * 100:.0f} points")
 mb = M("100_balanced_s42_emo")
 need("balanced 2-class negatives caught", f"{mb['per_class']['NEGATIVE']['correct']}/{mb['per_class']['NEGATIVE']['support']}")
@@ -79,7 +79,7 @@ need("negative recall", f"**{p1(pc['NEGATIVE']['recall'])}**")
 need("neutral predicted", f"{pc['NEUTRAL']['predicted']} labels vs. {pc['NEUTRAL']['support']}")
 need("positive recall", f"**{p1(pc['POSITIVE']['recall'])}**")
 nlo, nhi = pc["NEUTRAL"]["recall_ci95"]
-need("neutral recall+CI", f"**{p1(pc['NEUTRAL']['recall'])}** ({pc['NEUTRAL']['correct']}/50; 95% range {p0(nlo)[:-1]}–{p0(nhi)})")
+need("neutral recall+CI", f"**{p1(pc['NEUTRAL']['recall'])}** ({pc['NEUTRAL']['correct']}/50; 95% range {p0(nlo)[:-1]} to {p0(nhi)})")
 need("positive→neutral misses", f"its {cm['NEUTRAL']['POSITIVE']} misses")
 mb2 = pd.read_csv(R / "batch_100_balanced_s42_emo.csv")
 need("3★ in 2-class balanced", f"all {int((mb2.rating == 3).sum())} three-star reviews")
